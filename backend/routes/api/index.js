@@ -1,7 +1,7 @@
 // backend/routes/api/index.js
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
-const userRouter = require('./user.js')
+const userRouter = require('./users')
 const { restoreUser } = require('../../utils/auth.js');
 
 // Connect restoreUser middleware to the API router
@@ -11,7 +11,7 @@ router.use(restoreUser);
 
 router.use('/session', sessionRouter);
 
-router.use('./users', userRouter);
+router.use('/users', userRouter);
 
 router.post('/test', (req, res) => {
     res.json({ requestBody: req.body })
