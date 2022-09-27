@@ -27,7 +27,7 @@ module.exports = {
     {
       spotId: 3,
       userId: 3,
-      review: 'Pretty good stay. We weren\'t a fan of the lawn and the water pressure but over all we felt safe and had a good time! Appreciated the supplied glassware and cookware.',
+      review: 'Pretty good stay. We weren\'t a fan of the lawn and the water pressure but over all we felt safe and had a good time!',
       stars: 5
     },
     {

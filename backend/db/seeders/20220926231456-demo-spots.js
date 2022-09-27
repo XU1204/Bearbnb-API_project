@@ -20,7 +20,7 @@ module.exports = {
       lat: 100.1,
       lng: 200.2,
       name: 'Modern Farmhouse Near SOCO',
-      description: 'Come work or explore Austin. It is close to S Congress, S Lamar, and 1.5 miles to Lady Bird Lake. You’ll love this location b/c of the proximity to the Festivals Austin is known for. SXSW, ACL, Bat Watching, great dining and shopping. 7 miles to the airport. Walkability of the area makes daytime exploring easy, and evenings are surprisingly peaceful.',
+      description: 'Come work or explore Austin. It is close to S Congress, S Lamar, and 1.5 miles to Lady Bird Lake.',
       price: 151
     },
     {
@@ -31,7 +31,7 @@ module.exports = {
       lat: 98.2,
       lng: 70.3,
       name: 'NO FEE Modern Downtown Home Pearl, Alamo, River',
-      description: 'My mission is to ensure that you have all the amenities that you need to be comfortable, safe and enjoy your time in San Antonio. Entire Home walking distance to the Pearl, San Antonio Riverwalk, St Mary\'s Strip. Quiet Historic Tobin Hill neighborhood minutes from the all the downtown recreation, entertainment, attractions, and nightlife. 300Mbs Wifi, off street parking, laundry, allergen (HEPA/nut) free, pet friendly, no step access.',
+      description: 'My mission is to ensure that you have all the amenities.',
       price: 218
     },
     {
@@ -42,7 +42,7 @@ module.exports = {
       lat: 80.1,
       lng: 60.4,
       name: 'Adorable above garage apartment at Sunrise Farm',
-      description: 'Come experience our little farm that we are working on making into a permiculture oasis. Come make memories at our unique and family-friendly place. There are chickens, goats and dogs on the property so be aware that you may hear and see the activity that is involved with farm life.',
+      description: 'Come experience our little farm that we are working on making into a permiculture oasis.',
       price: 100
     },
     {
@@ -53,7 +53,7 @@ module.exports = {
       lat: 20.1,
       lng: 210.5,
       name: 'citizenM Seattle South Lake Union',
-      description: 'itizenM Seattle South Lake has landed. Home of affordable luxury in the heart of South Lake Union, our tech-savvy, design-loving hotel is just one block from Downtown Seattle and six minutes from the iconic Space Needle.',
+      description: 'itizenM Seattle South Lake has landed. Home of affordable luxury in the heart of South Lake Union.',
       price: 189
     },
     {
@@ -64,7 +64,7 @@ module.exports = {
       lat: 66.6,
       lng: 88.5,
       name: 'Architect\'s Off-Grid Stargazing Cabin.',
-      description: 'Folly Joshua Tree is an off-grid outpost designed by Malek Alqadi. Folly sleeps up to 6 people, but most comfortable for 4. The main cabin is modern and stylish that reflects the earthy tones of the landscape. The smaller structure houses an open-air bedroom that offers unique views of the mountains and is perfect for stargazing. It also has an indoor bedroom underneath.',
+      description: 'Folly Joshua Tree is an off-grid outpost designed by Malek Alqadi.',
       price: 1125
     },
    ])
