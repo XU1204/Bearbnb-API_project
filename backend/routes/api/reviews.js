@@ -14,7 +14,7 @@ const validateReview = [
         .withMessage('Review text is required.'),
     check('stars')
         .exists({ checkFalsy: true })
-        .isIn([1, 2, 3, 4, 5])
+        .isInt({min: 1, max: 5})
         .withMessage('Stars must be an integer from 1 to 5.'),
     handleValidationErrors
 ];
@@ -35,7 +35,6 @@ router.get('/current', restoreUser, requireAuth,
                     attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
                     include: {
                         model: SpotImage,
-                        attributes: ['url']
                     }
                 },
                 {
@@ -53,12 +52,17 @@ router.get('/current', restoreUser, requireAuth,
         })
         reviewList.forEach(review => {
             review.Spot.SpotImages.forEach(img => {
-                review.Spot.previewImage = img.url;
+                if (img.preview === true && !review.Spot.previewImage ) {
+                    review.Spot.previewImage = img.url;
+                }
             })
+            if (!review.Spot.previewImage ) {
+                review.Spot.previewImage = 'No avaliable preview images.'
+            }
             delete review.Spot.SpotImages
         });
 
-        res.json({
+        return res.json({
             Reviews: reviewList
         })
     }
@@ -72,7 +76,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
         const review = await Review.findByPk(reviewId)
         if (!review) {
             res.status(404);
-            res.json({
+            return res.json({
                 message: "Review couldn't be found",
                 statusCode: 404
             })
@@ -80,7 +84,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
 
         if (review.userId !== req.user) {
             res.status(403);
-            res.json(
+            return res.json(
                 {
                     "message": "Forbidden",
                     "statusCode": 403
@@ -91,7 +95,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
         const numImages = await ReviewImage.count({where: {reviewId}})
         if (numImages >= 10) {
             res.status(403);
-            res.json({
+            return res.json({
                 message: "Maximum number of images for this resource was reached",
                 statusCode: 403
             })
@@ -99,7 +103,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
 
         const { url } = req.body;
         const newReviewImage = await ReviewImage.create({ reviewId, url });
-        res.json({
+        return res.json({
             id: newReviewImage.id,
             url: newReviewImage.url
         })
@@ -114,14 +118,14 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
         const targetReview = await Review.findByPk(reviewId)
         if (!targetReview) {
             res.status(404);
-            res.json({
+            return res.json({
                 message: "Review couldn't be found",
                 statusCode: 404
             })
         }
         if (targetReview.userId !== req.user.id) {
             res.status(403);
-            res.json(
+            return res.json(
                 {
                     "message": "Forbidden",
                     "statusCode": 403
@@ -131,7 +135,7 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
 
         const { review, stars } = req.body;
         targetReview.update({ review, stars })
-        res.json(targetReview);
+        return res.json(targetReview);
     }
 )
 
@@ -143,14 +147,14 @@ router.delete('/:reviewId', restoreUser, requireAuth,
         const targetReview = await Review.findByPk(reviewId)
         if (!targetReview) {
             res.status(404);
-            res.json({
+            return res.json({
                 message: "Review couldn't be found",
                 statusCode: 404
             })
         }
         if (targetReview.userId !== req.user.id) {
             res.status(403);
-            res.json(
+            return res.json(
                 {
                     "message": "Forbidden",
                     "statusCode": 403
@@ -158,7 +162,7 @@ router.delete('/:reviewId', restoreUser, requireAuth,
             )
         }
         await targetReview.destroy();
-        res.json(
+        return res.json(
             {
                 "message": "Successfully deleted",
                 "statusCode": 200
@@ -166,11 +170,6 @@ router.delete('/:reviewId', restoreUser, requireAuth,
         )
     }
 )
-
-
-
-
-
 
 
 
