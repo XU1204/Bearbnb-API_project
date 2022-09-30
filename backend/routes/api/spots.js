@@ -287,7 +287,7 @@ router.get('/:spotId', async(req, res) => {
         attributes: ['id', 'firstName', 'lastName']
     });
 
-    const payload = [{
+    const payload = {
         id: singleSpot.id,
         ownerId: singleSpot.ownerId,
         address: singleSpot.address,
@@ -305,7 +305,7 @@ router.get('/:spotId', async(req, res) => {
         avgStarRating,
         SpotImages: singleSpot.SpotImages,
         owner: getOwner
-    }];
+    };
 
     return res.json(payload);
 })
