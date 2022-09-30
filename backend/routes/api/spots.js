@@ -31,7 +31,7 @@ const validateCreate = [
         .withMessage("Longtitude is not valid"),
     check('name')
       .exists({ checkFalsy: true })
-      .isLength({ max: 50 })
+      .isLength({min:1, max: 50 })
       .withMessage('Name must be less than 50 characters.'),
     check('description')
       .exists({ checkFalsy: true })
@@ -147,7 +147,9 @@ router.get('/', validateQuery,
             include: {
                 model: SpotImage,
                 attributes: ['url']
-            }
+            },
+            limit: size,
+            offset: (page - 1) * size
         });
 
         const payload = [];
@@ -158,7 +160,7 @@ router.get('/', validateQuery,
                 attributes: [
                     [sequelize.fn("AVG", sequelize.col("stars")),"avgRating"]
                     ],
-                raw: true
+                raw: true,
             });
 
             let previewImage;
@@ -314,9 +316,6 @@ router.post('/', restoreUser, requireAuth, validateCreate,
     async(req, res) => {
         const { user } = req;
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
-        price = Number(price);
-        lat = Number(lat);
-        lng = Number(lng);
 
         const newSpot = await Spot.create({
             ownerId: user.id,
@@ -526,7 +525,9 @@ router.get('/:spotId/bookings', restoreUser, requireAuth,
                 where: {spotId},
                 attributes: ['spotId', 'startDate', 'endDate']
             });
-            return res.json(bookings)
+            return res.json({
+                Bookings: bookings
+            });
         };
         if (spot.ownerId === req.user.id) {
             const bookings = await Booking.findAll({
@@ -536,7 +537,9 @@ router.get('/:spotId/bookings', restoreUser, requireAuth,
                     attributes: ['id', 'firstName', 'lastName']
                 }
             });
-            return res.json(bookings);
+            return res.json({
+                Bookings: bookings
+            });
         }
 
     }
@@ -569,6 +572,13 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, validateBooking,
                 }
             )
         };
+        if (spot.ownerId === req.user.id) {
+            res.status(403);
+            return res.json({
+                message: 'Forbidden. Spot must NOT belong to the current user.',
+                statusCode: 403
+            })
+        }
         const { startDate, endDate } = req.body;
        if(!compareDate(startDate, endDate)) {
             res.status(400);

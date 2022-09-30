@@ -82,7 +82,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
             })
         }
 
-        if (review.userId !== req.user) {
+        if (review.userId !== req.user.id) {
             res.status(403);
             return res.json(
                 {
