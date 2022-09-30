@@ -45,7 +45,7 @@ router.post(
       const existEmail = await User.findOne({where: {email}});
       if (existEmail) {
         res.status(403);
-        res.json({
+        return res.json({
           "message": "User already exists",
           "statusCode": 403,
           "errors": {
@@ -57,7 +57,7 @@ router.post(
       const existUsername = await User.findOne({where: {username}})
       if(existUsername){
         res.status(403);
-        res.json({
+        return res.json({
           "message": "User already exists",
           "statusCode": 403,
           "errors": {
@@ -65,10 +65,10 @@ router.post(
           }
         })
       };
-      
+
       const user = await User.signup({ firstName, lastName, email, username, password });
 
-      let token = await setTokenCookie(res, user);
+      let token = setTokenCookie(res, user);
 
       return res.json({
         id: user.id,
