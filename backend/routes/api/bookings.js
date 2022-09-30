@@ -76,6 +76,7 @@ const compareDate = (start, end) => {
 const compareWithToday = (end) => {
     let current = new Date();
     let currentYear = current.getFullYear();
+    console.log(currentYear)
     let currentMonth = current.getMonth() + 1;
     let currentDay = current.getDate();
     let endYear = end.slice(0, 4);
@@ -127,6 +128,13 @@ router.put('/:bookingId', restoreUser, requireAuth, validateBooking,
                     }
             })
         };
+        if (!compareWithToday(startDate) || !compareWithToday(endDate)) {
+            res.status(403);
+            return res.json({
+                message: "Start date and end date must be future days.",
+                statusCode: 403
+            })
+        }
 
         const allBookings = await Booking.findAll({ where: {id: bookingId}});
         const allBookingsList = [];
