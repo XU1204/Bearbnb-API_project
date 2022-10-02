@@ -613,20 +613,40 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, validateBooking,
         allBookings.forEach(ele => {
             allBookingsList.push(ele.toJSON())
         });
+        let start = false;
+        let end = false;
         allBookingsList.forEach(singleBooking => {
             if (singleBooking.startDate.toJSON().includes(startDate) ) {
-                console.log(singleBooking.startDate)
-                res.status(403);
-                return res.json({
+                start = true;
+            }
+            if (singleBooking.endDate.toJSON().includes(endDate)) {
+                end = true;
+            }
+        })
+
+        if (start && end) {
+            res.status(403);
+            return res.json({
                 message: "Sorry, this spot is already booked for the specified dates",
                 statusCode: 403,
                 errors: {
-                    startDate: "Start date conflicts with an existing booking"
+                    startDate: "Start date conflicts with an existing booking",
+                    endDate: "End date conflicts with an existing booking"
                 }
+            })
+        }
+        else if (start) {
+            res.status(403);
+                return res.json({
+                    message: "Sorry, this spot is already booked for the specified dates",
+                    statusCode: 403,
+                    errors: {
+                        startDate: "Start date conflicts with an existing booking"
+                    }
                 });
-            }
-            if (singleBooking.endDate.toJSON().includes(endDate)) {
-                res.status(403);
+        }
+        else if (end) {
+            res.status(403);
                 return res.json({
                     message: "Sorry, this spot is already booked for the specified dates",
                     statusCode: 403,
@@ -634,16 +654,16 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, validateBooking,
                         endDate: "End date conflicts with an existing booking"
                     }
                 })
-            }
-        })
-
-        const newBooking = await Booking.create({
-            spotId,
-            userId: req.user.id,
-            startDate,
-            endDate
-        });
-        return res.json(newBooking)
+        }
+        else {
+            const newBooking = await Booking.create({
+                spotId,
+                userId: req.user.id,
+                startDate,
+                endDate
+            });
+            return res.json(newBooking)
+        }
     }
 )
 
