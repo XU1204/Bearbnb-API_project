@@ -316,7 +316,7 @@ router.get('/:spotId', async(req, res) => {
         numReviews,
         avgStarRating,
         SpotImages: singleSpot.SpotImages,
-        owner: getOwner
+        Owner: getOwner
     };
 
     return res.json(payload);
