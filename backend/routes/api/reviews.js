@@ -1,5 +1,4 @@
 const express = require('express');
-const sequelize = require('sequelize');
 const { Spot, Review, ReviewImage ,SpotImage, User } = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 
@@ -57,7 +56,7 @@ router.get('/current', restoreUser, requireAuth,
                 }
             })
             if (!review.Spot.previewImage ) {
-                review.Spot.previewImage = 'No avaliable preview images.'
+                review.Spot.previewImage = 'No available preview images.'
             }
             delete review.Spot.SpotImages
         });

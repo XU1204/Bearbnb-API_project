@@ -1,6 +1,5 @@
 const express = require('express');
-const { Op } = require('sequelize');
-const { Spot, Review ,SpotImage, User, ReviewImage, Booking} = require('../../db/models');
+const { Spot,SpotImage, User, Booking} = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 
 const { check } = require('express-validator');
@@ -62,29 +61,28 @@ router.get('/current', restoreUser, requireAuth,
 
 //Edit a Booking
 const compareDate = (start, end) => {
-    let startYear = start.slice(0, 4);
-    let startMonth = start.slice(5, 7);
-    let startDay = start.slice(8);
-    let endYear = end.slice(0, 4);
-    let endMonth = end.slice(5, 7);
-    let endDay = end.slice(8);
+    let startYear = Number(start.slice(0, 4));
+    let startMonth = Number(start.slice(5, 7));
+    let startDay = Number(start.slice(8));
+    let endYear = Number(end.slice(0, 4));
+    let endMonth = Number(end.slice(5, 7));
+    let endDay = Number(end.slice(8));
     if (startYear > endYear) return false;
-    else if (startMonth > endMonth) return false;
-    else if (startDay >= endDay) return false;
+    else if (startYear === endYear && startMonth > endMonth) return false;
+    else if (startYear === endYear && startMonth === endMonth && startDay >= endDay) return false;
     else return true;
 }
 const compareWithToday = (end) => {
     let current = new Date();
     let currentYear = current.getFullYear();
-    console.log(currentYear)
     let currentMonth = current.getMonth() + 1;
     let currentDay = current.getDate();
-    let endYear = end.slice(0, 4);
-    let endMonth = end.slice(5, 7);
-    let endDay = end.slice(8);
+    let endYear = Number(end.slice(0, 4));
+    let endMonth = Number(end.slice(5, 7));
+    let endDay = Number(end.slice(8));
     if (currentYear > endYear) return false;
-    else if (currentMonth > endMonth) return false;
-    else if (currentDay >= endDay) return false;
+    else if (currentYear  === endYear && currentMonth > endMonth) return false;
+    else if (currentYear === endYear && currentMonth === endMonth && currentDay >= endDay) return false;
     else return true;
 }
 router.put('/:bookingId', restoreUser, requireAuth, validateBooking,
@@ -141,32 +139,42 @@ router.put('/:bookingId', restoreUser, requireAuth, validateBooking,
         allBookings.forEach(ele => {
             allBookingsList.push(ele.toJSON())
         });
+
+        let start = false;
+        let end = false;
         allBookingsList.forEach(singleBooking => {
             if (singleBooking.startDate.toJSON().includes(startDate) ) {
-                console.log(singleBooking.startDate)
-                res.status(403);
-                return res.json({
-                message: "Sorry, this spot is already booked for the specified dates",
-                statusCode: 403,
-                errors: {
-                    startDate: "Start date conflicts with an existing booking"
-                }
-                });
+                start = true;
             }
             if (singleBooking.endDate.toJSON().includes(endDate)) {
-                res.status(403);
-                return res.json({
-                    message: "Sorry, this spot is already booked for the specified dates",
-                    statusCode: 403,
-                    errors: {
-                        endDate: "End date conflicts with an existing booking"
-                    }
-                })
+                end = true;
             }
         })
 
-        booking.update({ startDate, endDate });
-        return res.json(booking)
+        if (start) {
+            res.status(403);
+                return res.json({
+                        message: "Sorry, this spot is already booked for the specified dates",
+                        statusCode: 403,
+                        errors: {
+                            startDate: "Start date conflicts with an existing booking"
+                        }
+                });
+        }
+        else if (end) {
+            res.status(403);
+                return res.json({
+                        message: "Sorry, this spot is already booked for the specified dates",
+                        statusCode: 403,
+                        errors: {
+                            endDate: "End date conflicts with an existing booking"
+                        }
+                })
+        }
+        else {
+            booking.update({ startDate, endDate });
+            return res.json(booking)
+        }
     }
 )
 

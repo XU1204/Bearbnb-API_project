@@ -146,7 +146,7 @@ router.get('/', validateQuery,
             where,
             include: {
                 model: SpotImage,
-                attributes: ['url']
+                attributes: ['url', 'preview']
             },
             limit: size,
             offset: (page - 1) * size
@@ -164,11 +164,23 @@ router.get('/', validateQuery,
             });
 
             let previewImage;
-            if (spot.SpotImages.length === 0) {
-                previewImage = null
-            } else {
-                previewImage = spot.SpotImages[0].url
-            };
+            // if (spot.SpotImages.length === 0) {
+            //     previewImage = "No available preview image."
+            // } else {
+            //     previewImage = spot.SpotImages[0].url
+            // };
+            let list = [];
+            spot.SpotImages.forEach(ele => {
+                list.push(ele.toJSON())
+            })
+            list.forEach(img => {
+                if (img.preview && !previewImage) {
+                    previewImage = img.url;
+                }
+            })
+            if (!previewImage) {
+                previewImage = 'No available preview images.'
+            }
 
             const spotsData = {
                 id: spot.id,
@@ -322,6 +334,7 @@ router.post('/', restoreUser, requireAuth, validateCreate,
             address, city, state, country, lat, lng, name, description, price
         });
 
+        res.status(201);
         return res.json(newSpot)
     }
 )
@@ -464,7 +477,9 @@ router.get('/:spotId/reviews', async(req, res) => {
             }
         ]
     })
-    return res.json(reviews);
+    return res.json({
+        Reviews: reviews
+    });
 })
 
 
@@ -501,6 +516,8 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, validateReview,
             review,
             stars
         });
+
+        res.status(201);
         return res.json(newReview)
     }
 )
@@ -555,8 +572,8 @@ const compareDate = (start, end) => {
     let endMonth = end.slice(5, 7);
     let endDay = end.slice(8);
     if (startYear > endYear) return false;
-    else if (startMonth > endMonth) return false;
-    else if (startDay >= endDay) return false;
+    else if (startYear === endYear && startMonth > endMonth) return false;
+    else if (startYear === endYear && startMonth === endMonth && startDay >= endDay) return false;
     else return true;
 }
 router.post('/:spotId/bookings', restoreUser, requireAuth, validateBooking,
