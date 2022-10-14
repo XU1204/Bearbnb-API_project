@@ -72,7 +72,8 @@ router.get(
         email: user.email,
         username: user.username
       });
-    } else return res.json({});
+    }else { res.json(null) }
+    //} else return res.json({});
   }
 );
 
