@@ -6,19 +6,31 @@ import { getSpots } from '../../store/spots'
 
 function MyListings () {
     const sessionUser = useSelector(state => state.session.user);
-    console.log('user', sessionUser.id)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getSpots())
     },[dispatch]);
     const allSpots = useSelector(state => Object.values(state.spotState));
-    console.log('allspots', allSpots)
     const spots = allSpots.filter(spot => spot.ownerId === sessionUser.id)
-    console.log('spot1111', spots)
+    if (!spots) return null;
     return (
         <>
-            <NavLink to='/api/spots'>Create new spot</NavLink>
-            <Homepage spots={spots} />
+            <NavLink to='/spots'>Create new spot</NavLink>
+            <div>
+                <ul>
+                    {spots.map(spot => (
+                        <li>
+                            {spot.name} in {spot.city}, {spot.state}
+                            <span>
+                                <button>Edit Listing</button>
+                            </span>
+                            <span>
+                                <button>Remove Listing</button>
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
 
     )

@@ -25,13 +25,13 @@ function App() {
           <Route exact path='/'>
             <HomepageIndex />
           </Route>
-          <Route path='/api/spots/current'>
+          <Route path='/spots/current'>
             <MyListings />
           </Route>
-          <Route path='/api/spots/:id'>
+          <Route path='/spots/:id'>
               <SpotDetails />
           </Route>
-          <Route path='/api/spots'>
+          <Route path='/spots'>
               <CreateSpotForm />
           </Route>
           <Route path='/signup'>

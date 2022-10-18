@@ -8,7 +8,7 @@ function Homepage ({spots}) {
     return (
         <div className="hp-list">
             {spots.map(spot => (
-                <NavLink key={spot.name} id='link' to={`/api/spots/${spot.id}`}>
+                <NavLink key={spot.name} id='link' to={`/spots/${spot.id}`}>
                 <div className="hp-each-list">
                     <img src={spot.previewImage} alt={`preview image of ${spot.name}`}/>
                     <div className="hp-name-star">
@@ -24,11 +24,6 @@ function Homepage ({spots}) {
                 </div>
                 </NavLink>
             ))}
-            {/* <Switch>
-                    <Route path='/api/spots/:id'>
-                        <SpotDetails spots={spots}/>
-                    </Route>
-            </Switch> */}
         </div>
     )
 }
