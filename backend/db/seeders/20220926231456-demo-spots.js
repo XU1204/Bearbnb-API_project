@@ -53,7 +53,7 @@ module.exports = {
       lat: 20.1,
       lng: 210.5,
       name: 'citizenM Seattle South Lake Union',
-      description: 'itizenM Seattle South Lake has landed. Home of affordable luxury in the heart of South Lake Union.',
+      description: 'CitizenM Seattle South Lake has landed. Home of affordable luxury in the heart of South Lake Union.',
       price: 189
     },
     {

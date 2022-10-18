@@ -1,0 +1,21 @@
+.hp-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hp-each-list {
+    width: 250px;
+    padding: 10px;
+    margin:20px
+}
+
+.hp-name-star {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#link {
+    text-decoration: none;
+    color: inherit
+}
