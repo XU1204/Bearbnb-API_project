@@ -1,19 +1,10 @@
-import { useEffect } from "react";
-import { NavLink, Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
-import { getSpots } from '../../store/spots'
+import { NavLink } from "react-router-dom";
 import './Homepage.css'
-import SpotDetails from "../SpotDetails/SpotDetails";
 
-function Homepage () {
-    const dispatch = useDispatch();
-    const spots = useSelector(state => Object.values(state.spotState));
-    useEffect(() => {
-        dispatch(getSpots())
-    },[dispatch])
+function Homepage ({spots}) {
 
     if(!spots) return null;
-    //console.log('spots from hp', spots)
+
     return (
         <div className="hp-list">
             {spots.map(spot => (

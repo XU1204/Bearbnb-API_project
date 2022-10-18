@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getDetails } from "../../store/spots";
 
 function SpotDetails () {
-    console.log(1)
+    //`console.log(1)
     const { id } = useParams();
     //console.log('id---', id)
     const dispatch = useDispatch();
@@ -18,7 +18,19 @@ function SpotDetails () {
     //console.log('spot------', spot)
 
     if (!spot) return null;
-    console.log(3)
+    if (!spot.SpotImages) return null;
+    //console.log(3)
+
+    let imageLink
+    if (spot.SpotImages[0]) {
+        imageLink = (
+            <img src={spot.SpotImages[0].url} alt='main image'/>
+        )
+    } else {
+        imageLink = (
+            <img alt='No available images'/>
+        )
+    }
 
     return (
        <div>
@@ -32,7 +44,8 @@ function SpotDetails () {
                 <span>{spot.country}</span>
             </div>
             <div>
-                <img src={spot.SpotImages[0].url} alt='main image'/>
+                {/* <img src={spot.SpotImages[0].url} alt='main image'/> */}
+                {imageLink}
             </div>
             <div>
                 <h3>Single house hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>

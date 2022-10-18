@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const LOAD = 'spots/GET'
 const CREATE = 'spots/CREATE'
+const REMOVE = 'spots/REMOVE'
 
 const load = (spots) => ({
     type: LOAD,
@@ -15,15 +16,30 @@ const add = (payload) => {
     }
 }
 
+const remove = (spotId, userId) => {
+    return {
+        type: REMOVE,
+        spotId,
+        userId
+    }
+}
+
 //thunk action creators
 export const getSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
     if(response.ok) {
         const spots = await response.json();
-        console.log('spotsdata', spots)
         dispatch(load(spots))
     }
 };
+
+export const getSpotsOfCurrent = () => async dispatch => {
+    const response = await csrfFetch('/api/spots/current');
+    if(response.ok) {
+        const spot = await response.json();
+        dispatch(load(spot))
+    }
+}
 
 export const getDetails = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
@@ -45,18 +61,27 @@ export const addSpot = (payload) => async dispatch => {
     if (response.ok) {
         const spot = await response.json();
         dispatch(add(spot));
+        console.log('spot1', spot)
         return spot;
     }
 }
 
+export const removeSpot = (spotId, userId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+    })
+    if (response.ok) {
+        dispatch(remove(spotId, userId))
+    }
+}
 //selectors
 const initialState = {}
 
 //reducer
 const spotsReducer = (state = initialState, action) => {
+    let newState = {...state};
     switch(action.type) {
         case LOAD:
-            const newState = {...state};
             if (action.spots.Spots) {
                 action.spots.Spots.forEach(spot => newState[spot.id] = spot);
                 return newState;
@@ -67,10 +92,15 @@ const spotsReducer = (state = initialState, action) => {
                 return newState;
             }
         case CREATE:
-            return {
+            const newSpot =  {
                 ...state,
                 [action.payload.id]: action.payload
             }
+            console.log('spot2', newSpot)
+            return newSpot;
+        case REMOVE:
+            delete newState[action.spotId]
+            return newState;
         default:
             return state
     };
