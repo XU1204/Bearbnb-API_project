@@ -14,27 +14,27 @@ module.exports = {
    await queryInterface.bulkInsert('SpotImages', [
     {
       spotId: 1,
-      url: 'https://www.pexels.com/photo/scenic-photo-of-forest-with-sunlight-1757363/',
+      url: 'https://image.shutterstock.com/image-photo/custom-built-nicely-landscaped-luxury-600w-100512892.jpg',
       preview: true,
     },
     {
       spotId: 2,
-      url: 'https://www.pexels.com/photo/green-pine-trees-covered-with-fogs-under-white-sky-during-daytime-167699/',
+      url: 'https://image.shutterstock.com/image-photo/luxury-house-spring-vancouver-canada-600w-1352690099.jpg',
       preview: true,
     },
     {
       spotId: 3,
-      url: 'https://www.pexels.com/photo/brown-mountains-2559941/',
+      url: 'https://image.shutterstock.com/image-photo/big-luxury-house-dusk-night-600w-108205049.jpg',
       preview: true,
     },
     {
       spotId: 4,
-      url: 'https://www.pexels.com/photo/snowy-forest-235621/',
+      url: 'https://image.shutterstock.com/image-photo/custom-built-luxury-house-nicely-600w-229302916.jpg',
       preview: true,
     },
     {
       spotId: 5,
-      url: 'https://www.pexels.com/photo/gray-asphalt-road-in-dark-forest-7753054/',
+      url: 'https://image.shutterstock.com/image-photo/cute-autumn-hygge-home-decor-600w-1812210559.jpg',
       preview: true,
     }
    ])
