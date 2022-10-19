@@ -10,7 +10,9 @@ function Homepage ({spots}) {
             {spots.map(spot => (
                 <NavLink key={spot.name} id='link' to={`/spots/${spot.id}`}>
                 <div className="hp-each-list">
-                    <img src={spot.previewImage} alt={`preview image of ${spot.name}`}/>
+                    <div className="hp-preview-img">
+                        <img src={spot.previewImage} alt={`preview image of ${spot.name}`}/>
+                    </div>
                     <div className="hp-name-star">
                         <h4>Home in {spot.city}</h4>
                         <div>

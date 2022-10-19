@@ -19,3 +19,9 @@
     text-decoration: none;
     color: inherit
 }
+
+.hp-preview-img, img {
+    width: 250px;
+    height: 200px;
+    border-radius: 10px;
+}

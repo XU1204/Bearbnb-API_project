@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
-// import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { addSpot } from '../../store/spots'
 
@@ -24,7 +22,7 @@ function CreateSpotForm() {
 
     const data = {
         address, city, state, country, lat, lng, name, description, price
-      }
+    }
       //console.log(1)
     //   let createdSpot;
     //   createdSpot = dispatch(addSpot(data))
@@ -37,22 +35,19 @@ function CreateSpotForm() {
         //     if (data && data.errors) setErrors(data.errors)
         //  });
 
-         let createdSpot;
-         try {
-            createdSpot = await dispatch(addSpot(data))
-         } catch (error) {
-            setErrors(error)
-         }
+    let createdSpot;
+    try {
+        createdSpot = await dispatch(addSpot(data))
+    } catch (error) {
+        setErrors(error)
+    }
 
-         if (createdSpot) {
-            setErrors([])
-            console.log('createdspot:', createdSpot)
-            history.push(`/api/spots/${createdSpot.id}`)
-         }
-
-     // }
+    if (createdSpot) {
+        setErrors([])
+        //console.log('createdspot:', createdSpot)
+        history.push(`/spots/${createdSpot.id}`)
+    }
       //return setErrors(['Invalid Input']);
-
   }
 
   return (

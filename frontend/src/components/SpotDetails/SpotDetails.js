@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetails } from "../../store/spots";
+import './SpotDetails.css'
 
 function SpotDetails () {
     //`console.log(1)
@@ -10,7 +11,7 @@ function SpotDetails () {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(2)
+        //console.log(2)
         dispatch(getDetails(id))
     }, [id]);
     const spot = useSelector(state => state.spotState[id])
@@ -24,7 +25,7 @@ function SpotDetails () {
     let imageLink
     if (spot.SpotImages[0]) {
         imageLink = (
-            <img src={spot.SpotImages[0].url} alt='main image'/>
+            <img id='img-of-spot-details' src={spot.SpotImages[0].url} alt='main image'/>
         )
     } else {
         imageLink = (
@@ -39,8 +40,8 @@ function SpotDetails () {
                 <span>★</span>
                 <span>{spot.avgStarRating || 'new'}</span>
                 <span>・{spot.numReviews} Reviews・</span>
-                <span>{spot.city},</span>
-                <span>{spot.state},</span>
+                <span>{spot.city}, </span>
+                <span>{spot.state}, </span>
                 <span>{spot.country}</span>
             </div>
             <div>
