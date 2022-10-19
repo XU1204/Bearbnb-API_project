@@ -14,27 +14,27 @@ module.exports = {
    await queryInterface.bulkInsert('SpotImages', [
     {
       spotId: 1,
-      url: 'https://image.shutterstock.com/image-photo/custom-built-nicely-landscaped-luxury-600w-100512892.jpg',
+      url: 'https://www.territorysupply.com/wp-content/uploads/2020/11/countryside-vacation-airbnb-oklahoma.jpg',
       preview: true,
     },
     {
       spotId: 2,
-      url: 'https://image.shutterstock.com/image-photo/luxury-house-spring-vancouver-canada-600w-1352690099.jpg',
+      url: 'https://www.territorysupply.com/wp-content/uploads/2020/11/belle-ame-cabin-oklahoma.jpg',
       preview: true,
     },
     {
       spotId: 3,
-      url: 'https://image.shutterstock.com/image-photo/big-luxury-house-dusk-night-600w-108205049.jpg',
+      url: 'https://www.territorysupply.com/wp-content/uploads/2020/11/poolside-airbnb-oklahoma.jpg',
       preview: true,
     },
     {
       spotId: 4,
-      url: 'https://image.shutterstock.com/image-photo/custom-built-luxury-house-nicely-600w-229302916.jpg',
+      url: 'https://www.territorysupply.com/wp-content/uploads/2020/11/circle-pines-cabin-rental-oklahoma.jpg',
       preview: true,
     },
     {
       spotId: 5,
-      url: 'https://image.shutterstock.com/image-photo/cute-autumn-hygge-home-decor-600w-1812210559.jpg',
+      url: 'https://www.territorysupply.com/wp-content/uploads/2020/11/cottage-airbnb-oklahoma.jpg',
       preview: true,
     }
    ])
