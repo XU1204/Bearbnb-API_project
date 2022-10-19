@@ -21,14 +21,14 @@ const validateCreate = [
     check('country')
         .exists({ checkFalsy: true })
         .withMessage('Country is required.'),
-    check('lat')
-        .exists({ checkFalsy: true })
-        .isDecimal({isDecimal: true})
-        .withMessage("Latitude is not valid"),
-    check('lng')
-        .exists({ checkFalsy: true })
-        .isDecimal({isDecimal: true})
-        .withMessage("Longtitude is not valid"),
+    // check('lat')
+    //     .exists({ checkFalsy: true })
+    //     .isDecimal({isDecimal: true})
+    //     .withMessage("Latitude is not valid"),
+    // check('lng')
+    //     .exists({ checkFalsy: true })
+    //     .isDecimal({isDecimal: true})
+    //     .withMessage("Longtitude is not valid"),
     check('name')
       .exists({ checkFalsy: true })
       .isLength({min:1, max: 50 })
@@ -327,11 +327,11 @@ router.get('/:spotId', async(req, res) => {
 router.post('/', restoreUser, requireAuth, validateCreate,
     async(req, res) => {
         const { user } = req;
-        let { address, city, state, country, lat, lng, name, description, price } = req.body;
+        let { address, city, state, country, name, description, price } = req.body;
 
         const newSpot = await Spot.create({
             ownerId: user.id,
-            address, city, state, country, lat, lng, name, description, price
+            address, city, state, country, name, description, price
         });
 
         res.status(201);
@@ -403,11 +403,11 @@ router.put('/:spotId', restoreUser, requireAuth, validateCreate,
         }
 
         const { user } = req;
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const { address, city, state, country, name, description, price } = req.body;
 
         spot.update({
             ownerId: user.id,
-            address, city, state, country, lat, lng, name, description, price
+            address, city, state, country, name, description, price
         });
 
         return res.json(spot)

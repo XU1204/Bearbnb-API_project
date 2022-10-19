@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD = 'spots/GET'
+const DETAIL = 'spots/DETAIL'
 const CREATE = 'spots/CREATE'
 const REMOVE = 'spots/REMOVE'
 const UPDATE = 'spots/UPDATE'
@@ -15,6 +16,13 @@ const add = (payload) => {
     return {
         type: CREATE,
         payload
+    }
+}
+
+const detail = (spot) => {
+    return {
+        type: DETAIL,
+        spot
     }
 }
 
@@ -46,15 +54,15 @@ export const getSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
     if(response.ok) {
         const spots = await response.json();
-        dispatch(load(spots))
+        dispatch(load(spots.Spots))
     }
 };
 
 export const getSpotsOfCurrent = () => async dispatch => {
     const response = await csrfFetch('/api/spots/current');
     if(response.ok) {
-        const spot = await response.json();
-        dispatch(load(spot))
+        const spots = await response.json();
+        dispatch(load(spots.Spots))
     }
 }
 
@@ -63,7 +71,7 @@ export const getDetails = (spotId) => async dispatch => {
     if (response.ok) {
         const spot = await response.json();
         //console.log('spot from getDetails',spot)
-        dispatch(load(spot))
+        dispatch(detail(spot))
     }
 };
 
@@ -129,14 +137,13 @@ const spotsReducer = (state = initialState, action) => {
     let newState = {...state};
     switch(action.type) {
         case LOAD:
-            if (action.spots.Spots) {
-                action.spots.Spots.forEach(spot => newState[spot.id] = spot);
-                return newState;
-            }
-            else {
-                newState[action.spots.id] = action.spots;
-                //console.log('newState from getdetails,', newState)
-                return newState;
+            // action.spots.Spots.forEach(spot => newState[spot.id] = spot);
+            action.spots.forEach(spot => newState[spot.id] = spot)
+            return newState;
+        case DETAIL:
+            console.log('action.spot', action)
+            return {
+                [action.spot.id] : action.spot
             }
         case CREATE:
             const newSpot =  {

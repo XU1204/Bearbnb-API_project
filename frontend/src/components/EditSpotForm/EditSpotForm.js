@@ -10,8 +10,8 @@ function EditSpotForm ({spot}) {
     const [city, setCity] = useState(spot.city);
     const [state, setState] = useState(spot.state);
     const [country, setCountry] = useState(spot.country);
-    const [lat, setLat] = useState(spot.lat);
-    const [lng, setLng] = useState(spot.lng);
+    // const [lat, setLat] = useState(spot.lat);
+    // const [lng, setLng] = useState(spot.lng);
     const [name, setName] = useState(spot.name);
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
@@ -22,8 +22,8 @@ function EditSpotForm ({spot}) {
     const updateState= (e) => setState(e.target.value);
     const updateCountry = (e) => setCountry(e.target.value);
     const updateName = (e) => setName(e.target.value);
-    const updateLat = (e) => setLat(e.target.value);
-    const updateLng = (e) => setLng(e.target.value);
+    // const updateLat = (e) => setLat(e.target.value);
+    // const updateLng = (e) => setLng(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
 
@@ -33,20 +33,32 @@ function EditSpotForm ({spot}) {
 
         const data = {
             id: spot.id,
-            address, city, state, country, lat, lng, name, description, price
+            address, city, state, country, name, description, price
         }
         let updatedSpot;
         try {
             updatedSpot = await dispatch(updateSpot(data))
         } catch (error) {
+            //console.log('error:---', error)
             setErrors(error)
         }
 
         if (updatedSpot) {
             setErrors([])
-            console.log('updatedspot:', updatedSpot)
+            //console.log('updatedspot:', updatedSpot)
             history.push(`/spots/${updatedSpot.id}`)
         }
+
+        // return dispatch(updateSpot(data))
+        // .catch(async (res) => {
+        //     const data2 = await res.json();
+        //     console.log('data2:---', data2)
+        //     if (data2 && data2.errors) setErrors(data2.errors);
+        //     else {
+        //         setErrors([])
+        //         history.push(`/spots/current`)
+        //     }
+        // })
     };
 
     return (
@@ -94,7 +106,7 @@ function EditSpotForm ({spot}) {
                     required
                 />
             </label>
-            <label>
+            {/* <label>
                 Latitude:
                 <input
                     type='number'
@@ -113,7 +125,7 @@ function EditSpotForm ({spot}) {
                     onChange={updateLng}
                     required
                 />
-            </label>
+            </label> */}
             <label>
                 Name:
                 <input

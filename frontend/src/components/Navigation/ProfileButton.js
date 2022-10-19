@@ -50,7 +50,10 @@ function ProfileButton ({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <NavLink to='/spots/current'>MyListings</NavLink>
+              <NavLink key='listing' to='/spots/current'>My Listings</NavLink>
+            </li>
+            <li>
+              <NavLink key='review' to='/reviews/current'>My Reviews</NavLink>
             </li>
             <li>
               <button onClick={logout}>Log Out</button>

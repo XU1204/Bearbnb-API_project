@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { getSpots, removeSpot, addImageToSpot } from '../../store/spots'
+import { getSpotsOfCurrent, removeSpot } from '../../store/spots'
 import EditSpotFormModal from "../EditSpotForm";
 import AddImageFormModal from "../EditSpotForm/AddImageFromModal.js";
 
@@ -10,11 +10,11 @@ function MyListings () {
     const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
-        dispatch(getSpots())
-    },[dispatch]);
+        dispatch(getSpotsOfCurrent())
+    },[dispatch])
 
-    const allSpots = useSelector(state => Object.values(state.spotState));
-    const spots = allSpots.filter(spot => spot.ownerId === sessionUser.id)
+   const allSpots = useSelector(state => Object.values(state.spotState));
+   const spots = allSpots.filter(spot => spot.ownerId === sessionUser.id)
     if (!spots) return null;
     return (
         <>

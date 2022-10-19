@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { getReviewsOfSpot } from "../../store/reviews";
 import { getDetails } from "../../store/spots";
 import './SpotDetails.css'
 
 function SpotDetails () {
     //`console.log(1)
     const { id } = useParams();
+    //Attention: typeof id is string!!!
     //console.log('id---', id)
     const dispatch = useDispatch();
 
@@ -17,9 +19,16 @@ function SpotDetails () {
     const spot = useSelector(state => state.spotState[id])
 
     //console.log('spot------', spot)
+    useEffect(() => {
+        dispatch(getReviewsOfSpot(id))
+    },[id])
+    const reviews = useSelector(state => Object.values(state.reviewState))
+    //const reviews = allreviews.filter(review => review.spotId === +id)
+    //console.log('review', reviews)
 
     if (!spot) return null;
     if (!spot.SpotImages) return null;
+   // if(!review)
     //console.log(3)
 
     let imageLink
@@ -54,7 +63,19 @@ function SpotDetails () {
                 <div>${spot.price} per night</div>
                 <p>Description: {spot.description}</p>
             </div>
-            <ul></ul>
+            <div>
+                {reviews.map(review => (
+                    <>
+                        <h3>★ {review.stars} ・{reviews.length} Reviews:</h3>
+                        <div>
+                        <ul>
+                            <li><h4>{review.User.firstName} {review.User.lastName}:</h4> {review.review}</li>
+                        </ul>
+                        </div>
+                    </>
+                ))}
+            </div>
+
        </div>
     )
 }

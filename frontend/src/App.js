@@ -9,6 +9,7 @@ import HomepageIndex from "./components/Homepage";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateSpotForm from "./components/CreateSpotForm/CreateSpotForm";
 import MyListings from "./components/MyListings/MyListings";
+import MyReviews from "./components/MyReviews/MyReviews";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path='/spots'>
               <CreateSpotForm />
+          </Route>
+          <Route path='/reviews/current'>
+            <MyReviews />
           </Route>
           <Route path='/signup'>
             <SignupFormPage />
