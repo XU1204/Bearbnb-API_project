@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addSpot } from '../../store/spots'
+import { useDispatch, useSelector } from 'react-redux';
+import { addSpot, addImageToSpot, getDetails } from '../../store/spots'
 
 function CreateSpotForm() {
   const dispatch = useDispatch();
@@ -17,37 +17,46 @@ function CreateSpotForm() {
   const [price, setPrice] = useState(0);
   const [errors, setErrors] = useState([]);
 
+  //
+  const [url, setUrl] = useState('');
+  const [preview, setPreview] = useState('yes');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = {
+    const data1 = {
         address, city, state, country, name, description, price
     }
       //console.log(1)
-    //   let createdSpot;
-    //   createdSpot = dispatch(addSpot(data))
-    //   console.log('createdSpot', createdSpot)
-    //   if (createdSpot) {
-        // setErrors([]);
-        // return dispatch(addSpot(data))
-        // .catch(async (res) => {
-        //     const data = await res.json();
-        //     if (data && data.errors) setErrors(data.errors)
-        //  });
 
-    let createdSpot;
-    try {
-        createdSpot = await dispatch(addSpot(data))
-    } catch (error) {
-        setErrors(error)
+      const data2 = {
+        url,
+        preview: preview === 'yes'? true : false
     }
+
+    const  createdSpot = await dispatch(addSpot(data1))
+    .catch(async (res) => {
+    const data = await res.json();
+    //console.log('data--', data)
+    if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
+    });
 
     if (createdSpot) {
         setErrors([])
-        //console.log('createdspot:', createdSpot)
+        const spot = await dispatch(getDetails(createdSpot.id))
+        // dispatch(addImageToSpot(spot, data2))
+        console.log('createdspot:', createdSpot)
+        //console.log('spot------', spot)
         history.push(`/spots/${createdSpot.id}`)
     }
-      //return setErrors(['Invalid Input']);
+
+    // return dispatch(addSpot(data1))
+    // .then((spot) => addImageToSpot(spot, data2))
+    //     .catch(async (res) => {
+    //     const data = await res.json();
+    //     //console.log('data--', data)
+    //     if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
+    //     });
   }
 
   return (
@@ -136,6 +145,40 @@ function CreateSpotForm() {
                     required
                 />
             </label>
+
+            {/*  */}
+            <label>
+                    Image Url:
+                    <input
+                        type='url'
+                        value={url}
+                        placeholder={"https://example.com"}
+                        onChange={(e) => setUrl(e.target.value)}
+                        required
+                    />
+                </label>
+                <legend>Preview:</legend>
+                <div>
+                <label>
+                    <input
+                        type="radio"
+                        value='yes'
+                        checked={preview === 'yes'}
+                        onChange={(e) => setPreview(e.target.value)}
+                    />
+                    true
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        value='no'
+                        checked={preview === 'no'}
+                        onChange={(e) => setPreview(e.target.value)}
+                    />
+                    false
+                </label>
+                </div>
+
             <button type='submit'>Create new spot</button>
     </form>
   );

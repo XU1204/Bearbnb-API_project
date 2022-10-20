@@ -38,7 +38,8 @@ const validateCreate = [
       .withMessage('Description is required.'),
     check('price')
       .exists({ checkFalsy: true })
-      .withMessage('Price per day is required.'),
+      .isFloat({min: 0})
+      .withMessage('Price per day is required (minimum is 0).'),
     handleValidationErrors
   ];
 

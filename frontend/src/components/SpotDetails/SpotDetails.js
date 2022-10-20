@@ -7,44 +7,32 @@ import CreateReviewFormModal from "../CreateSpotForm/CreateReviewForm";
 import './SpotDetails.css'
 
 function SpotDetails () {
-    //`console.log(1)
+    console.log(1)
     const { id } = useParams();
     //Attention: typeof id is string!!!
     //console.log('id---', id)
     const dispatch = useDispatch();
-//modify
-   // const sessionUser = useSelector(state => state.session.user);
-    // let createReviewButton;
-    // if (sessionUser) {
-    //     createReviewButton = (
-    //         <CreateReviewFormModal id={+id}/>
-    //     )
-    // } else {
-    //     createReviewButton = (
-    //         <></>
-    //     );
-    // }
+
+    const reviews = useSelector(state => Object.values(state.reviewState))
 
     useEffect(() => {
-        //console.log(2)
-        dispatch(getDetails(+id));
-        dispatch(getReviewsOfSpot(+id))
-    }, [ dispatch,+id]);
-    const spot = useSelector(state => state.spotState[+id])
+        console.log(2)
+        dispatch(getDetails(id));
+        dispatch(getReviewsOfSpot(id))
+    }, [ dispatch, id]);
+    const spot = useSelector(state => state.spotState[id])
 
     //console.log('spot------', spot)
     // useEffect(() => {
 
     // },[dispatch ,id])
-    const reviews = useSelector(state => Object.values(state.reviewState))
     //const reviews = allreviews.filter(review => review.spotId === +id)
-    //console.log('review', reviews)
+    //console.log('review from spotsdetails, reviews)
 
     if (!spot) return null;
     if (!spot.SpotImages) return null;
     if(!reviews) return null;
 
-    //console.log(3)
 
     let imageLink
     if (spot.SpotImages[0]) {

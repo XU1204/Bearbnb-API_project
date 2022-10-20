@@ -14,18 +14,14 @@ function CreateReviewFormModal ({id}) {
     const [errors, setErrors] = useState([]);
     //console.log('error111111', errors)
 
-    // useEffect(() => {
-    //     getDetails(id)
-    // }, [dispatch])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data1 = {
             review, stars
         }
 
-        await dispatch(getDetails(+id));
-        await dispatch(getReviewsOfSpot(+id))
+        // await dispatch(getDetails(+id));
+        // await dispatch(getReviewsOfSpot(+id))
         // return dispatch(createReviewOfSpot(id, data1))
         // .catch(async (res) => {
         // const data = await res.json();
@@ -42,26 +38,11 @@ function CreateReviewFormModal ({id}) {
 
         if (newReview) {
             setErrors([])
-        console.log('created review:', newReview)
+            //console.log('created review:', newReview)
             history.push(`/spots/${id}`)
         }
-
-        // let createdReview;
-        // try {
-        //     createdReview = await dispatch(createReviewOfSpot(id, data));
-        // } catch (error) {
-        //     console.log('error--', error)
-        //     setErrors([error])
-        // };
-
-        // console.log('created review 111 :', createdReview)
-        // if (createdReview) {
-        //     setErrors([])
-        // console.log('created review:', createdReview)
-        //     history.push(`/spots/${id}`)
-        // }
     }
-// modify
+
     const sessionUser = useSelector(state => state.session.user);
     let content;
     if (!sessionUser) {
@@ -104,27 +85,6 @@ function CreateReviewFormModal ({id}) {
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                 {content}
-              {/* <form onSubmit={handleSubmit}>
-                <label>
-                    Review:
-                    <input
-                        type='text'
-                        value={review}
-                        onChange={(e) => setReview(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Stars:
-                    <input
-                        type='number'
-                        value={stars}
-                        onChange={(e) => setStars(e.target.value)}
-                        required
-                    />
-                </label>
-                <button type='submit'>Submit</button>
-              </form> */}
             </Modal>
           )}
         </>

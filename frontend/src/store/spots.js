@@ -72,6 +72,7 @@ export const getDetails = (spotId) => async dispatch => {
         const spot = await response.json();
         //console.log('spot from getDetails',spot)
         dispatch(detail(spot))
+        return spot;
     }
 };
 

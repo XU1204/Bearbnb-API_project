@@ -15,7 +15,7 @@ function MyReviews () {
 
     const allReviews = useSelector(state => Object.values(state.reviewState))
     const reviews = allReviews.filter(review => review.userId === sessionUser.id)
-    console.log('2222 reviews-------', reviews)
+    //console.log('2222 reviews-------', reviews)
     if (!reviews) return null;
 
     return (

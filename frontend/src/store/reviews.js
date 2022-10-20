@@ -63,7 +63,7 @@ export const createReviewOfSpot = (id, payload) => async dispatch => {
         const review = await response.json();
         console.log('new review of spot:  ', review)
         dispatch(create(review));
-        //return review;
+        return review;
     }
 };
 
@@ -106,7 +106,7 @@ const reviewsReducer = (state = {}, action) => {
             return Object.assign({...state}, {[action.review.id]: action.review});
         case UPDATE:
             const updateReviewObj = Object.assign({...state}, {[action.review.id]: action.review});
-            console.log(('updateReviewObj', updateReviewObj));
+            //console.log(('updateReviewObj', updateReviewObj));
             return updateReviewObj
         case REMOVE:
             let newOne = {...state}
