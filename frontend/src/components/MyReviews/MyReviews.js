@@ -1,37 +1,38 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getReviewsOfCurrent } from "../../store/reviews";
+import { getReviewsOfCurrent, removeReview } from "../../store/reviews";
+import EditReviewFormModal from "../EditSpotForm/EditReviewForm";
 
 
 function MyReviews () {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     useEffect(() => {
+        console.log(1)
         dispatch(getReviewsOfCurrent())
     },[dispatch]);
 
     const allReviews = useSelector(state => Object.values(state.reviewState))
-    //console.log('all')
-    if (!allReviews) return null;
+    const reviews = allReviews.filter(review => review.userId === sessionUser.id)
+    console.log('2222 reviews-------', reviews)
+    if (!reviews) return null;
+
     return (
         <>
-            <NavLink to='/reviews'>Create new review</NavLink>
             <div>
                 <ul>
-                    {allReviews.map(review => (
-                        <li key={review.id}>
-                            {review.review} in {review.Spot.id}, {review.stars} stars.
-                            <span>
+                    {reviews.map(eachreview => (
+                        <li key={eachreview.id}>
+                            {eachreview.review} in {eachreview.spotId}, {eachreview.stars} stars.
+                            {/* <span>
                                 <button>Add Image</button>
-                                {/* <AddImageFormModal spot={spot}/> */}
-                            </span>
+                            </span> */}
+                            {/* <span>
+                                <EditReviewFormModal eachreview={eachreview}/>
+                            </span> */}
                             <span>
-                                <button >Edit Review</button>
-                                {/* <EditSpotFormModal spot={spot}/> */}
-                            </span>
-                            <span>
-                                <button>Remove Review</button>
+                                <button onClick={(e) =>  dispatch(removeReview(eachreview.id))}>Remove Review</button>
                             </span>
                         </li>
                     ))}

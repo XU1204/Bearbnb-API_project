@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { updateSpot } from '../../store/spots'
 
 function EditSpotForm ({spot}) {
+    //console.log(1, 'each spot', spot)
     const dispatch = useDispatch();
     const history = useHistory();
     const [address, setAddress] = useState(spot.address);

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { getReviewsOfSpot } from "../../store/reviews";
 import { getDetails } from "../../store/spots";
+import CreateReviewFormModal from "../CreateSpotForm/CreateReviewForm";
 import './SpotDetails.css'
 
 function SpotDetails () {
@@ -11,24 +12,38 @@ function SpotDetails () {
     //Attention: typeof id is string!!!
     //console.log('id---', id)
     const dispatch = useDispatch();
+//modify
+   // const sessionUser = useSelector(state => state.session.user);
+    // let createReviewButton;
+    // if (sessionUser) {
+    //     createReviewButton = (
+    //         <CreateReviewFormModal id={+id}/>
+    //     )
+    // } else {
+    //     createReviewButton = (
+    //         <></>
+    //     );
+    // }
 
     useEffect(() => {
         //console.log(2)
-        dispatch(getDetails(id))
-    }, [id]);
-    const spot = useSelector(state => state.spotState[id])
+        dispatch(getDetails(+id));
+        dispatch(getReviewsOfSpot(+id))
+    }, [ dispatch,+id]);
+    const spot = useSelector(state => state.spotState[+id])
 
     //console.log('spot------', spot)
-    useEffect(() => {
-        dispatch(getReviewsOfSpot(id))
-    },[id])
+    // useEffect(() => {
+
+    // },[dispatch ,id])
     const reviews = useSelector(state => Object.values(state.reviewState))
     //const reviews = allreviews.filter(review => review.spotId === +id)
     //console.log('review', reviews)
 
     if (!spot) return null;
     if (!spot.SpotImages) return null;
-   // if(!review)
+    if(!reviews) return null;
+
     //console.log(3)
 
     let imageLink
@@ -44,6 +59,7 @@ function SpotDetails () {
 
     return (
        <div>
+            <CreateReviewFormModal id={+id}/>
             <h1>{spot.name}</h1>
             <div>
                 <span>★</span>
@@ -64,12 +80,12 @@ function SpotDetails () {
                 <p>Description: {spot.description}</p>
             </div>
             <div>
+                <h3>★  {spot.avgStarRating || 'new'} ・{reviews.length} Reviews:</h3>
                 {reviews.map(review => (
                     <>
-                        <h3>★ {review.stars} ・{reviews.length} Reviews:</h3>
                         <div>
                         <ul>
-                            <li><h4>{review.User.firstName} {review.User.lastName}:</h4> {review.review}</li>
+                            <li key={review.id}><h4>{review.User.firstName} {review.User.lastName}:</h4> {review.review}</li>
                         </ul>
                         </div>
                     </>
