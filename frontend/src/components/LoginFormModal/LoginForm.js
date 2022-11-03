@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
+import './LoginForm.css'
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -19,31 +20,47 @@ function LoginForm() {
       });
   }
 
+  const setDemoUser = () => {
+    setCredential('Demo-lition');
+    setPassword('password')
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
+      <div >
       <label>
         Username or Email:
+        <div>
         <input
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
           required
         />
+        </div>
       </label>
+      </div>
+      <div>
       <label>
         Password:
+        <div>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        </div>
       </label>
-      <button type="submit">Log In</button>
+      </div>
+      <button className='login-form-button' type="submit">Log In</button>
+      <span>or</span>
+      <button className='login-form-button' onClick={() => setDemoUser()} type="submit">Login with Demo User</button>
     </form>
+
   );
 }
 

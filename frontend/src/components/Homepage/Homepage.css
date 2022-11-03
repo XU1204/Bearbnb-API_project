@@ -6,7 +6,7 @@
 .hp-each-list {
     width: 250px;
     padding: 10px;
-    margin:30px
+    margin:10px
 }
 
 .hp-name-star {
@@ -22,6 +22,6 @@
 
 .hp-preview-img, img {
     width: 250px;
-    height: 200px;
+    height: 220px;
     border-radius: 10px;
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import './Navigation.css'
 
 function ProfileButton ({ user }) {
     const dispatch = useDispatch();
@@ -41,8 +42,9 @@ function ProfileButton ({ user }) {
     };
 
     return (
-     <>
+     <div>
         <button onClick={openMenu}>
+            <i className="fa-solid fa-bars"></i>
             <i className="fa-solid fa-user"></i>
         </button>
         {showMenu && (
@@ -60,7 +62,7 @@ function ProfileButton ({ user }) {
             </li>
           </ul>
         )}
-     </>
+     </div>
     )
 }
 

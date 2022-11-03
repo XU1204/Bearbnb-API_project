@@ -14,20 +14,19 @@ function CreateReviewFormModal ({id}) {
     const [errors, setErrors] = useState([]);
     //console.log('error111111', errors)
 
+    const reviews = useSelector(state => state.reviewState);
+    console.log('review state------', reviews)
+    useEffect(() => {
+        console.log(1)
+        dispatch(getDetails(id))
+    }, [])
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data1 = {
             review, stars
         }
-
-        // await dispatch(getDetails(+id));
-        // await dispatch(getReviewsOfSpot(+id))
-        // return dispatch(createReviewOfSpot(id, data1))
-        // .catch(async (res) => {
-        // const data = await res.json();
-        // //console.log('data--', data)
-        // if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
-        // });
 
         const newReview = await dispatch(createReviewOfSpot(id, data1))
         .catch(async (res) => {
@@ -40,6 +39,9 @@ function CreateReviewFormModal ({id}) {
             setErrors([])
             //console.log('created review:', newReview)
             history.push(`/spots/${id}`)
+            setShowModal(false)
+            setReview('');
+            setStars(5)
         }
     }
 

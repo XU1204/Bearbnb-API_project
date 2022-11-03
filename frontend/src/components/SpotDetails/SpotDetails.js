@@ -13,14 +13,17 @@ function SpotDetails () {
     //console.log('id---', id)
     const dispatch = useDispatch();
 
+    const sessionUser = useSelector(state => state.session.user);
+
+    const spot = useSelector(state => state.spotState[id])
+
     const reviews = useSelector(state => Object.values(state.reviewState))
 
     useEffect(() => {
-        console.log(2)
+        //console.log(2)
         dispatch(getDetails(id));
         dispatch(getReviewsOfSpot(id))
     }, [ dispatch, id]);
-    const spot = useSelector(state => state.spotState[id])
 
     //console.log('spot------', spot)
     // useEffect(() => {
@@ -62,7 +65,7 @@ function SpotDetails () {
                 {imageLink}
             </div>
             <div>
-                <h3>Single house hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
+                <h3>Single house hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h3>
                 <h4>{spot.address}, {spot.city}, {spot.state}</h4>
                 <div>${spot.price} per night</div>
                 <p>Description: {spot.description}</p>
@@ -73,7 +76,7 @@ function SpotDetails () {
                     <>
                         <div>
                         <ul>
-                            <li key={review.id}><h4>{review.User.firstName} {review.User.lastName}:</h4> {review.review}</li>
+                            <li key={review.id}><h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4> {review.review}</li>
                         </ul>
                         </div>
                     </>
