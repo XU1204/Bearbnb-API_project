@@ -22,7 +22,7 @@ function Homepage ({spots}) {
                     </div>
                     <h5>{spot.name}</h5>
                     <li>{spot.description}</li>
-                    <li>${spot.price} / night</li>
+                    <li><span id='hp-price'>${spot.price}</span> night</li>
                 </div>
                 </NavLink>
             ))}

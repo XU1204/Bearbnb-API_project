@@ -1,6 +1,7 @@
 .hp-list {
     display: flex;
     flex-wrap: wrap;
+    font-family: 'Urbanist', sans-serif;
 }
 
 .hp-each-list {
@@ -24,4 +25,12 @@
     width: 250px;
     height: 220px;
     border-radius: 10px;
+}
+
+#hp-price {
+    font-weight: bold ;
+}
+
+li {
+    text-decoration: none;
 }

@@ -43,4 +43,6 @@ button {
     padding: 5px 10px 5px;
     font-size: 15px;
     background-color: #ff385c;
+    border-radius: 21px;
+    border: 1px solid #dddddd;
 }
