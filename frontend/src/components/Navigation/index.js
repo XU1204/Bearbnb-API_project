@@ -32,7 +32,13 @@ function Navigation ({ isLoaded }) {
             <NavLink exact to='/'>
                 <img id='bearbnb' src='https://pbs.twimg.com/media/BstWqTHCEAMhHBc?format=jpg&name=900x900' alt='BearBnb'/>
             </NavLink>
-            {isLoaded && sessionLinks}
+            <div className='nav-right-part'>
+                <span>
+                    <NavLink to='/spots'><button>Become a Host</button></NavLink>
+                </span>
+                <i className="fa-solid fa-globe"></i>
+                {isLoaded && sessionLinks}
+            </div>
         </div>
     )
 

@@ -12,7 +12,8 @@ function AddImageFormModal({spot}) {
     const [preview, setPreview] = useState('yes');
     const [errors, setErrors] = useState([]);
 
-    const spot2 = useSelector(state => state.spotState[spot.id]);
+    //const spot2 = useSelector(state => state.spotState[spot.id]);
+    //const detailedSpot = dispatch(getDetails(spot.id))
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,14 +27,14 @@ function AddImageFormModal({spot}) {
 
         let newImageObj;
         try {
-            newImageObj = await dispatch(addImageToSpot(spot2, data))
+            newImageObj = await dispatch(addImageToSpot(spot.id, data))
         } catch (error) {
             setErrors(error)
         }
 
         if (newImageObj) {
             setErrors([])
-            history.push(`/spots/${spot2.id}`)
+            history.push(`/spots/${spot.id}`)
         }
     };
 

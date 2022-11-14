@@ -23,6 +23,11 @@ button {
     border-bottom: 1px solid #dddddd;
 }
 
+.nav-right-part {
+    display: flex;
+    align-items: center;
+}
+
 #bearbnb {
     width: 100px;
     height: 40px

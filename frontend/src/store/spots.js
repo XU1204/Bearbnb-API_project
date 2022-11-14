@@ -12,10 +12,10 @@ const load = (spots) => ({
     spots
 })
 
-const add = (payload) => {
+const add = (spot) => {
     return {
         type: CREATE,
-        payload
+        spot
     }
 }
 
@@ -41,10 +41,10 @@ const update = (spot) => {
     }
 }
 
-const addImage = (spot, payload) => {
+const addImage = (id, payload) => {
     return {
         type: ADD_IMAGE,
-        spot,
+        id,
         payload
     }
 }
@@ -54,7 +54,7 @@ export const getSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
     if(response.ok) {
         const spots = await response.json();
-        dispatch(load(spots.Spots))
+        dispatch(load(spots))
     }
 };
 
@@ -62,7 +62,7 @@ export const getSpotsOfCurrent = () => async dispatch => {
     const response = await csrfFetch('/api/spots/current');
     if(response.ok) {
         const spots = await response.json();
-        dispatch(load(spots.Spots))
+        dispatch(load(spots))
     }
 }
 
@@ -116,8 +116,8 @@ export const updateSpot = (payload) => async dispatch => {
     }
 };
 
-export const addImageToSpot = (spot, payload) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spot.id}/images`,{
+export const addImageToSpot = (id, payload) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}/images`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -126,53 +126,72 @@ export const addImageToSpot = (spot, payload) => async dispatch => {
     });
     if (response.ok) {
         const newImage = await response.json();
-        dispatch(addImage(spot, newImage));
+        dispatch(addImage(id, newImage));
         return response;
     }
 }
 //selectors
-const initialState = {}
+//const initialState = {}
+const initialState = { allSpots: {}, singleSpot: {}}
 
 //reducer
 const spotsReducer = (state = initialState, action) => {
-    let newState = {...state};
     switch(action.type) {
         case LOAD:
-            // action.spots.Spots.forEach(spot => newState[spot.id] = spot);
-            action.spots.forEach(spot => newState[spot.id] = spot)
+            // // action.spots.Spots.forEach(spot => newState[spot.id] = spot);
+            // action.spots.forEach(spot => newState[spot.id] = spot)
+            // return newState;
+            let newState = {...state};
+            action.spots.Spots.forEach(spot => newState.allSpots[spot.id] = spot);
             return newState;
         case DETAIL:
             //console.log('action.spot', action)
+            // return {
+            //     [action.spot.id] : action.spot
+            // }
             return {
-                [action.spot.id] : action.spot
+                ...state,
+                singleSpot: {
+                    [action.spot.id]: action.spot
+                }
             }
         case CREATE:
-            const newSpot =  {
+            // const newSpot =  {
+            //     ...state,
+            //     [action.payload.id]: action.payload
+            // }
+            const newSpot = {
                 ...state,
-                [action.payload.id]: action.payload
+                //allSpots: [...state.allSpots]
             }
-            console.log('spot2', newSpot)
+            newSpot.allSpots[action.spot.id] = action.spot
             return newSpot;
         case UPDATE:
             return {
                 ...state,
-                [action.spot.id]: action.spot
+                allSpots: {
+                    ...state.allSpots,
+                    [action.spot.id]: action.spot
+                }
             }
         case REMOVE:
-            delete newState[action.spotId]
+            delete newState.allSpots[action.spotId]
             return newState;
         case ADD_IMAGE:
-            let newImage = {
-                ...state[action.spot.id]
-            };
-            newImage.SpotImages = [
-                ...newImage.SpotImages,
-                action.payload
-            ]
-            return {
-                ...state,
-                [action.spot.id]: newImage
-            }
+            // let newImage = {
+            //     ...state[action.spot.id]
+            // };
+            // newImage.SpotImages = [
+            //     ...newImage.SpotImages,
+            //     action.payload
+            // ]
+            // return {
+            //     ...state,
+            //     [action.spot.id]: newImage
+            // }
+            let newImageState = {...state};
+            newImageState.singleSpot[action.id].SpotImages.push(action.payload);
+            return newImageState;
         default:
             return state
     };

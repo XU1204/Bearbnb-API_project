@@ -15,7 +15,7 @@ function SpotDetails () {
 
     const sessionUser = useSelector(state => state.session.user);
 
-    const spot = useSelector(state => state.spotState[id])
+    const spot = useSelector(state => state.spotState.singleSpot[id])
 
     const reviews = useSelector(state => Object.values(state.reviewState))
 
@@ -50,7 +50,7 @@ function SpotDetails () {
 
     return (
        <div>
-            <CreateReviewFormModal id={+id}/>
+            {/* <CreateReviewFormModal id={+id}/> */}
             <h1>{spot.name}</h1>
             <div>
                 <span>★</span>
@@ -71,7 +71,10 @@ function SpotDetails () {
                 <p>Description: {spot.description}</p>
             </div>
             <div>
+                <div>
                 <h3>★  {spot.avgStarRating || 'new'} ・{reviews.length} Reviews:</h3>
+                <CreateReviewFormModal id={+id}/>
+                </div>
                 {reviews.map(review => (
                     <>
                         <div>

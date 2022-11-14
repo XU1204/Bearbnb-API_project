@@ -1,0 +1,41 @@
+.my-listings-list {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 14px;
+}
+
+.my-listings-each {
+    width: 250px;
+    padding: 10px;
+    margin:10px 10px 0;
+}
+
+.my-listings-name-star {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0 5px;
+}
+
+.my-listings-fold {
+    font-weight: bold;
+}
+
+li {
+    margin: 5px 0 5px;
+}
+
+#my-listings-name {
+    color: gray
+}
+
+.my-listings-button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px ;
+}
+
+.my-listings-button>span>button:hover {
+    background-color: #ff385c;
+}

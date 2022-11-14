@@ -6,7 +6,7 @@ import Homepage from "./Homepage";
 
 function HomepageIndex () {
     const dispatch = useDispatch();
-    const spots = useSelector(state => Object.values(state.spotState));
+    const spots = useSelector(state => Object.values(state.spotState.allSpots));
     useEffect(() => {
         dispatch(getSpots())
     },[dispatch]);
