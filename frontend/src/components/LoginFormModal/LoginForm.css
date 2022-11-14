@@ -3,19 +3,26 @@ form {
     flex-direction: column;
     padding: 0px 20px 30px 20px;
     font-size: 16px;
-    border: 1px solid black;
+    border: 1px solid #dddddd;
     align-items: center;
     width: 300px;
     border-radius: 10px;
 }
 
 .login-form-button {
-    background-color: #ff385c;
     width: 90%;
     margin: 10px;
     font-size: 15px;
     border-radius: 21px;
     border: 1px solid #dddddd;
+}
+
+.login-form-button:hover {
+    background-color: #ff385c;
+}
+
+#login-form-login {
+    margin-top: 20px;
 }
 
 label {
@@ -24,4 +31,3 @@ label {
     align-items: center;
     margin-top: 10px;
 };
-

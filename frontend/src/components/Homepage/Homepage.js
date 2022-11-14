@@ -14,14 +14,13 @@ function Homepage ({spots}) {
                         <img src={spot.previewImage} alt={`preview image of ${spot.name}`}/>
                     </div>
                     <div className="hp-name-star">
-                        <h4>Home in {spot.city}</h4>
-                        <div>
+                        <span>{spot.city}, {spot.state}</span>
+                        <span>
                             <span>★</span>
                             <span>{spot.avgRating || 'new'}</span>
-                        </div>
+                        </span>
                     </div>
-                    <h5>{spot.name}</h5>
-                    <li>{spot.description}</li>
+                    <li id='hp-spot-name'>{spot.name}</li>
                     <li><span id='hp-price'>${spot.price}</span> night</li>
                 </div>
                 </NavLink>

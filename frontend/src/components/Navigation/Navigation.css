@@ -2,14 +2,16 @@ i {
     margin: 8px;
 }
 
-button {
+.nav-right-part button {
     border-radius: 21px;
     border: 1px solid #dddddd;
-    transition-property: box-shadow;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
-    transition-delay: 0s;
     background: transparent;
+    padding: 5px 10px 5px;
+    margin: 0 8px 0;
+}
+
+.nav-right-part button:hover {
+    background-color: lightgray;
 }
 
 .nav {

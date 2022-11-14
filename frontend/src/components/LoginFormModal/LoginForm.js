@@ -26,6 +26,7 @@ function LoginForm() {
   }
 
   return (
+    <div className='login-form-container'>
     <form onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -56,11 +57,11 @@ function LoginForm() {
         </div>
       </label>
       </div>
-      <button className='login-form-button' type="submit">Log In</button>
+      <button className='login-form-button' id='login-form-login' type="submit">Log In</button>
       <span>or</span>
       <button className='login-form-button' onClick={() => setDemoUser()} type="submit">Login with Demo User</button>
     </form>
-
+    </div>
   );
 }
 

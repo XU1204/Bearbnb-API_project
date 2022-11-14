@@ -150,7 +150,7 @@ const spotsReducer = (state = initialState, action) => {
             //     [action.spot.id] : action.spot
             // }
             return {
-                ...state,
+                ...state.allSpots,
                 singleSpot: {
                     [action.spot.id]: action.spot
                 }

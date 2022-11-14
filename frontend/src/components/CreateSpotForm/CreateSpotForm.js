@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSpot, addImageToSpot, getDetails } from '../../store/spots'
+import './CreateForm.css'
 
 function CreateSpotForm() {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ function CreateSpotForm() {
   }
 
   return (
+    <div className='create-spot-form-container'>
     <form onSubmit={handleSubmit}>
         <ul>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -179,8 +181,9 @@ function CreateSpotForm() {
                 </label>
                 </div>
 
-            <button type='submit'>Create new spot</button>
+            <button id='create-spot-form-button' type='submit'>Create new spot</button>
     </form>
+    </div>
   );
 }
 
