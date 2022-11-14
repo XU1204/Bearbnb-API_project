@@ -75,33 +75,33 @@ function CreateSpotForm() {
                 required
             />
         </label>
-            <label>
-                City:
-                <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
+        <label>
+            City:
+            <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+            />
+        </label>
+        <label>
+            State:
+            <input
+                type='text'
+                value={state}
+                onChange={(e) => setState(e.target.value)}
                 required
-                />
-            </label>
-            <label>
-                State:
-                <input
-                    type='text'
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Country:
-                <input
-                    type='text'
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
-            </label>
+            />
+        </label>
+        <label>
+            Country:
+            <input
+                type='text'
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+            />
+        </label>
             {/* <label>
                 Latitude:
                 <input
@@ -120,47 +120,47 @@ function CreateSpotForm() {
                     required
                 />
             </label> */}
-            <label>
-                Name:
-                <input
-                    type='text'
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Description:
-                <input
-                    type='text'
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Price:
-                <input
-                    type='number'
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
-            </label>
+        <label>
+            Name:
+            <input
+                type='text'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+            />
+        </label>
+        <label>
+            Description:
+            <input
+                type='text'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+            />
+        </label>
+        <label>
+            Price:
+            <input
+                type='number'
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+            />
+        </label>
 
-            {/*  */}
-            <label>
-                    Image Url:
-                    <input
-                        type='url'
-                        value={url}
-                        placeholder={"https://example.com"}
-                        onChange={(e) => setUrl(e.target.value)}
-                        required
-                    />
-                </label>
-                <legend>Preview:</legend>
-                <div>
+        <label>
+            Image Url:
+            <input
+                type='url'
+                value={url}
+                placeholder={"https://example.com"}
+                onChange={(e) => setUrl(e.target.value)}
+                required
+            />
+        </label>
+        <div className='preview-container'>
+            <legend id='preview-label'>Preview:</legend>
+            <div id='preview-ture-false'>
                 <label>
                     <input
                         type="radio"
@@ -179,7 +179,8 @@ function CreateSpotForm() {
                     />
                     false
                 </label>
-                </div>
+            </div>
+        </div>
 
             <button id='create-spot-form-button' type='submit'>Create new spot</button>
     </form>

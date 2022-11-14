@@ -16,3 +16,18 @@
 #create-spot-form-button:hover {
     background-color: #ff385c;
 }
+
+.preview-container {
+    margin-top: 20px;
+    width: 60%;
+}
+
+.preview-container>#preview-label {
+    display: flex;
+    justify-content: center;
+}
+
+.preview-container>#preview-ture-false {
+    display: flex;
+    justify-content: space-around;
+}
