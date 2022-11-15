@@ -150,7 +150,9 @@ const spotsReducer = (state = initialState, action) => {
             //     [action.spot.id] : action.spot
             // }
             return {
-                ...state.allSpots,
+                allSpots: {
+                    ...state.allSpots
+                },
                 singleSpot: {
                     [action.spot.id]: action.spot
                 }
@@ -175,8 +177,9 @@ const spotsReducer = (state = initialState, action) => {
                 }
             }
         case REMOVE:
-            delete newState.allSpots[action.spotId]
-            return newState;
+            const newState2 = {...state}
+            delete newState2.allSpots[action.spotId]
+            return newState2;
         case ADD_IMAGE:
             // let newImage = {
             //     ...state[action.spot.id]
@@ -191,6 +194,7 @@ const spotsReducer = (state = initialState, action) => {
             // }
             let newImageState = {...state};
             newImageState.singleSpot[action.id].SpotImages.push(action.payload);
+            console.log('newImageState:', newImageState)
             return newImageState;
         default:
             return state

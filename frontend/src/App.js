@@ -18,6 +18,14 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  function PageNotFound() {
+    return (
+      <div>
+        <h2>404 Page not found</h2>
+      </div>
+    );
+  }
+
   return isLoaded && (
     <>
      <Navigation isLoaded={isLoaded} />
@@ -26,7 +34,7 @@ function App() {
           <Route exact path='/'>
             <HomepageIndex />
           </Route>
-          <Route path='/spots/current'>
+          <Route exact path='/spots/current'>
             <MyListings />
           </Route>
           <Route path='/spots/:id'>
@@ -40,6 +48,9 @@ function App() {
           </Route>
           <Route path='/signup'>
             <SignupFormPage />
+          </Route>
+          <Route path='*'>
+            {PageNotFound}
           </Route>
         </Switch>
       )}

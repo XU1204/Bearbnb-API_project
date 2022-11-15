@@ -30,7 +30,7 @@ function CreateSpotForm() {
     }
       //console.log(1)
 
-      const data2 = {
+    const data2 = {
         url,
         preview: preview === 'yes'? true : false
     }
@@ -44,9 +44,9 @@ function CreateSpotForm() {
 
     if (createdSpot) {
         setErrors([])
-        const spot = await dispatch(getDetails(createdSpot.id))
-        // dispatch(addImageToSpot(spot, data2))
-        console.log('createdspot:', createdSpot)
+        //const spot = await dispatch(getDetails(createdSpot.id))
+        dispatch(addImageToSpot(createdSpot.id, data2))
+        //console.log('createdspot:', createdSpot)
         //console.log('spot------', spot)
         history.push(`/spots/${createdSpot.id}`)
     }
