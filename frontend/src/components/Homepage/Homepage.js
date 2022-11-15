@@ -17,7 +17,7 @@ function Homepage ({spots}) {
                         <span>{spot.city}, {spot.state}</span>
                         <span>
                             <span>★</span>
-                            <span>{(spot.avgRating).toFixed(1) || 'new'}</span>
+                            <span>{Number(spot.avgRating).toFixed(1) || 'new'}</span>
                         </span>
                     </div>
                     <li id='hp-spot-name'>{spot.name}</li>
