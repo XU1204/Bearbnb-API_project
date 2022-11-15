@@ -49,7 +49,7 @@ function SpotDetails () {
     }
 
     return (
-       <div>
+       <div className="detail-page">
             {/* <CreateReviewFormModal id={+id}/> */}
             <h1>{spot.name}</h1>
             <div>

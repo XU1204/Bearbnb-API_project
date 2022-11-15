@@ -1,5 +1,5 @@
 // frontend/src/components/Navigation/index.js
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import { NavLink } from 'react-router-dom';
@@ -9,6 +9,8 @@ import './Navigation.css'
 
 function Navigation ({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const [showModal, setShowModal] = useState(false);
+    const [login, setLogin] = useState(true);
 
     let sessionLinks;
     if (sessionUser) {
