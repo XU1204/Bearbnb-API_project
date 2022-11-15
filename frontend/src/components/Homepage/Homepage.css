@@ -5,6 +5,11 @@
     font-size: 14px;
 }
 
+.hp-each-spot {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .hp-each-list {
     width: 250px;
     padding: 10px;

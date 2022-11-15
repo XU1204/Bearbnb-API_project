@@ -7,6 +7,7 @@ function Homepage ({spots}) {
 
     return (
         <div className="hp-list">
+            <div className="hp-each-spot">
             {spots.map(spot => (
                 <NavLink key={spot.name} id='link' to={`/spots/${spot.id}`}>
                 <div className="hp-each-list">
@@ -25,6 +26,7 @@ function Homepage ({spots}) {
                 </div>
                 </NavLink>
             ))}
+            </div>
         </div>
     )
 }
