@@ -31,3 +31,17 @@
     display: flex;
     justify-content: space-around;
 }
+
+#write-review-button{
+    margin-right: 20px;
+    padding: 0 10px 0;
+    font-size: 14px;
+    margin-top: 30px;
+    border-radius: 10px;
+    border: 1px solid #dddddd;
+    background-color: transparent;
+}
+#write-review-button:hover {
+    background-color: #dddddd;
+}
+

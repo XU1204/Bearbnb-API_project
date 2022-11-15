@@ -30,7 +30,7 @@ function MyListings () {
                             <span className='my-listings-fold'>{spot.city}, {spot.state}</span>
                             <span>
                                 <span>★</span>
-                                <span>{spot.avgRating || 'new'}</span>
+                                <span>{(spot.avgRating).toFixed(1) || 'new'}</span>
                             </span>
                         </div>
                         <li id='my-listings-name' key={spot.name}>{spot.name}</li>

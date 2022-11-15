@@ -83,7 +83,7 @@ function CreateReviewFormModal ({id}) {
 
     return (
         <>
-          <button onClick={() => setShowModal(true)}>Write a review</button>
+          <button id='write-review-button' onClick={() => setShowModal(true)}>Write a review</button>
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                 {content}
