@@ -25,8 +25,8 @@ function MyReviews () {
                 {reviews.map(eachreview => (
                     <div className="my-reviews-each-review">
                         <ul key={eachreview.id}>
-                            <li><span className="my-reviews-bold">Spot: </span> {eachreview.Spot.name}</li>
-                            <li><span className="my-reviews-bold">Location: </span> {eachreview.Spot.address}, {eachreview.Spot.city}, {eachreview.Spot.state}</li>
+                            <li><span className="my-reviews-bold">Spot: </span> {eachreview.Spot?.name}</li>
+                            <li><span className="my-reviews-bold">Location: </span> {eachreview.Spot?.address}, {eachreview.Spot?.city}, {eachreview.Spot?.state}</li>
                             <li><span className="my-reviews-bold">Review: </span>
                                 {eachreview.stars} stars.  {eachreview.review}
                             </li>
