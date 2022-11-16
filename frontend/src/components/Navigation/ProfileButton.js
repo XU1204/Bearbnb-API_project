@@ -54,13 +54,13 @@ function ProfileButton ({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <NavLink key='listing' to='/spots/current'>My Listings</NavLink>
+              <NavLink style={{textDecoration: 'none', color: 'black'}} key='listing' to='/spots/current'>My Listings</NavLink>
             </li>
             <li>
-              <NavLink key='review' to='/reviews/current'>My Reviews</NavLink>
+              <NavLink style={{textDecoration: 'none', color: 'black'}} key='review' to='/reviews/current'>My Reviews</NavLink>
             </li>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button id='logout-button' onClick={logout}>Log Out</button>
             </li>
           </ul>
         )}

@@ -58,6 +58,18 @@ function SpotDetails () {
         imageLink = (
             <img alt='No available images'/>
         )
+    };
+
+    let createReviewFormLink;
+    if (sessionUser) {
+        createReviewFormLink = (
+            <CreateReviewFormModal id={+id}/>
+        )
+    };
+    if (!sessionUser) {
+        createReviewFormLink = (
+            <></>
+        )
     }
 
     return (
@@ -84,8 +96,9 @@ function SpotDetails () {
             </div>
             <div>
                 <div className="review-title">
-                <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3>
-                <CreateReviewFormModal id={+id}/>
+                    <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3>
+                    {/* <CreateReviewFormModal id={+id}/> */}
+                    {createReviewFormLink}
                 </div>
                 {reviews.map(review => (
                     <>

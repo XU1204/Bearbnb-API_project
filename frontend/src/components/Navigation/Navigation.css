@@ -53,3 +53,8 @@ i {
     border-radius: 21px;
     border: 1px solid #dddddd;
 }
+
+#logout-button {
+    margin-top: 10px;
+}
+

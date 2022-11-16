@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateSpot } from '../../store/spots'
+import './EditForm.css'
 
 function EditSpotForm ({spot}) {
     //console.log(1, 'each spot', spot)
@@ -157,7 +158,7 @@ function EditSpotForm ({spot}) {
                     required
                 />
             </label>
-            <button type='submit'>Update Listing</button>
+            <button id='update-spot-button' type='submit'>Update Listing</button>
     </form>
     )
 

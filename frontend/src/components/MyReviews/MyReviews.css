@@ -1,0 +1,31 @@
+.my-reviews-each-review{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 0 30px 0px;
+    margin: 20px 150px 20px;
+    align-items: center;
+}
+
+.my-reviews-each-review:hover{
+    background-color: #dddddd;
+}
+
+.my-reviews-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-reviews-bold {
+    font-weight: bold;
+}
+
+#remove-review-button {
+    border-radius: 10px;
+    border: 1px solid #dddddd;
+}
+
+#remove-review-button:hover {
+    background-color: #ff385c;
+}

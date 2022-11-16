@@ -46,3 +46,16 @@ li {
 #hp-spot-name {
     color: grey;
 }
+
+.hp-page-bottom {
+    box-sizing: border-box;
+    position: fixed;
+    border-top: 1px solid #dddddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: grey;
+    bottom: 10px;
+    width: 100%;
+    padding: 0 40px 0;
+}

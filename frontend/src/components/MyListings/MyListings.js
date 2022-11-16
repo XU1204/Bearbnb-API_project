@@ -38,10 +38,7 @@ function MyListings () {
                     </div>
                     </NavLink>
                     <div className="my-listings-button">
-                        <span>
-                            {/* <button onClick={(e) =>  dispatch(addImageToSpot(spot.id))}>Add Image</button> */}
-                            <AddImageFormModal spot={spot}/>
-                        </span>
+                            {/* <AddImageFormModal spot={spot}/> */}
                         <span>
                             {/* <button onClick={() => setEdit(true)}>Edit Listing</button> */}
                             <EditSpotFormModal spot={spot}/>

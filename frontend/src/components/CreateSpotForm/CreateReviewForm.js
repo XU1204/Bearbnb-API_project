@@ -55,7 +55,6 @@ function CreateReviewFormModal ({id}) {
         content = (
             <form onSubmit={handleSubmit}>
                 <ul>
-
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
             <label>

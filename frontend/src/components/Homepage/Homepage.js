@@ -6,6 +6,7 @@ function Homepage ({spots}) {
     if(!spots) return null;
 
     return (
+        <div>
         <div className="hp-list">
             <div className="hp-each-spot">
             {spots.map(spot => (
@@ -28,6 +29,17 @@ function Homepage ({spots}) {
             ))}
             </div>
         </div>
+        <div className="hp-page-bottom">
+        <span>2022 Bearbnb, Inc. · Privacy · Terms · Sitemap</span>
+        <div>
+            <i class="fa-solid fa-earth-americas"></i>
+            <span>English (US)  $ USD </span>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-instagram"></i>
+        </div>
+    </div>
+    </div>
     )
 }
 

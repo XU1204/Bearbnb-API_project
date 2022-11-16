@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getReviewsOfCurrent, removeReview } from "../../store/reviews";
 import EditReviewFormModal from "../EditSpotForm/EditReviewForm";
+import './MyReviews.css'
 
 
 function MyReviews () {
@@ -19,26 +20,31 @@ function MyReviews () {
     if (!reviews) return null;
 
     return (
-        <>
+        <div className="my-reviews-list">
             <div>
-                <ul>
-                    {reviews.map(eachreview => (
-                        <li key={eachreview.id}>
-                            {eachreview.review} in {eachreview.spotId}, {eachreview.stars} stars.
+                {reviews.map(eachreview => (
+                    <div className="my-reviews-each-review">
+                        <ul key={eachreview.id}>
+                            <li><span className="my-reviews-bold">Spot: </span> {eachreview.Spot.name}</li>
+                            <li><span className="my-reviews-bold">Location: </span> {eachreview.Spot.address}, {eachreview.Spot.city}, {eachreview.Spot.state}</li>
+                            <li><span className="my-reviews-bold">Review: </span>
+                                {eachreview.stars} stars.  {eachreview.review}
+                            </li>
+                            {/* {eachreview.review} in {eachreview.spotId}, {eachreview.stars} stars. */}
                             {/* <span>
                                 <button>Add Image</button>
                             </span> */}
                             {/* <span>
                                 <EditReviewFormModal eachreview={eachreview}/>
                             </span> */}
-                            <span>
-                                <button onClick={(e) =>  dispatch(removeReview(eachreview.id))}>Remove Review</button>
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+                        </ul>
+                        <span>
+                            <button id='remove-review-button' onClick={(e) =>  dispatch(removeReview(eachreview.id))}>Remove Review</button>
+                        </span>
+                    </div>
+                ))}
             </div>
-        </>
+        </div>
     )
 }
 
