@@ -15,6 +15,7 @@
 .my-reviews-list {
     display: flex;
     flex-direction: column;
+    font-family:Arial, Helvetica, sans-serif
 }
 
 .my-reviews-bold {

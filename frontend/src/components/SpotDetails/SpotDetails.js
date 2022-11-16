@@ -61,12 +61,11 @@ function SpotDetails () {
     };
 
     let createReviewFormLink;
-    if (sessionUser) {
+    if (sessionUser && spot.ownerId !== sessionUser.id) {
         createReviewFormLink = (
             <CreateReviewFormModal id={+id}/>
         )
-    };
-    if (!sessionUser) {
+    } else {
         createReviewFormLink = (
             <></>
         )

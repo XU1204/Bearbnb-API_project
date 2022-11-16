@@ -25,11 +25,11 @@ function MyReviews () {
                 {reviews.map(eachreview => (
                     <div className="my-reviews-each-review">
                         <ul key={eachreview.id}>
-                            <li><span className="my-reviews-bold">Spot: </span> {eachreview.Spot?.name}</li>
+                            <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${eachreview.Spot?.id}`}> {eachreview.Spot?.name}</NavLink></li>
                             <li><span className="my-reviews-bold">Location: </span> {eachreview.Spot?.address}, {eachreview.Spot?.city}, {eachreview.Spot?.state}</li>
-                            <li><span className="my-reviews-bold">Review: </span>
-                                {eachreview.stars} stars.  {eachreview.review}
-                            </li>
+                            <li><span className="my-reviews-bold">Created at: </span>{eachreview.createdAt.slice(0,10)}</li>
+                            <li><span className="my-reviews-bold">Stars: </span>{eachreview.stars} </li>
+                            <li><span className="my-reviews-bold">Review: </span>{eachreview.review}</li>
                             {/* {eachreview.review} in {eachreview.spotId}, {eachreview.stars} stars. */}
                             {/* <span>
                                 <button>Add Image</button>
