@@ -41,6 +41,36 @@ module.exports = {
       userId: 5,
       review: 'Great place! Very clean, great location, good communication!',
       stars: 4
+    },
+    {
+      spotId: 6,
+      userId: 1,
+      review: 'Beautiful view and location! Both decks were utilized the entire trip. Propane was empty on the outdoor fire pit, so that was a huge bummer. ',
+      stars: 5
+    },
+    {
+      spotId: 7,
+      userId: 2,
+      review: 'It\'s a really awesome trip for us. The view is super amazing we spent 1 night here and the cabin is really clean and organized.',
+      stars: 5
+    },
+    {
+      spotId: 8,
+      userId: 3,
+      review: 'Absolutely recommend!! Beautiful cabin in a great location. Host was fantastic and had great communication.',
+      stars: 5
+    },
+    {
+      spotId: 9,
+      userId: 4,
+      review: 'Would stay here again anytime! Great host and accommodations, communication was clear. Truly enjoyed our stay.',
+      stars: 4
+    },
+    {
+      spotId: 10,
+      userId: 5,
+      review: 'Loved the location away from all the hustle and bustle of downtown yet close enough to what you need. Very clean and nice condo. ',
+      stars: 4
     }
    ])
   },

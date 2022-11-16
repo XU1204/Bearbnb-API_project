@@ -31,6 +31,26 @@ module.exports = {
     {
       reviewId: 5,
       url: 'https://www.pexels.com/photo/beautiful-view-of-moraine-lake-2662116/'
+    },
+    {
+      reviewId: 6,
+      url:'https://www.pexels.com/photo/person-walking-between-green-forest-trees-15286/'
+    },
+    {
+      reviewId: 7,
+      url:'https://www.pexels.com/photo/scenic-view-of-snow-capped-mountains-during-night-3408744/'
+    },
+    {
+      reviewId: 8,
+      url:'https://www.pexels.com/photo/aurora-borealis-624015/'
+    },
+    {
+      reviewId: 9,
+      url: 'https://www.pexels.com/photo/mountain-covered-snow-under-star-572897/'
+    },
+    {
+      reviewId: 10,
+      url: 'https://www.pexels.com/photo/beautiful-view-of-moraine-lake-2662116/'
     }
    ])
   },
