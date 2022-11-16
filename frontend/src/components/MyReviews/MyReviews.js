@@ -19,6 +19,7 @@ function MyReviews () {
 
     return (
         <div className="my-reviews-list">
+            <h2 id='my-review-title'>My Reviews List</h2>
             <div>
                 {reviews.map(eachreview => (
                     <div className="my-reviews-each-review">

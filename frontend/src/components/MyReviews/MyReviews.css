@@ -30,3 +30,9 @@
 #remove-review-button:hover {
     background-color: #ff385c;
 }
+
+#my-review-title{
+    display: flex;
+    justify-content: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
