@@ -12,14 +12,13 @@ function CreateReviewFormModal ({id}) {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(5);
     const [errors, setErrors] = useState([]);
-    //console.log('error111111', errors)
 
     const reviews = useSelector(state => state.reviewState);
-    console.log('review state------', reviews)
+
     useEffect(() => {
         console.log(1)
         dispatch(getDetails(id))
-    }, [])
+    }, [reviews])
 
 
     const handleSubmit = async (e) => {
@@ -31,13 +30,11 @@ function CreateReviewFormModal ({id}) {
         const newReview = await dispatch(createReviewOfSpot(id, data1))
         .catch(async (res) => {
         const data = await res.json();
-        //console.log('data--', data)
         if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
         });
 
         if (newReview) {
             setErrors([])
-            //console.log('created review:', newReview)
             history.push(`/spots/${id}`)
             setShowModal(false)
             setReview('');

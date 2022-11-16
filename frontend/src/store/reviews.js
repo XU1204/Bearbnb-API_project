@@ -34,9 +34,7 @@ export const getReviewsOfCurrent = () => async dispatch => {
     const response = await csrfFetch('/api/reviews/current');
     if(response.ok) {
         const reviews = await response.json();
-        //console.log('reviews of getreviews of current', reviews.Reviews)
         dispatch(load(reviews.Reviews))
-        //return reviews;
     }
 };
 
@@ -44,7 +42,6 @@ export const getReviewsOfSpot = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}/reviews`);
     if(response.ok) {
         const reviews = await response.json();
-        //console.log('reviews of single spot', reviews.Reviews)
         dispatch(load(reviews.Reviews))
         return reviews;
     }
@@ -59,9 +56,7 @@ export const createReviewOfSpot = (id, payload) => async dispatch => {
         body: JSON.stringify(payload)
     });
     if (response.ok) {
-        console.log('ok response', response)
         const review = await response.json();
-        console.log('new review of spot:  ', review)
         dispatch(create(review));
         return review;
     }
@@ -77,7 +72,6 @@ export const updateReview = (id, payload) => async dispatch => {
     })
     if (response.ok) {
         const review = await response.json();
-        console.log('update review', review)
         dispatch(update(review));
         return review;
     }
@@ -99,14 +93,12 @@ const reviewsReducer = (state = {}, action) => {
     switch(action.type) {
         case LOAD:
             let newState = {};
-            //console.log('reviews of load', action.reviews)
             action.reviews.forEach(review => newState[review.id] = review);
             return newState;
         case CREATE:
             return Object.assign({...state}, {[action.review.id]: action.review});
         case UPDATE:
             const updateReviewObj = Object.assign({...state}, {[action.review.id]: action.review});
-            //console.log(('updateReviewObj', updateReviewObj));
             return updateReviewObj
         case REMOVE:
             let newOne = {...state}

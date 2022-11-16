@@ -7,10 +7,8 @@ import CreateReviewFormModal from "../CreateSpotForm/CreateReviewForm";
 import './SpotDetails.css'
 
 function SpotDetails () {
-    console.log(1)
     const { id } = useParams();
     //Attention: typeof id is string!!!
-    //console.log('id---', id)
     const dispatch = useDispatch();
 
     const sessionUser = useSelector(state => state.session.user);
@@ -20,17 +18,9 @@ function SpotDetails () {
     const reviews = useSelector(state => Object.values(state.reviewState))
 
     useEffect(() => {
-        //console.log(2)
         dispatch(getDetails(id));
         dispatch(getReviewsOfSpot(id))
     }, [ dispatch, id]);
-
-    //console.log('spot------', spot)
-    // useEffect(() => {
-
-    // },[dispatch ,id])
-    //const reviews = allreviews.filter(review => review.spotId === +id)
-    //console.log('review from spotsdetails, reviews)
 
     if (!spot) return null;
     if (!spot.SpotImages) return null;
@@ -103,7 +93,11 @@ function SpotDetails () {
                     <>
                         <div className="review-detail">
                             <img id='user-review-photo'src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user-photo' />
-                            <div key={review.id}><h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4> {review.review}</div>
+                            <div key={review.id}>
+                                <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
+                                <div>{review.stars} stars</div>
+                                {review.review}
+                             </div>
                         </div>
                     </>
                 ))}
