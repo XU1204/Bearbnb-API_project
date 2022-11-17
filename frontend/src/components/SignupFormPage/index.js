@@ -87,7 +87,7 @@ function SignupFormPage() {
                 />
             </label>
             <label>
-                Comfirm Password:
+                Confirm Password:
                 <input
                     type='password'
                     value={confirmPassword}
