@@ -27,7 +27,7 @@ module.exports = {
       },
       country: {
         type: Sequelize.STRING,
-        defaultValue: 'United States of America'
+        defaultValue: 'United States'
       },
       lat: {
         type: Sequelize.DECIMAL
