@@ -37,18 +37,25 @@ function EditSpotForm ({spot}) {
             id: spot.id,
             address, city, state, country, name, description, price
         }
-        let updatedSpot;
-        try {
-            updatedSpot = await dispatch(updateSpot(data))
-        } catch (error) {
-            //console.log('error:---', error)
-            setErrors(error)
+
+        const updatedSpot = await dispatch(updateSpot(data))
+        . catch (async(res) => {
+            const data = await res.json();
+        if (data && typeof data.errors === 'object') {
+            setErrors(Object.values(data.errors))
         }
+        else if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
+        });
 
         if (updatedSpot) {
-            setErrors([])
+            if (price <= 0) {
+                setErrors(['Price must be greater than 0.'])
+            }
+            else {
+                setErrors([])
             //console.log('updatedspot:', updatedSpot)
-            history.push(`/spots/${updatedSpot.id}`)
+                history.push(`/spots/${updatedSpot.id}`)
+            }
         }
 
         // return dispatch(updateSpot(data))

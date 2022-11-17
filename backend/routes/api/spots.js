@@ -38,8 +38,8 @@ const validateCreate = [
       .withMessage('Description is required.'),
     check('price')
       .exists({ checkFalsy: true })
-      .isFloat({min: 0})
-      .withMessage('Price per day is required (minimum is 0).'),
+      .isFloat({min: 1})
+      .withMessage('Price per day is required (minimum is 1).'),
     handleValidationErrors
   ];
 
@@ -111,23 +111,23 @@ router.get('/', validateQuery,
         size = parseInt(size);
         if (!page || page <= 0) page = 1;
         if (!size || size <= 0) size = 20;
-        if (minPrice < 0) {
+        if (minPrice <= 0) {
             res.status(400);
             return res.json({
                 message: "Validation Error",
                 statusCode: 400,
                 errors: {
-                    "minPrice": "Minimum price must be greater than or equal to 0"
+                    "minPrice": "Minimum price must be greater than 0"
                 }
             })
         }
-        if (maxPrice < 0) {
+        if (maxPrice <= 0) {
             res.status(400);
             return res.json({
                 message: "Validation Error",
                 statusCode: 400,
                 errors: {
-                    "maxPrice": "Maximum price must be greater than or equal to 0"
+                    "maxPrice": "Maximum price must be greater than 0"
                 }
             })
         }

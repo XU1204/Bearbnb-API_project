@@ -5,65 +5,57 @@ import { addSpot, addImageToSpot, getDetails } from '../../store/spots'
 import './CreateForm.css'
 
 function CreateSpotForm() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-//   const [lat, setLat] = useState(0);
-//   const [lng, setLng] = useState(0);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
-  const [errors, setErrors] = useState([]);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    //   const [lat, setLat] = useState(0);
+    //   const [lng, setLng] = useState(0);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState(0);
+    const [errors, setErrors] = useState([]);
 
-  //
-  const [url, setUrl] = useState('');
-  const [preview, setPreview] = useState('yes');
+    const [url, setUrl] = useState('');
+    const [preview, setPreview] = useState('yes');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const allSpots = useSelector(state => Object.values(state.spotState.allSpots));
 
-    const data1 = {
-        address, city, state, country, name, description, price
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const data1 = {
+            address, city, state, country, name, description, price
+        }
+
+        const data2 = {
+            url,
+            preview: preview === 'yes'? true : false
+        }
+
+        const  createdSpot = await dispatch(addSpot(data1))
+        .catch(async (res) => {
+        const data = await res.json();
+        if (data && typeof data.errors === 'object') {
+            setErrors(Object.values(data.errors))
+        }
+        else if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
+        });
+
+        if (createdSpot) {
+            const isExist = allSpots.find(spot => spot.address.trim() === address.trim() && spot.city.trim() === city.trim());
+            if (isExist)  setErrors(['The spot with the same address and city has already exist.'])
+            if (price <= 0) setErrors(['Price must be greater than 0.'])
+            else {
+                setErrors([]);
+                dispatch(getDetails(createdSpot.id))
+                dispatch(addImageToSpot(createdSpot.id, data2))
+                history.push(`/spots/${createdSpot.id}`)
+            }
+        }
     }
-      //console.log(1)
-
-
-
-    const data2 = {
-        url,
-        preview: preview === 'yes'? true : false
-    }
-
-    const  createdSpot = await dispatch(addSpot(data1))
-    .catch(async (res) => {
-    const data = await res.json();
-    //console.log('data--', data)
-    if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
-    });
-
-    if (createdSpot) {
-        setErrors([])
-        //const spot = await dispatch(getDetails(createdSpot.id))
-        dispatch(getDetails(createdSpot.id))
-        dispatch(addImageToSpot(createdSpot.id, data2))
-        //console.log('createdspot:', createdSpot)
-        //console.log('spot------', spot)
-        //if (!createdSpot.SpotImages) return null
-
-        history.push(`/spots/${createdSpot.id}`)
-    }
-
-    // return dispatch(addSpot(data1))
-    // .then((spot) => addImageToSpot(spot, data2))
-    //     .catch(async (res) => {
-    //     const data = await res.json();
-    //     //console.log('data--', data)
-    //     if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
-    //     });
-  }
 
   return (
     <div className='create-spot-form-container'>
@@ -192,5 +184,6 @@ function CreateSpotForm() {
     </div>
   );
 }
+
 
 export default CreateSpotForm;
