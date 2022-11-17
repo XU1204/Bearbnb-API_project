@@ -36,7 +36,7 @@ function Navigation ({ isLoaded }) {
             </NavLink>
             <div className='nav-right-part'>
                 <span>
-                    <NavLink to='/spots'><button id='become-host-button'>Become a Host</button></NavLink>
+                    <NavLink to='/spots'><button id='become-host-button'>Airbnb your home</button></NavLink>
                 </span>
                 <i className="fa-solid fa-globe"></i>
                 {isLoaded && sessionLinks}

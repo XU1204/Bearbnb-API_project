@@ -35,6 +35,11 @@ function CreateSpotForm() {
             preview: preview === 'yes'? true : false
         }
 
+        if(data1.address && data1.city) {
+            const isExist = allSpots.find(spot => spot.address.trim() === address.trim() && spot.city.trim() === city.trim());
+            if (isExist)  setErrors(['The spot with the same address and city has already exist.'])
+        }
+
         const  createdSpot = await dispatch(addSpot(data1))
         .catch(async (res) => {
         const data = await res.json();
@@ -46,6 +51,7 @@ function CreateSpotForm() {
 
         if (createdSpot) {
             const isExist = allSpots.find(spot => spot.address.trim() === address.trim() && spot.city.trim() === city.trim());
+            console.log('isExist:', isExist)
             if (isExist)  setErrors(['The spot with the same address and city has already exist.'])
             if (price <= 0) setErrors(['Price must be greater than 0.'])
             else {

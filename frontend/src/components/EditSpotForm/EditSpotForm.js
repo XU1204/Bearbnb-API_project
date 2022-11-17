@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateSpot } from '../../store/spots'
 import './EditForm.css'
 
@@ -29,6 +29,7 @@ function EditSpotForm ({spot}) {
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
 
+    const allSpots = useSelector(state => Object.values(state.spotState.allSpots));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,6 +49,8 @@ function EditSpotForm ({spot}) {
         });
 
         if (updatedSpot) {
+            const isExist = allSpots.find(spot => spot.address.trim() === address.trim() && spot.city.trim() === city.trim());
+            if (isExist)  setErrors(['The spot with the same address and city has already exist.'])
             if (price <= 0) {
                 setErrors(['Price must be greater than 0.'])
             }

@@ -63,16 +63,18 @@ function CreateReviewFormModal ({id}) {
                     required
                 />
             </label>
-            <label>
+            <label id='create-review-star-label'>
                 Stars:
                 <input
                     type='number'
                     value={stars}
                     onChange={(e) => setStars(e.target.value)}
+                    min='1'
+                    max='5'
                     required
                 />
             </label>
-            <button type='submit'>Submit</button>
+            <button id='create-review-button' type='submit'>Submit</button>
           </form>
         )
     }

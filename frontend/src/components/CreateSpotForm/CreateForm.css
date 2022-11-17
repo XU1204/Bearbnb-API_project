@@ -45,4 +45,17 @@
     background-color: #dddddd;
 }
 
+#create-review-button {
+    margin-top: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 1px 5px 1px;
+}
 
+#create-review-button:hover {
+    background-color: #ff385c;
+}
+
+#create-review-star-label>input {
+    width: 145px;
+}
