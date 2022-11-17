@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     font-family: 'Urbanist', sans-serif;
     font-size: 14px;
+    margin-left: 50px;
 }
 
 .hp-each-spot {
@@ -55,7 +56,8 @@ li {
     align-items: center;
     justify-content: space-between;
     color: grey;
-    bottom: 10px;
+    bottom: 0px;
     width: 100%;
-    padding: 0 40px 0;
+    padding: 0 40px 10px;
+    background-color: white;
 }

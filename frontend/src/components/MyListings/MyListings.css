@@ -1,10 +1,10 @@
 .my-listings-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     font-family: 'Urbanist', sans-serif;
     font-size: 14px;
     margin-top: 50px;
+    margin-left: 50px;
 }
 
 .my-listings-each {

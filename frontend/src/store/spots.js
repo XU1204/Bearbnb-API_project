@@ -86,6 +86,22 @@ export const addSpot = (payload) => async dispatch => {
     });
     if (response.ok) {
         const spot = await response.json();
+
+        //11-16
+        // const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(payload)
+        // })
+
+        // if (response.ok) {
+        //     const newImage = await imageRes.json();
+        //     spot.previewImage = newImage.url
+
+        // }
+
         dispatch(add(spot));
         //console.log('spot1', spot)
         return spot;
