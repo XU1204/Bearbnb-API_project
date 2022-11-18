@@ -6,7 +6,7 @@ function Homepage ({spots}) {
     if(!spots) return null;
 
     return (
-        <div>
+        <div className="hp-content-container">
         <div className="hp-list">
             <div className="hp-each-spot">
             {spots.map(spot => (
