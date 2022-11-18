@@ -61,13 +61,27 @@ function SpotDetails () {
         )
     }
 
+    let starLink;
+    if (!spot.avgStarRating) {
+        starLink = (
+            <span>New</span>
+        )
+    } else {
+        starLink = (
+            <span>
+                {Number(spot.avgStarRating).toFixed(1)}
+            </span>
+        )
+    }
+
     return (
        <div className="detail-page">
             {/* <CreateReviewFormModal id={+id}/> */}
             <h1>{spot.name}</h1>
             <div className="detail-page-top">
                 <span>★</span>
-                <span>{Number(spot.avgStarRating).toFixed(1)  || 'new'}</span>
+                {/* <span>{Number(spot.avgStarRating).toFixed(1)  || 'new'}</span> */}
+                {starLink}
                 <span>・{spot.numReviews} Reviews・</span>
                 <span>{spot.city}, </span>
                 <span>{spot.state}, </span>
@@ -85,7 +99,8 @@ function SpotDetails () {
             </div>
             <div>
                 <div className="review-title">
-                    <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3>
+                    {/* <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3> */}
+                    <h3>★  {starLink}・{reviews.length} Reviews:</h3>
                     {/* <CreateReviewFormModal id={+id}/> */}
                     {createReviewFormLink}
                 </div>

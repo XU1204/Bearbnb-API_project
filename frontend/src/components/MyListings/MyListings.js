@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { getSpotsOfCurrent, removeSpot } from '../../store/spots'
 import EditSpotFormModal from "../EditSpotForm";
 import AddImageFormModal from "../EditSpotForm/AddImageFromModal.js";
+import StarRating from "../Homepage/StarRating";
 import './MyListings.css'
 
 function MyListings () {
@@ -16,7 +17,7 @@ function MyListings () {
 
    const allSpots = useSelector(state => Object.values(state.spotState.allSpots));
    const spots = allSpots.filter(spot => spot.ownerId === sessionUser.id)
- 
+
     if (!spots) return null;
 
    let noListing;
@@ -46,7 +47,8 @@ function MyListings () {
                             <span className='my-listings-fold'>{spot.city}, {spot.state}</span>
                             <span>
                                 <span>★</span>
-                                <span>{Number(spot.avgRating).toFixed(1) || 'new'}</span>
+                                {/* <span>{Number(spot.avgRating).toFixed(1) || 'new'}</span> */}
+                                <StarRating spot={spot} />
                             </span>
                         </div>
                         <li id='my-listings-name' key={spot.name}>{spot.name}</li>
