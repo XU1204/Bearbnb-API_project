@@ -15,16 +15,23 @@ function Navigation ({ isLoaded }) {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
+            <>
+            <span>
+                    <NavLink to='/spots'><button id='become-host-button'>Airbnb your home</button></NavLink>
+                </span>
+                <i className="fa-solid fa-globe"></i>
             <div className='nav-button'>
                 <ProfileButton user={sessionUser} />
             </div>
+            </>
 
         );
     } else {
         sessionLinks = (
             <div>
-             <LoginFormModal />
-             <NavLink to='/signup'><button>Sign Up</button></NavLink>
+                <i className="fa-solid fa-globe"></i>
+                <LoginFormModal />
+                <NavLink to='/signup'><button>Sign Up</button></NavLink>
             </div>
         )
     }
@@ -35,10 +42,10 @@ function Navigation ({ isLoaded }) {
                 <img id='bearbnb' src='https://pbs.twimg.com/media/BstWqTHCEAMhHBc?format=jpg&name=900x900' alt='BearBnb'/>
             </NavLink>
             <div className='nav-right-part'>
-                <span>
+                {/* <span>
                     <NavLink to='/spots'><button id='become-host-button'>Airbnb your home</button></NavLink>
                 </span>
-                <i className="fa-solid fa-globe"></i>
+                <i className="fa-solid fa-globe"></i> */}
                 {isLoaded && sessionLinks}
             </div>
         </div>

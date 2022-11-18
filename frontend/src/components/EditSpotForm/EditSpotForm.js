@@ -5,7 +5,6 @@ import { updateSpot } from '../../store/spots'
 import './EditForm.css'
 
 function EditSpotForm ({spot}) {
-    //console.log(1, 'each spot', spot)
     const dispatch = useDispatch();
     const history = useHistory();
     const [address, setAddress] = useState(spot.address);
@@ -56,21 +55,9 @@ function EditSpotForm ({spot}) {
             }
             else {
                 setErrors([])
-            //console.log('updatedspot:', updatedSpot)
                 history.push(`/spots/${updatedSpot.id}`)
             }
         }
-
-        // return dispatch(updateSpot(data))
-        // .catch(async (res) => {
-        //     const data2 = await res.json();
-        //     console.log('data2:---', data2)
-        //     if (data2 && data2.errors) setErrors(data2.errors);
-        //     else {
-        //         setErrors([])
-        //         history.push(`/spots/current`)
-        //     }
-        // })
     };
 
     return (

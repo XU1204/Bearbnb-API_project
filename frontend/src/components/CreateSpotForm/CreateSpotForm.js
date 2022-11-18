@@ -161,7 +161,7 @@ function CreateSpotForm() {
                 required
             />
         </label>
-        <div className='preview-container'>
+        {/* <div className='preview-container'>
             <legend id='preview-label'>Preview:</legend>
             <div id='preview-ture-false'>
                 <label>
@@ -183,7 +183,7 @@ function CreateSpotForm() {
                     false
                 </label>
             </div>
-        </div>
+            </div> */}
 
             <button id='create-spot-form-button' type='submit'>Create new spot</button>
     </form>

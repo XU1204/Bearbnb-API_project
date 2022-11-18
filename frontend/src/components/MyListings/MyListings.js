@@ -16,9 +16,25 @@ function MyListings () {
 
    const allSpots = useSelector(state => Object.values(state.spotState.allSpots));
    const spots = allSpots.filter(spot => spot.ownerId === sessionUser.id)
+ 
     if (!spots) return null;
+
+   let noListing;
+   if (spots.length === 0) {
+    noListing = (
+        <h2 className="my-listing-title">You have no Listing yet!</h2>
+    )
+   }
+   else {
+    noListing = (
+        <h2 className="my-listing-title">My Listings List</h2>
+    )
+   }
+
     return (
-        <div className="my-listings-list">
+        <div>
+            {noListing}
+            <div className="my-listings-list">
             {spots.map(spot => (
                 <div>
                     <NavLink key={spot.id} id='link' to={`/spots/${spot.id}`}>
@@ -49,6 +65,7 @@ function MyListings () {
                     </div>
                 </div>
             ))}
+            </div>
         </div>
     )
 }

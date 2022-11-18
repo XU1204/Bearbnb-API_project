@@ -17,9 +17,20 @@ function MyReviews () {
     const reviews = allReviews.filter(review => review.userId === sessionUser.id)
     if (!reviews) return null;
 
+    let noReviews;
+    if(reviews.length === 0) {
+        noReviews = (
+            <h2 id='my-review-title'>You have no reviews yet!</h2>
+        )
+    } else {
+        noReviews = (
+            <h2 id='my-review-title'>My Reviews List</h2>
+        )
+    }
+
     return (
         <div className="my-reviews-list">
-            <h2 id='my-review-title'>My Reviews List</h2>
+            {noReviews}
             <div>
                 {reviews.map(eachreview => (
                     <div className="my-reviews-each-review">
