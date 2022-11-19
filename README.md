@@ -13,4 +13,4 @@
 ![](/images/homepage.png)
 
 ### Login Form (Modal)
-![](/images/login%20demo.mov)
+![](/images/login%20demo.mp4)
