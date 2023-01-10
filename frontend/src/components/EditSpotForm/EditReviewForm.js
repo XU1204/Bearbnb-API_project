@@ -5,7 +5,7 @@ import { Modal } from '../../context/Modal';
 import { updateReview } from '../../store/reviews';
 
 function EditReviewFormModal ({eachreview}) {
-    console.log(1, 'each review', eachreview)
+    // console.log(1, 'each review', eachreview)
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
