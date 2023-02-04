@@ -96,7 +96,7 @@ function LoginFormModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
+      <button onClick={() => setShowModal(true)} id={styles.begin}>Log In</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className={styles.container}>

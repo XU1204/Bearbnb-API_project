@@ -1,3 +1,17 @@
+#begin {
+    border-radius: 21px;
+    border: 1px solid #dddddd;
+    background: transparent;
+    font-size: 16px;
+    padding: 5px 15px;
+    margin: 0 2vw 0 0;
+    cursor: pointer;
+}
+#begin:hover{
+    box-shadow: 0 5px 5px #dddddd;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -58,6 +72,7 @@ form {
 .titleWrapper{
     display: flex;
     border: 1px solid #dddddd;
+    justify-content: center;
     align-items: center;
     border-radius: 15px 15px 0 0;
 }
@@ -65,17 +80,20 @@ form {
     text-align: center;
     width: 80%;
 }
+
 #cancelBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: none;
     background-color: white;
     height: 35px;
     width: 35px;
-    text-align: center;
     border-radius: 50%;
     margin-left: 10px;
 }
 #cancelBtn:hover{
-    background-color: #dddddd;
+    background-color: #ecebeb;
 }
 
 .changeBtn{
@@ -88,7 +106,9 @@ form {
 }
 .changeBtn:hover{
     cursor: pointer;
-    background-color: #f1f0f08e;
+    background-color: #f1f0f08e
+
+    ;
 }
 
 .error{
