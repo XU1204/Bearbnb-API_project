@@ -11,10 +11,9 @@ function Homepage ({spots}) {
         <>
         <div className="hp-content-container">
         <div className="hp-list">
-            <div className="hp-each-spot">
             {spots.map(spot => (
-                <NavLink key={spot.name} id='link' to={`/spots/${spot.id}`}>
                 <div className="hp-each-list">
+                <NavLink key={spot.name} id='link' to={`/spots/${spot.id}`}>
                     <div className="hp-preview-img">
                         <img src={spot.previewImage} alt={`preview image of ${spot.name}`}/>
                     </div>
@@ -28,10 +27,10 @@ function Homepage ({spots}) {
                     </div>
                     <li id='hp-spot-name'>{spot.name}</li>
                     <li><span id='hp-price'>${spot.price}</span> night</li>
-                </div>
                 </NavLink>
+                </div>
             ))}
-            </div>
+
         </div>
     </div>
         <div className="hp-page-bottom">
