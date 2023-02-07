@@ -9,6 +9,8 @@ import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateSpotForm from "./components/CreateSpotForm/CreateSpotForm";
 import MyListings from "./components/MyListings/MyListings";
 import MyReviews from "./components/MyReviews/MyReviews";
+import MyBookings from "./components/Booking";
+import BookingsOfSpot from "./components/Booking/BookingsOfSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,14 +38,20 @@ function App() {
           <Route exact path='/spots/current'>
             <MyListings />
           </Route>
-          <Route path='/spots/:id'>
+          <Route path='/spots/:id' exact={true}>
               <SpotDetails />
+          </Route>
+          <Route path='/spots/:id/bookings' exact={true}>
+            <BookingsOfSpot />
           </Route>
           <Route path='/spots'>
               <CreateSpotForm />
           </Route>
           <Route path='/reviews/current'>
             <MyReviews />
+          </Route>
+          <Route path='/bookings/current'>
+            <MyBookings />
           </Route>
           <Route path='*'>
             {PageNotFound}

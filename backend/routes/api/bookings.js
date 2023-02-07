@@ -51,7 +51,7 @@ router.get('/current', restoreUser, requireAuth,
             }
             delete booking.Spot.SpotImages
         });
-
+        // console.log('back bookings.js------', bookingList)
         return res.json({
             Bookings: bookingList
         })

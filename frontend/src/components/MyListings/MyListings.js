@@ -9,14 +9,14 @@ import './MyListings.css'
 
 function MyListings () {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
+    // const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getSpotsOfCurrent())
     },[dispatch])
 
-   const allSpots = useSelector(state => Object.values(state.spotState.allSpots));
-   const spots = allSpots.filter(spot => spot.ownerId === sessionUser.id)
+   const spots = useSelector(state => Object.values(state.spotState.allSpots));
+//    const spots = allSpots.filter(spot => spot.ownerId === sessionUser.id)
 
     if (!spots) return null;
 
@@ -30,6 +30,10 @@ function MyListings () {
     noListing = (
         <h2 className="my-listing-title">My Listings List</h2>
     )
+   }
+
+   const handleView = () => {
+    dispatch()
    }
 
     return (
@@ -65,6 +69,13 @@ function MyListings () {
                             <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove Listing</button>
                         </span>
                     </div>
+
+                    <button onClick={handleView}>
+                        <NavLink key={spot.id} to={`/spots/${spot.id}/bookings`} style={{ color: 'black', textDecoration: 'none'}}>
+                            View Bookings
+                        </NavLink>
+                    </button>
+
                 </div>
             ))}
             </div>

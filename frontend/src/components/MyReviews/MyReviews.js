@@ -8,13 +8,14 @@ import './MyReviews.css'
 
 function MyReviews () {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
+    // const sessionUser = useSelector(state => state.session.user);
     useEffect(() => {
         dispatch(getReviewsOfCurrent())
     },[dispatch]);
 
-    const allReviews = useSelector(state => Object.values(state.reviewState))
-    const reviews = allReviews.filter(review => review.userId === sessionUser.id)
+    const reviews = useSelector(state => Object.values(state.reviewState))
+    // console.log('++++my reviews++++', reviews)
+    // const reviews = allReviews.filter(review => review.userId === sessionUser.id)
     if (!reviews) return null;
 
     let noReviews;
@@ -32,7 +33,7 @@ function MyReviews () {
         <div className="my-reviews-list">
             {noReviews}
             <div>
-                {reviews.map(eachreview => (
+                {reviews?.map(eachreview => (
                     <div className="my-reviews-each-review">
                         <ul key={eachreview.id}>
                             <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${eachreview.Spot?.id}`}> {eachreview.Spot?.name}</NavLink></li>
