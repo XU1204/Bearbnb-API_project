@@ -40,7 +40,6 @@ export const getBookingsOfCurrent = () => async dispatch => {
 
 export const getBookingsOfSpot = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}/bookings`);
-    console.log('------',response)
     if(response.ok) {
         const bookings = await response.json();
         dispatch(load(bookings.Bookings))
