@@ -49,7 +49,7 @@ router.get('/current', restoreUser, requireAuth,
         reviews.forEach(review => {
             reviewList.push(review.toJSON())
         })
-        console.log('back reviews+++++++', reviewList)
+        // console.log('back reviews+++++++', reviewList)
         reviewList.forEach(review => {
             review.Spot.SpotImages.forEach(img => {
                 if (img.preview === true && !review.Spot.previewImage ) {
