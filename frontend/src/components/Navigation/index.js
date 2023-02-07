@@ -16,13 +16,13 @@ function Navigation ({ isLoaded }) {
     if (sessionUser) {
         sessionLinks = (
             <>
-            <span>
+                <span>
                     <NavLink to='/spots'><button id='become-host-button'>Airbnb your home</button></NavLink>
                 </span>
-                <i className="fa-solid fa-globe"></i>
-            <div className='nav-button'>
-                <ProfileButton user={sessionUser} />
-            </div>
+                    <i className="fa-solid fa-globe"></i>
+                <div className='nav-button'>
+                    <ProfileButton user={sessionUser} />
+                </div>
             </>
 
         );
@@ -31,7 +31,6 @@ function Navigation ({ isLoaded }) {
             <div>
                 <i className="fa-solid fa-globe"></i>
                 <LoginFormModal />
-                <NavLink to='/signup'><button>Sign Up</button></NavLink>
             </div>
         )
     }

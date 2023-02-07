@@ -8,6 +8,7 @@ import './SpotDetails.css'
 
 function SpotDetails () {
     const { id } = useParams();
+    // console.log('detail id----', id)
     //Attention: typeof id is string!!!
     const dispatch = useDispatch();
 

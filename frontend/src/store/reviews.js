@@ -34,7 +34,10 @@ export const getReviewsOfCurrent = () => async dispatch => {
     const response = await csrfFetch('/api/reviews/current');
     if(response.ok) {
         const reviews = await response.json();
+        // console.log('reducer----------reviews',response)
         dispatch(load(reviews.Reviews))
+        // console.log('reducer----------reviews',reviews)
+        return reviews;
     }
 };
 
@@ -43,7 +46,7 @@ export const getReviewsOfSpot = (id) => async dispatch => {
     if(response.ok) {
         const reviews = await response.json();
         dispatch(load(reviews.Reviews))
-        return reviews;
+        // return reviews;
     }
 };
 
@@ -93,7 +96,9 @@ const reviewsReducer = (state = {}, action) => {
     switch(action.type) {
         case LOAD:
             let newState = {};
+            // console.log('load---', action.reviews)
             action.reviews.forEach(review => newState[review.id] = review);
+            // console.log('new state---------', newState)
             return newState;
         case CREATE:
             return Object.assign({...state}, {[action.review.id]: action.review});

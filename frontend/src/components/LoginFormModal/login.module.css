@@ -1,0 +1,117 @@
+#begin {
+    border-radius: 21px;
+    border: 1px solid #dddddd;
+    background: transparent;
+    font-size: 16px;
+    padding: 5px 15px;
+    margin: 0 2vw 0 0;
+    cursor: pointer;
+}
+#begin:hover{
+    box-shadow: 0 5px 5px #dddddd;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px 30px 20px;
+    font-size: 16px;
+    width: 400px;
+    border-radius: 0 0 15px 15px;
+}
+
+.continue{
+    background-color: #ff385c;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 18px;
+    color: white
+}
+.continue:hover {
+    cursor: pointer;
+    background-color: #e51e51;
+}
+
+.demo{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+.demo:hover{
+    cursor: pointer;
+    background-color: #f1f0f08e;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 18px;
+}
+
+.inputContainer>input {
+    font-size: 16px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    box-shadow: 0 2px 2px #eeeeee;
+}
+.inputContainer>input:hover {
+    border: 1px solid rgba(128, 128, 128, 0.889);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.titleWrapper{
+    display: flex;
+    border: 1px solid #dddddd;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px 15px 0 0;
+}
+.titleWrapper>h3{
+    text-align: center;
+    width: 80%;
+}
+
+#cancelBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: white;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+#cancelBtn:hover{
+    background-color: #ecebeb;
+}
+
+.changeBtn{
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+    width: 15%;
+    padding: 5px;
+    margin-right: 20px;
+}
+.changeBtn:hover{
+    cursor: pointer;
+    background-color: #f1f0f08e
+
+    ;
+}
+
+.error{
+    margin-bottom: 10px;
+    color: red
+}
