@@ -1,0 +1,165 @@
+
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 120px;
+    width: 20vw;
+    height: fit-content;
+    padding: 20px;
+    margin: 50px 0px 0px 80px;
+    border: .3px solid rgb(222, 222, 222);
+    border-radius: 10px;
+    max-width: 400px;
+    min-width: 350px;
+    row-gap: 3ch;
+    box-shadow: rgb(0 0 0 / 20%) 0px 6px 20px !important;
+}
+
+.cal-price-reviews {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px
+}
+
+.cal-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.cal-cal {
+    width: 90vw !important;
+    cursor: pointer;
+}
+
+.cal-all {
+    row-gap: 1ch;
+}
+
+.cal-charge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cal-reserve-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cal-reserve {
+    width: 90%;
+    height: 47px;
+    border-radius: 10px;
+    /* background-color: rgba(225, 23, 104, 0.98); */
+    background-image: radial-gradient(circle at center center, #ff385c 0, #e61e4d 0, #e31c5f 40%, #d70466 57.5%, #bd1e59 75%, #bd1e59 100%);
+    border: none;
+    cursor: pointer;
+}
+
+.cal-charge-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-night {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+
+/* calendar styling */
+
+.CalendarDay__default {
+    border: none;
+}
+
+.calendar-info-bottom {
+    display: flex;
+    justify-content: end;
+    column-gap: 1ch;
+}
+
+.calendar-info-bottom>button {
+    padding: 5px;
+    margin: 10px 10px 10px 0px;
+}
+
+.clearDateBTN {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.closeBTN {
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    width: 60px;
+    cursor: pointer;
+}
+
+#startDateId {
+    border-right: .5px solid rgb(225, 225, 225);
+}
+
+
+.DayPickerNavigation_button {
+    border: none;
+}
+
+.DayPickerNavigation_button:hover {
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(128, 128, 128, 0.094);
+}
+
+.CalendarDay__highlighted_calendar {
+    color: rgba(128, 128, 128, 0.762);
+    background: white;
+
+}
+
+.CalendarDay__highlighted_calendar:hover {
+    color: rgba(128, 128, 128, 0.762);
+    background: white
+}
+
+.CalendarDay__blocked_calendar {
+    background: rgba(128, 128, 128, 0.198);
+    color: rgba(0, 0, 0, 0.641);
+    text-decoration: line-through;
+}
+
+.CalendarDay__blocked_calendar:hover {
+    background: rgba(128, 128, 128, 0.198);
+    color: rgba(0, 0, 0, 0.641);
+}
+
+.CalendarDay__blocked_out_of_range {
+    text-decoration: line-through;
+}
+
+
+
+
+
+/*
+.DayPicker__withBorder {
+    box-shadow: 0 2px 6px rgb(0 0 0 / 5%), 0 0 0 1px rgb(0 0 0 / 7%);
+    border-radius: 3px;
+}
+.DayPicker__withBorder>div {
+    border: 1px solid red !important;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 5%), 0 0 0 1px rgb(0 0 0 / 7%) !important;
+    height: 443px;
+    border-radius: 16px !important;
+} */

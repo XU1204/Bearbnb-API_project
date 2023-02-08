@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
+import { getBookingsOfSpot } from "../../store/bookings";
 import { getReviewsOfSpot } from "../../store/reviews";
 import { getDetails } from "../../store/spots";
 import CreateReviewFormModal from "../CreateSpotForm/CreateReviewForm";
+import Calendar from "../Booking/CreateBooking";
 import './SpotDetails.css'
 
 function SpotDetails () {
@@ -15,12 +17,15 @@ function SpotDetails () {
     const sessionUser = useSelector(state => state.session.user);
 
     const spot = useSelector(state => state.spotState.singleSpot[id])
-
     const reviews = useSelector(state => Object.values(state.reviewState))
+    const bookings = useSelector(state => Object.values(state.bookingState))
+    console.log('bookings-----', bookings)
+
 
     useEffect(() => {
         dispatch(getDetails(id));
         dispatch(getReviewsOfSpot(id))
+        dispatch(getBookingsOfSpot(id))
     }, [ dispatch, id]);
 
     if (!spot) return null;
@@ -97,6 +102,9 @@ function SpotDetails () {
                 <h4>{spot.address}, {spot.city}, {spot.state}</h4>
                 <div><span id='detail-page-price'>${spot.price}</span> per night</div>
                 <p>Description: {spot.description}</p>
+            </div>
+            <div>
+                <Calendar bookings={bookings} spot={spot} />
             </div>
             <div>
                 <div className="review-title">
