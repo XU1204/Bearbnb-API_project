@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
+import moment from 'moment';
 import { getBookingsOfSpot } from "../../store/bookings";
 import { getReviewsOfSpot } from "../../store/reviews";
 import { getDetails } from "../../store/spots";
 import CreateReviewFormModal from "../CreateSpotForm/CreateReviewForm";
-import Calendar from "../Booking/CreateBooking";
+import ShowCalendar from "../Booking/Calendar";
+import { getMMMDDYYYStr } from "./DateCalculate";
 import './SpotDetails.css'
 
 function SpotDetails () {
@@ -14,27 +16,61 @@ function SpotDetails () {
     //Attention: typeof id is string!!!
     const dispatch = useDispatch();
 
-    const sessionUser = useSelector(state => state.session.user);
-
-    const spot = useSelector(state => state.spotState.singleSpot[id])
-    const reviews = useSelector(state => Object.values(state.reviewState))
-    const bookings = useSelector(state => Object.values(state.bookingState))
-    console.log('bookings-----', bookings)
-
-
     useEffect(() => {
         dispatch(getDetails(id));
         dispatch(getReviewsOfSpot(id))
         dispatch(getBookingsOfSpot(id))
-    }, [ dispatch, id]);
+    }, [dispatch, id]);
+
+    const sessionUser = useSelector(state => state.session.user);
+
+    const spot = useSelector(state => state.spotState.singleSpot[id])
+    // console.log('-------spot-------', spot)
+    const reviews = useSelector(state => Object.values(state.reviewState))
+    const bookings = useSelector(state => Object.values(state.bookingState))
+    // console.log('------bookings-----', bookings)
+
+
+    // if (!spot) return null;
+    // if (!spot.SpotImages) return null;
+    // if(!reviews) return null;
+
+    // date related
+    const [dates, setDates] = useState({ startDate: moment(), endDate: moment() });
+    const [dateErrors, setDateErrors] = useState({});
+    const [totalDays, setTotayDays] = useState(1);
+
+    useEffect(() => {
+        // console.log('-------spot------', spot)
+        if (!spot) return;
+        setDates({
+            startDate: moment(spot.firstAvailableStart),
+            endDate: moment(spot.firstAvailableEnd)
+        })
+
+        return () => {
+            setDates({});
+        }
+    }, [spot])
+
+    useEffect(() => {
+        // console.log('-------dates------', dates)
+        if (dates.endDate <= dates.startDate) return;
+        setTotayDays(Math.round((dates.endDate - dates.startDate) / 86400000));
+
+        return () => {
+            setTotayDays(1);
+        }
+    }, [dates])
+
+    // date related end
 
     if (!spot) return null;
     if (!spot.SpotImages) return null;
     if(!reviews) return null;
 
-
     let imageLink
-    if (spot.SpotImages[0]) {
+    if (spot?.SpotImages[0]) {
         imageLink = (
             <div className="detail-photos">
                 <img id='img-of-spot-details' src={spot.SpotImages[0].url} alt='main image'/>
@@ -103,9 +139,16 @@ function SpotDetails () {
                 <div><span id='detail-page-price'>${spot.price}</span> per night</div>
                 <p>Description: {spot.description}</p>
             </div>
-            <div>
-                <Calendar bookings={bookings} spot={spot} />
+
+            {/* modify-------- */}
+            <div className='info-detail-wrapper'>
+                {/* <h4>{totalDays} nights in {spot.city}</h4> */}
+                <div className='date-calendar-span'>
+                    <span>{`${getMMMDDYYYStr(dates.startDate)}`} - {dates.endDate ? `${getMMMDDYYYStr(dates.endDate)}` : getMMMDDYYYStr(moment(dates.startDate, 'DD-MM-YYYY').add(1, 'day'))}</span>
+                </div>
+                <ShowCalendar dates={dates} setDates={setDates} setDateErrors={setDateErrors} />
             </div>
+
             <div>
                 <div className="review-title">
                     {/* <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3> */}

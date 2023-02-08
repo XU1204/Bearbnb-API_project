@@ -13,7 +13,8 @@ export default function ShowCalendar({ dates, setDates }) {
     // console.log('******** ShowCalendar Component ********')
     const moment = extendMoment(Moment);
 
-    const spotBookings = useSelector(state => state.spots.spotBookings);
+    const spotBookings = useSelector(state => Object.values(state.bookingState));
+    // console.log('-------spotbookings', spotBookings)
 
     const defaultFocusedInput = "startDate";
     const [focusedInput, setFocusedInput] = useState(defaultFocusedInput);
@@ -28,8 +29,8 @@ export default function ShowCalendar({ dates, setDates }) {
         else setnumberOfMonths(2);
 
         const handleResize = (e) => {
-            // console.log(e)
-            // console.log(window.innerWidth)
+            console.log(e)
+            console.log(window.innerWidth)
             if (window.innerWidth < 1200) setnumberOfMonths(1);
             else setnumberOfMonths(2);
         }
@@ -52,7 +53,7 @@ export default function ShowCalendar({ dates, setDates }) {
         booked.sort((b1, b2) => b1.start - b2.start);
 
         setFutureBookedRanges(booked)
-    }, [spotBookings])
+    }, [])
 
 
     const handleDatesChange = (dates) => {
