@@ -1,165 +1,168 @@
-
-
-.calendar-container {
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 120px;
-    width: 20vw;
-    height: fit-content;
-    padding: 20px;
-    margin: 50px 0px 0px 80px;
-    border: .3px solid rgb(222, 222, 222);
-    border-radius: 10px;
-    max-width: 400px;
-    min-width: 350px;
-    row-gap: 3ch;
-    box-shadow: rgb(0 0 0 / 20%) 0px 6px 20px !important;
-}
-
-.cal-price-reviews {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px
-}
-
-.cal-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 10px;
-}
-
-.cal-cal {
-    width: 90vw !important;
-    cursor: pointer;
-}
-
-.cal-all {
-    row-gap: 1ch;
-}
-
-.cal-charge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cal-reserve-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cal-reserve {
-    width: 90%;
-    height: 47px;
-    border-radius: 10px;
-    /* background-color: rgba(225, 23, 104, 0.98); */
-    background-image: radial-gradient(circle at center center, #ff385c 0, #e61e4d 0, #e31c5f 40%, #d70466 57.5%, #bd1e59 75%, #bd1e59 100%);
-    border: none;
-    cursor: pointer;
-}
-
-.cal-charge-info {
-    display: flex;
-    justify-content: space-between;
-}
-
-.price-night {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-}
-
-
-/* calendar styling */
-
-.CalendarDay__default {
-    border: none;
-}
-
-.calendar-info-bottom {
-    display: flex;
-    justify-content: end;
-    column-gap: 1ch;
-}
-
-.calendar-info-bottom>button {
-    padding: 5px;
-    margin: 10px 10px 10px 0px;
-}
-
-.clearDateBTN {
-    border: none;
+.calendar-datepicker-wrapper {
+    /* outline: 1px solid salmon; */
     background-color: white;
-    cursor: pointer;
-    text-decoration: underline;
 }
 
-.closeBTN {
+.fa-solid.fa-chevron-left.in-calendar {
+    /* outline: 1px solid salmon; */
     border: none;
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-    width: 60px;
-    cursor: pointer;
+    position: absolute;
+    top: 18px;
+    left: 0px;
+    padding: 6px 9px;
+    border-radius: 50%;
 }
 
-#startDateId {
-    border-right: .5px solid rgb(225, 225, 225);
-}
-
-
-.DayPickerNavigation_button {
+.fa-solid.fa-chevron-right {
     border: none;
+    position: absolute;
+    top: 18px;
+    right: 12px;
+    padding: 6px 9px;
+    border-radius: 50%;
 }
 
-.DayPickerNavigation_button:hover {
+.fa-solid.fa-chevron-left:hover,
+.fa-solid.fa-chevron-right:hover {
+    background-color: rgb(243, 243, 243);
+}
+
+/* day settings --- not sure how to set background outside of round border */
+
+.CalendarDay {
+    border: none;
+    font-weight: 500;
+    /* border-radius: 50%; */
+}
+
+.CalendarDay:hover {
+    background-color: white;
     border: none;
     border-radius: 50%;
-    background-color: rgba(128, 128, 128, 0.094);
+    outline: 1px solid #222222;
+    overflow: visible;
 }
 
-.CalendarDay__highlighted_calendar {
-    color: rgba(128, 128, 128, 0.762);
-    background: white;
-
+.CalendarDay__selected_span {
+    background: rgb(243, 243, 243);
+    border-radius: none;
+    color: #222222;
 }
 
-.CalendarDay__highlighted_calendar:hover {
-    color: rgba(128, 128, 128, 0.762);
-    background: white
+.CalendarDay__selected_end,
+.CalendarDay__selected_start {
+    border-radius: 50%;
+    border: none;
+    position: relative;
+    z-index: 0;
+    background: #222222;
+    color: white;
+}
+
+.CalendarDay__selected_start::before {
+    /* outline: 1px solid red; */
+    display: block;
+    position: absolute;
+    content: '';
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: rgb(243, 243, 243);
+    z-index: -1;
+}
+
+.CalendarDay__selected_start::after {
+    /* outline: 1px solid red; */
+    border: none;
+    display: block;
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: #222222;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.CalendarDay__selected_end::before {
+    /* outline: 1px solid red; */
+    display: block;
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 50%;
+    bottom: 0;
+    top: 0;
+    background: rgb(243, 243, 243);
+    z-index: -1;
+}
+
+.CalendarDay__selected_end::after {
+    /* outline: 1px solid red; */
+    border: none;
+    display: block;
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: #222222;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.CalendarDay__selected_span:hover {
+    background: rgb(243, 243, 243);
+    color: #222222;
+    border: none;
+    outline: 1px solid #222222;
+    overflow: visible;
+}
+
+.CalendarDay__selected_end:hover,
+.CalendarDay__selected_start:hover {
+    background: #222222;
+    color: white;
+    border: none;
+}
+
+.CalendarDay__hovered_span {
+    background: rgb(243, 243, 243);
+    border-radius: unset;
+    color: #222222;
+}
+
+.CalendarDay__hovered_span:hover {
+    outline: 1px solid #222222;
+    border: none;
+    color: #222222;
+    background-color: rgb(243, 243, 243);
+    border-radius: 50%;
+}
+
+/* .CalendarDay__hovered_span:last-of-type::before {
+    outline: 1px solid salmon;
+    display: block;
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: rgb(243, 243, 243);
+    z-index: -1;
+} */
+
+
+.DayPickerKeyboardShortcuts_buttonReset {
+    display: none;
 }
 
 .CalendarDay__blocked_calendar {
-    background: rgba(128, 128, 128, 0.198);
-    color: rgba(0, 0, 0, 0.641);
-    text-decoration: line-through;
+    background-color: unset;
+    color: #cacccd;
 }
-
-.CalendarDay__blocked_calendar:hover {
-    background: rgba(128, 128, 128, 0.198);
-    color: rgba(0, 0, 0, 0.641);
-}
-
-.CalendarDay__blocked_out_of_range {
-    text-decoration: line-through;
-}
-
-
-
-
-
-/*
-.DayPicker__withBorder {
-    box-shadow: 0 2px 6px rgb(0 0 0 / 5%), 0 0 0 1px rgb(0 0 0 / 7%);
-    border-radius: 3px;
-}
-.DayPicker__withBorder>div {
-    border: 1px solid red !important;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 5%), 0 0 0 1px rgb(0 0 0 / 7%) !important;
-    height: 443px;
-    border-radius: 16px !important;
-} */

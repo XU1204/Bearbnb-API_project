@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { DayPickerRangeController, isInclusivelyBeforeDay, isInclusivelyAfterDay } from 'react-dates';
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import { DayPickerRangeController, isInclusivelyBeforeDay, isInclusivelyAfterDay } from 'react-dates';
+import './calendar.css'
 
 
 export default function ShowCalendar({ dates, setDates }) {
