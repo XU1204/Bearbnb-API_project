@@ -133,13 +133,14 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Spots',{
-      name: [
-        'Modern Farmhouse Near SOCO',
-        'NO FEE Modern Downtown Home Pearl, Alamo, River',
-        'Adorable above garage apartment at Sunrise Farm',
-        'citizenM Seattle South Lake Union',
-        'Architect\'s Off-Grid Stargazing Cabin.'
-      ]
+      // name: [
+      //   'Modern Farmhouse Near SOCO',
+      //   'NO FEE Modern Downtown Home Pearl, Alamo, River',
+      //   'Adorable above garage apartment at Sunrise Farm',
+      //   'citizenM Seattle South Lake Union',
+      //   'Architect\'s Off-Grid Stargazing Cabin.'
+      // ]
+      id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     })
   }
 };

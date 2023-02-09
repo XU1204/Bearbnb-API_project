@@ -63,7 +63,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('ReviewImages', {
-      id: [1, 2, 3, 4, 5]
+      id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     })
   }
 };

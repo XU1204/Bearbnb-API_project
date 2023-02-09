@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import RatingNumReview from '../Reviews/RatingNumReview';
 import MyButton from './MyButton';
-// import CalendarDates from './CalendarDates';
 import './createBooking.css';
 import { createBookingOfSpot } from '../../store/bookings';
 
