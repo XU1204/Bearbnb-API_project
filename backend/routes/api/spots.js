@@ -305,14 +305,14 @@ router.get('/:spotId', async(req, res) => {
 
     // modify----------------------------------
     const bookings = await singleSpot.getBookings();
-    console.log('--------- bookings of a spot in spot route --------', bookings)
+    // console.log('--------- bookings of a spot in spot route --------', bookings)
     const moment = MomentRange.extendMoment(Moment);
 
     let startDate = moment();
-    console.log('--------start date----', startDate)
+    // console.log('--------start date----', startDate)
 
     let endDate = moment(startDate, "DD-MM-YYYY").add(2, 'days'); // adding 3 days for now
-    console.log('--------end date----', endDate)
+    // console.log('--------end date----', endDate)
 
     bookings.sort((b1, b2) => moment(b1.startDate) - moment(b2.startDate))
     if (bookings.length) {
@@ -589,7 +589,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth,
         if (spot.ownerId !== req.user.id) {
             const bookings = await Booking.findAll({
                 where: {spotId},
-                attributes: ['spotId', 'startDate', 'endDate']
+                attributes: ['id', 'spotId', 'startDate', 'endDate']
             });
             return res.json({
                 Bookings: bookings

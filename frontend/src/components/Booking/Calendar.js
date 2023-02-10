@@ -30,8 +30,8 @@ export default function ShowCalendar({ dates, setDates }) {
         else setnumberOfMonths(2);
 
         const handleResize = (e) => {
-            console.log(e)
-            console.log(window.innerWidth)
+            // console.log(e)
+            // console.log(window.innerWidth)
             if (window.innerWidth < 1200) setnumberOfMonths(1);
             else setnumberOfMonths(2);
         }

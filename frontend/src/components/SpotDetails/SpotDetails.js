@@ -29,7 +29,7 @@ function SpotDetails () {
     // console.log('-------spot-------', spot)
     const reviews = useSelector(state => Object.values(state.reviewState))
     const bookings = useSelector(state => Object.values(state.bookingState))
-    // console.log('------bookings-----', bookings)
+    console.log('------bookings-----', bookings)
 
 
     // if (!spot) return null;

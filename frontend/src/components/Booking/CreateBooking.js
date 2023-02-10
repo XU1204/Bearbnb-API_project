@@ -4,8 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import MyButton from './MyButton';
 import './createBooking.css';
 import { createBookingOfSpot } from '../../store/bookings';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateBooking({ spot, setShowReviewModal, dates, setDates, setDateErrors, totalDays }) {
+    const dispatch = useDispatch();
+    const history = useHistory()
+
     const user = useSelector(state =>  state.session.user);
     const nf = new Intl.NumberFormat();
     const price = nf.format(spot.price);
@@ -15,7 +19,6 @@ export default function CreateBooking({ spot, setShowReviewModal, dates, setDate
     const totalFinal = nf.format(Math.ceil(spot.price * totalDays * 1.1));
 
     const [bookingErrors, setBookingErrors] = useState('')
-    const dispatch = useDispatch();
 
     const handleSubmit =  (e) => {
         e.preventDefault();
@@ -35,7 +38,7 @@ export default function CreateBooking({ spot, setShowReviewModal, dates, setDate
             // console.log('error --------', error)
             setBookingErrors(error.message)
         })
-
+        history.push('/bookings/current')
     }
 
 

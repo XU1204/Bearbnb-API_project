@@ -44,7 +44,7 @@ function App() {
           <Route path='/spots/:id/bookings' exact={true}>
             <BookingsOfSpot />
           </Route>
-          <Route path='/spots'>
+          <Route exact path='/spots'>
               <CreateSpotForm />
           </Route>
           <Route path='/reviews/current'>

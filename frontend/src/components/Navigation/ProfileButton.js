@@ -57,7 +57,7 @@ function ProfileButton ({ user }) {
               <NavLink style={{ color: 'black'}} key='listing' to='/spots/current'>My Listings</NavLink>
             </li>
             <li>
-              <NavLink style={{ color: 'black'}} key='review' to='/bookings/current'>My Bookings</NavLink>
+              <NavLink style={{ color: 'black'}} key='review' to='/bookings/current'>Trips</NavLink>
             </li>
             <li>
               <NavLink style={{ color: 'black'}} key='review' to='/reviews/current'>My Reviews</NavLink>
