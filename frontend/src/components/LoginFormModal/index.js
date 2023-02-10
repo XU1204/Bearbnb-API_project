@@ -105,7 +105,7 @@ function LoginFormModal() {
               <h3>{signup? 'Sign up' : 'Log in'}</h3>
               <button className={styles.changeBtn} onClick={handleSwitch}>{signup? 'Log in' : 'Sign up'}</button>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.loginForm}>
               <p style={{textAlign: 'left', fontSize: '26px'}}><strong>Welcome to Bearbnb</strong></p>
               {!signup && (
                 <>
