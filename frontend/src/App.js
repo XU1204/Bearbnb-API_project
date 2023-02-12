@@ -41,6 +41,9 @@ function App() {
           <Route path='/spots/:id' exact={true}>
               <SpotDetails />
           </Route>
+          <Route path='/spots/search' exact={true}>
+              <SpotDetails />
+          </Route>
           <Route path='/spots/:id/bookings' exact={true}>
             <BookingsOfSpot />
           </Route>
