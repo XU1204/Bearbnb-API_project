@@ -17,7 +17,7 @@ const SearchBar = () => {
 
     const handleSubmit = () => {
         setShowMenu(false)
-        history.push('/')
+        history.push('/search')
     }
 
     return (
@@ -34,9 +34,9 @@ const SearchBar = () => {
                     <div >
                         {showMenu && (
                             <div className='searchResults' style={{width:'300px'}}>
-                                <div className='search-bar-title'>
-                                    <button onClick={handleCancel} id=''><i class="fa-solid fa-xmark"></i></button>
+                                <div className='searchResults-title'>
                                     <h3>Start search</h3>
+                                    <button onClick={handleCancel} id=''><i class="fa-solid fa-xmark"></i></button>
                                 </div>
                                     <div>Price:
                                         <div>Select a range between 1 - 9999.</div>
