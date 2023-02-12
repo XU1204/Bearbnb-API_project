@@ -1,23 +1,14 @@
-import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { GoogleMap, useJsApiLoader, OverlayView } from '@react-google-maps/api';
+import { useSelector } from 'react-redux';
 
 const containerStyle = {
     width: '100%',
     height: '100%',
-}
+};
 
-
-import './Maps.css';
-
-const Maps = ({ setQuery, setCenter, center }) => {
-    const key = useSelector((state) => state.mapState.key);
-
-    if (!key) {
-        return null;
-    }
-
+const Maps = ({ apiKey, setQuery, center }) => {
     const [libraries] = useState(['places']);
     const [mapref, setMapRef] = React.useState(null);
 
@@ -50,7 +41,7 @@ const Maps = ({ setQuery, setCenter, center }) => {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: key,
+        googleMapsApiKey: apiKey,
         libraries
     });
 
@@ -63,8 +54,7 @@ const Maps = ({ setQuery, setCenter, center }) => {
     }
 
     return (
-        <div className='home-page-map-container'>
-            <div className='google-map'>
+        <div className='google-map'>
             {isLoaded && (
                 <GoogleMap
                     mapContainerStyle={containerStyle}
@@ -88,8 +78,7 @@ const Maps = ({ setQuery, setCenter, center }) => {
                 </GoogleMap>
             )}
         </div>
-        </div>
     );
 };
 
-export default Maps;
+export default React.memo(Maps);

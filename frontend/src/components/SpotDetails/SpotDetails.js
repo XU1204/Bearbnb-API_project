@@ -9,6 +9,7 @@ import CreateReviewFormModal from "../CreateSpotForm/CreateReviewForm";
 import ShowCalendar from "../Booking/Calendar";
 import { getMMMDDYYYStr } from "./DateCalculate";
 import CreateBooking from "../Booking/CreateBooking";
+import SpotMapContainer from "../Maps/SpotMapContainer";
 import './SpotDetails.css'
 
 function SpotDetails () {
@@ -28,8 +29,8 @@ function SpotDetails () {
     const spot = useSelector(state => state.spotState.singleSpot[id])
     // console.log('-------spot-------', spot)
     const reviews = useSelector(state => Object.values(state.reviewState))
-    const bookings = useSelector(state => Object.values(state.bookingState))
-    console.log('------bookings-----', bookings)
+    // const bookings = useSelector(state => Object.values(state.bookingState))
+    // console.log('------bookings-----', bookings)
 
 
     // if (!spot) return null;

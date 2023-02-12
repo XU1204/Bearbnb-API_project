@@ -3,7 +3,7 @@ import SpotMap from './SpotMap';
 import './spotMapContainer.css'
 
 const SpotMapContainer = ({ spot }) => {
-    const key = useSelector((state) => state.maps.key);
+    const key = useSelector((state) => state.mapState.key);
 
     if (!key) {
         return null;
