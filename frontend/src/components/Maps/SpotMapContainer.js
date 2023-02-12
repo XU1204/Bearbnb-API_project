@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import SpotMap from './SpotMap';
-import './SpotMapContainer.css'
+import './spotMapContainer.css'
 
 const SpotMapContainer = ({ spot }) => {
     const key = useSelector((state) => state.maps.key);
