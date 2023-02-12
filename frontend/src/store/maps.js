@@ -19,7 +19,10 @@ export const getKey = () => async (dispatch) => {
     const res = await csrfFetch('/api/maps/key', {
         method: 'POST',
     });
+    console.log('-----getKey() store---res ---', res)
+
     const data = await res.json();
+    console.log('-----getKey() store---data ---', data)
     dispatch(loadApiKey(data.googleMapsAPIKey));
 };
 
@@ -27,7 +30,10 @@ export const getGeoKey = () => async (dispatch) => {
     const res = await csrfFetch('/api/maps/geokey', {
         method: 'POST',
     });
+    console.log('-----getGeoKey() store---res ---', res)
     const data = await res.json();
+    console.log('-----getGeoKey() store---data ---', data)
+
     dispatch(loadGeoKey(data.geoAPIKey));
 };
 
