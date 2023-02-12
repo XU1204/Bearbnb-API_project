@@ -191,6 +191,14 @@ function SpotDetails () {
                         </div>
                     </>
                 ))}
+                 <div className='spot-map-wrapper' id='spot-detail-map'>
+                    <div className='spot-map-sub-wrapper'>
+                        <h4>
+                            Where you'll be
+                        </h4>
+                    </div>
+                    <SpotMapContainer spot={spot}/>
+                </div>
                 <div className="detail-page-bottom">
                     <span>2022 Bearbnb, Inc. · Privacy · Terms · Sitemap</span>
                     <div>
