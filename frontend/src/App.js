@@ -76,8 +76,10 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
-            <HomepageIndex setQuery={setQuery} query={query}/>
-            <MapContainer setQuery={setQuery} setCenter={setCenter} center={center} />
+            <div className="app-hp-wrapper">
+                <HomepageIndex setQuery={setQuery} query={query}/>
+                <MapContainer setQuery={setQuery} setCenter={setCenter} center={center} />
+            </div>
           </Route>
           <Route exact path='/spots/current'>
             <MyListings />
