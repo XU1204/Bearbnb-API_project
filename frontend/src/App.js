@@ -11,7 +11,7 @@ import MyListings from "./components/MyListings/MyListings";
 import MyReviews from "./components/MyReviews/MyReviews";
 import MyBookings from "./components/Booking";
 import BookingsOfSpot from "./components/Booking/BookingsOfSpot";
-import MapContainer from "./components/Maps/MapsContainer";
+import MapContainer from "./components/Maps/MapContainer";
 import { getGeoKey, getKey } from './store/maps';
 
 

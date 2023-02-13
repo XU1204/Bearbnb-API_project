@@ -4,9 +4,12 @@ import { getSpots } from '../../store/spots'
 import './Homepage.css'
 import Homepage from "./Homepage";
 
-function HomepageIndex () {
+function HomepageIndex ({ query, setQuery }) {
     const dispatch = useDispatch();
     const spots = useSelector(state => Object.values(state.spotState.allSpots));
+
+    const userLocation = useSelector(state => state.session.userLocation);
+
     useEffect(() => {
         dispatch(getSpots())
     },[dispatch]);
