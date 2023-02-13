@@ -45,7 +45,7 @@ const SpotMap = ({ apiKey, spot }) => {
                                 <div className='spot-map-label-pointer'></div>
                                 <div className='spot-map-icon-container'>
                                     <i className="fa-solid fa-house spot-map-house-icon"></i>
-                                    <i className="fa-brands fa-airbnb spot-map-airbnb-icon"></i>
+                                    <img className='spot-map-bearbnb-icon' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl-9zfsElAH6TDb6xilVqx8lJnuiyOWG0ApQ&usqp=CAU"></img>
                                 </div>
                             </button>
                         </div>

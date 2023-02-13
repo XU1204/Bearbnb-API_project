@@ -4,7 +4,7 @@ import './maps.css';
 
 const MapContainer = ({ setQuery, setCenter, center }) => {
     const key = useSelector((state) => state.mapState.key);
-    console.log('--------MapContainer.js------,key', key)
+    // console.log('--------MapContainer.js------,key', key)
 
     if (!key) {
         return null;

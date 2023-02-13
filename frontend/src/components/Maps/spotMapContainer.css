@@ -85,19 +85,17 @@
     backface-visibility: hidden;
 }
 
-.spot-map-airbnb-icon {
+.spot-map-bearbnb-icon {
     position: absolute;
-    color: white;
-    font-size: 1.25rem;
-    font-weight: 700;
+    width: 2rem;
+    height: 2rem;
     transform: rotateY(180deg);
     backface-visibility: hidden;
 }
 
 @media (max-width: 550px) {
     .spot-map-container {
-        height: 240px !important;
-        border-radius: 1rem !important;
-        overflow: hidden !important;
+        height: 240px;
+        /* overflow: hidden; */
     }
 }

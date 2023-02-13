@@ -22,8 +22,8 @@ function App() {
   // added 2/12/23
   const [query, setQuery] = useState({});
   const [center, setCenter] = useState({
-    lat: 47.6040349,
-    lng: -122.3007308,
+    lat: 30.272111846938458,
+    lng: -97.74064523000791,
   });
   const [userCenter, setUserCenter] = useState({});
   const key = useSelector((state) => state.mapState.key);
