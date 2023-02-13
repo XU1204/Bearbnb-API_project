@@ -162,7 +162,6 @@ function SpotDetails () {
                     </div>
                 </div>
 
-
                 <div className='booking-form-wrapper'>
                     <div className='booking-form-sub-wrapper'>
                         <div className='booking-form'>
@@ -174,30 +173,30 @@ function SpotDetails () {
             {/* modify end---------------- */}
 
             <div>
-                <div className="review-title">
-                    {/* <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3> */}
-                    <h3>★  {starLink}・{reviews.length} Reviews:</h3>
-                    {/* <CreateReviewFormModal id={+id}/> */}
-                    {createReviewFormLink}
-                </div>
-                {reviews.map(review => (
-                    <>
-                        <div className="review-detail">
-                            <img id='user-review-photo'src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user-photo' />
-                            <div key={review.id}>
-                                <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
-                                <div>{review.stars} stars</div>
-                                {review.review}
-                             </div>
-                        </div>
-                    </>
-                ))}
-                 <div className='spot-map-wrapper' id='spot-detail-map'>
-                    <div className='spot-map-sub-wrapper'>
-                        <h4>
-                            Where you'll be
-                        </h4>
+                <div className="detail-review-wrapper">
+                    <div className="review-title">
+                        {/* <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3> */}
+                        <h3>★  {starLink}・{reviews.length} Reviews:</h3>
+                        {/* <CreateReviewFormModal id={+id}/> */}
+                        {createReviewFormLink}
                     </div>
+                    {reviews.map(review => (
+                        <>
+                            <div className="review-detail">
+                                <img id='user-review-photo'src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user-photo' />
+                                <div key={review.id}>
+                                    <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
+                                    <div>{review.stars} stars</div>
+                                    {review.review}
+                                </div>
+                            </div>
+                        </>
+                    ))}
+                </div>
+                <div style={{marginTop: '4vh'}}>
+                    <h2>
+                        Where you'll be
+                    </h2>
                     <SpotMapContainer spot={spot}/>
                 </div>
                 <div className="detail-page-bottom">
