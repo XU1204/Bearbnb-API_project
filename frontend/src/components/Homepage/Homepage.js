@@ -30,7 +30,7 @@ function Homepage ({spots}) {
                 </div>
             ))}
         </div>
-        <div className="hp-page-bottom">
+        {/* <div className="hp-page-bottom">
             <span>2022 Bearbnb, Inc. · Privacy · Terms · Sitemap</span>
             <div>
                 <i class="fa-solid fa-earth-americas"></i>
@@ -39,7 +39,7 @@ function Homepage ({spots}) {
                 <i class="fa-brands fa-twitter"></i>
                 <i class="fa-brands fa-instagram"></i>
             </div>
-        </div>
+        </div> */}
     </>
     )
 }

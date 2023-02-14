@@ -13,6 +13,7 @@ import MyBookings from "./components/Booking";
 import BookingsOfSpot from "./components/Booking/BookingsOfSpot";
 import MapContainer from "./components/Maps/MapContainer";
 import { getGeoKey, getKey } from './store/maps';
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -71,7 +72,7 @@ function App() {
   }
 
   return isLoaded && (
-    <>
+    <div className="page-container">
      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -107,7 +108,8 @@ function App() {
           </Route>
         </Switch>
       )}
-    </>
+      <Footer />
+    </div>
   );
 }
 

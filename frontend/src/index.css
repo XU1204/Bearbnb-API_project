@@ -1,4 +1,15 @@
 /* TODO Add site wide styles */
+body {
+    margin: 0;
+}
+
+.page-container {
+    position: relative;
+    /* min-height: 100%; */
+    padding-bottom: 5rem;
+    min-height: 90vh;
+}
+
 .app-hp-wrapper{
     display: flex;
     height: calc(100vh - 81px - 65px);
