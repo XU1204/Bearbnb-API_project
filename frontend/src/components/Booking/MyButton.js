@@ -2,11 +2,9 @@ import React from 'react';
 import './myButton.css';
 
 export default function MyButton({ name, disabled }) {
-  // console.log('MyButton disabled?', disabled)
-
 
 // button color change
-    const handleMouseMove = (e) => {
+  const handleMouseMove = (e) => {
     const butt = e.target
     const rect = butt.getBoundingClientRect(); // has to bound on the element the background position is set with xy
 

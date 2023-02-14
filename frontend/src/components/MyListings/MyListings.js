@@ -66,7 +66,7 @@ function MyListings () {
                             <EditSpotFormModal spot={spot}/>
                         </span>
                         <span>
-                            <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove Listing</button>
+                            <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove</button>
                         </span>
                     </div>
 

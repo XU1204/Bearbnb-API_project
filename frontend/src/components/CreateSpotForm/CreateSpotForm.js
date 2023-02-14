@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSpot, addImageToSpot, getDetails } from '../../store/spots'
+import MyButton from '../Booking/MyButton';
 import styles from './CreateForm.module.css'
 
 function CreateSpotForm() {
@@ -213,8 +214,8 @@ function CreateSpotForm() {
                 </label>
             </div>
             </div> */}
-
-            <button id='create-spot-form-button' type='submit'>Create new spot</button>
+            <MyButton name='Create new spot' disabled={false} />
+            {/* <button id='create-spot-form-button' type='submit'>Create new spot</button> */}
     </form>
     </div>
   );

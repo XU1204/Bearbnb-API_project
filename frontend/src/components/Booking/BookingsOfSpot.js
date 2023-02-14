@@ -31,9 +31,9 @@ const BookingsOfSpot = () => {
                                 <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt.slice(0,10)}</li>
                                 <li><span className="my-reviews-bold">Stay: </span>{booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
                             </ul>
-                            <span>
+                            {/* <span>
                                 <button id='remove-review-button' onClick={(e) =>  dispatch(removeBooking(booking.id))}>Remove booking </button>
-                            </span>
+                            </span> */}
                         </div>
                     ))}
                 </div>
