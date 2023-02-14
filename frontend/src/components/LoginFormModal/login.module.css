@@ -106,9 +106,7 @@
 }
 .changeBtn:hover{
     cursor: pointer;
-    background-color: #f1f0f08e
-
-    ;
+    background-color: #f1f0f08e;
 }
 
 .error{

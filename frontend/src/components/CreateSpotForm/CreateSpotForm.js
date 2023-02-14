@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSpot, addImageToSpot, getDetails } from '../../store/spots'
-import './CreateForm.css'
+import styles from './CreateForm.module.css'
 
 function CreateSpotForm() {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function CreateSpotForm() {
     //   const [lng, setLng] = useState(0);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(1);
     const [errors, setErrors] = useState([]);
 
     const [url, setUrl] = useState('');
@@ -25,6 +25,28 @@ function CreateSpotForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // add error handling
+        let errors = []
+        if (price <= 0) errors.push('Price nust be greater than 0.');
+        if (!url.startsWith('http://') && !url.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
+        if (description.length > 254) errors.push('Description must be less than 255 characters.')
+        if (name.length > 254) errors.push('Title must be less than 255 characters.')
+        if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
+        if (name.trim().length === 0) errors.push('Title should not contain only spaces.')
+        let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', '.svg']
+        let count = 0
+        for (let i = 0; i < 6; i++) {
+            if (url.includes(imgEnd[i])) count++
+        }
+        if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
+
+        setErrors(errors)
+        // end add
+
+        if (errors.length) {
+            return;
+        }
 
         const data1 = {
             address, city, state, country, name, description, price
@@ -39,6 +61,9 @@ function CreateSpotForm() {
             const isExist = allSpots.find(spot => spot.address.trim() === address.trim() && spot.city.trim() === city.trim());
             if (isExist)  setErrors(['The spot with the same address and city has already exist.'])
         }
+
+
+
 
         const  createdSpot = await dispatch(addSpot(data1))
         .catch(async (res) => {
@@ -64,47 +89,51 @@ function CreateSpotForm() {
     }
 
   return (
-    <div className='create-spot-form-container'>
+    <div className={styles.container}>
     <form onSubmit={handleSubmit}>
-        <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <label>
-            Address:
+        <h1>Airbnb your home</h1>
+        <div>
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+        </div>
+        <div className={styles.inputWrapper}>
+            <label htmlFor='address'>Address<span style={{color: 'red'}}>*</span></label>
             <input
+                name='address'
                 type='text'
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
             />
-        </label>
-        <label>
-            City:
+        </div>
+        <div className={styles.inputWrapper}>
+            <label>City<span style={{color: 'red'}}>*</span></label>
             <input
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
             />
-        </label>
-        <label>
-            State:
+        </div>
+        <div className={styles.inputWrapper}>
+            <label>State<span style={{color: 'red'}}>*</span></label>
             <input
                 type='text'
                 value={state}
                 onChange={(e) => setState(e.target.value)}
                 required
             />
-        </label>
-        <label>
-            Country:
+        </div>
+        <div className={styles.inputWrapper}>
+            <label>Country<span style={{color: 'red'}}>*</span></label>
             <input
                 type='text'
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 required
             />
-        </label>
+        </div>
             {/* <label>
                 Latitude:
                 <input
@@ -123,44 +152,44 @@ function CreateSpotForm() {
                     required
                 />
             </label> */}
-        <label>
-            Name:
+        <div className={styles.inputWrapper}>
+            <label>Name<span style={{color: 'red'}}>*</span></label>
             <input
                 type='text'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
             />
-        </label>
-        <label>
-            Description:
-            <input
+        </div>
+        <div className={styles.inputWrapper}>
+            <label>Description<span style={{color: 'red'}}>*</span></label>
+            <textarea
+                id={styles.description}
                 type='text'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
             />
-        </label>
-        <label>
-            Price:
+        </div>
+        <div className={styles.inputWrapper}>
+            <label>Price<span style={{color: 'red'}}>*</span></label>
             <input
                 type='number'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 required
             />
-        </label>
-
-        <label>
-            Image Url:
+        </div>
+        <div className={styles.inputWrapper}>
+            <label>Image url<span style={{color: 'red'}}>*</span></label>
             <input
                 type='url'
                 value={url}
-                placeholder={"https://example.com"}
+                placeholder={"https://example.jpg"}
                 onChange={(e) => setUrl(e.target.value)}
                 required
             />
-        </label>
+        </div>
         {/* <div className='preview-container'>
             <legend id='preview-label'>Preview:</legend>
             <div id='preview-ture-false'>
