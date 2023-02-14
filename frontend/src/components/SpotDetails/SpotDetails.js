@@ -77,15 +77,26 @@ function SpotDetails () {
     if (spot?.SpotImages[0]) {
         imageLink = (
             <div className="detail-photos">
-                <img id='img-of-spot-details' src={spot.SpotImages[0].url} alt='main image'/>
+                <div className="detail-big-pic">
+                    <img id='img-of-spot-details' src={spot.SpotImages[0].url} alt='main image'
+                        onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
+                </div>
                 <div className="detail-photos-right">
-                    <div className="two-small-photos">
-                        <img src='https://a0.muscache.com/im/pictures/3277347e-df0f-4d77-bb8a-9134d2534a71.jpg?im_w=720' />
-                        <img src='https://a0.muscache.com/im/pictures/2651186d-c9c5-4e93-9e6a-98ace0221e74.jpg?im_w=720' />
+                    <div className="detail-small-pic">
+                        <img id='first-small' src='https://a0.muscache.com/im/pictures/3277347e-df0f-4d77-bb8a-9134d2534a71.jpg?im_w=720'
+                            onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
-                    <div className="two-small-photos" id='detail-photos-right-bottom'>
-                        <img src='https://a0.muscache.com/im/pictures/2394955e-8136-475b-83e5-5932915603bc.jpg?im_w=720' />
-                        <img src='https://a0.muscache.com/im/pictures/e110f89c-22fe-43f6-9a24-1725fbf2abd8.jpg?im_w=720' />
+                    <div className="detail-small-pic">
+                        <img id='second-small' src='https://a0.muscache.com/im/pictures/2651186d-c9c5-4e93-9e6a-98ace0221e74.jpg?im_w=720'
+                            onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
+                    </div>
+                    <div className="detail-small-pic" id='detail-photos-right-bottom'>
+                        <img id='third-small' src='https://a0.muscache.com/im/pictures/2394955e-8136-475b-83e5-5932915603bc.jpg?im_w=720'
+                            onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
+                    </div>
+                    <div className="detail-small-pic">
+                        <img id='forth-small' src='https://a0.muscache.com/im/pictures/e110f89c-22fe-43f6-9a24-1725fbf2abd8.jpg?im_w=720'
+                            onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                 </div>
             </div>
@@ -193,13 +204,13 @@ function SpotDetails () {
                         </>
                     ))}
                 </div>
-                <div style={{marginTop: '4vh'}}>
+                <div style={{margin: '4vh auto'}}>
                     <h2>
                         Where you'll be
                     </h2>
                     <SpotMapContainer spot={spot}/>
                 </div>
-                <div className="detail-page-bottom">
+                {/* <div className="detail-page-bottom">
                     <span>2022 Bearbnb, Inc. · Privacy · Terms · Sitemap</span>
                     <div>
                         <i class="fa-solid fa-earth-americas"></i>
@@ -208,7 +219,7 @@ function SpotDetails () {
                         <i class="fa-brands fa-twitter"></i>
                         <i class="fa-brands fa-instagram"></i>
                     </div>
-                </div>
+                </div> */}
             </div>
 
        </div>
