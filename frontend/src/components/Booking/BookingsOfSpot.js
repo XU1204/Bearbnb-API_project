@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { getBookingsOfSpot, removeBooking } from "../../store/bookings";
 import { getDetails } from "../../store/spots";
 
-
 const BookingsOfSpot = () => {
     const { id } = useParams();
     const dispatch = useDispatch();

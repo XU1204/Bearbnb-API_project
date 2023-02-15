@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
+import moment from 'moment';
+import { getBookingsOfSpot } from "../../store/bookings";
 import { getReviewsOfSpot } from "../../store/reviews";
 import { getDetails } from "../../store/spots";
 import CreateReviewFormModal from "../CreateSpotForm/CreateReviewForm";
+import ShowCalendar from "../Booking/Calendar";
+import { getMMMDDYYYStr } from "./DateCalculate";
+import CreateBooking from "../Booking/CreateBooking";
+import SpotMapContainer from "../Maps/SpotMapContainer";
 import './SpotDetails.css'
 
 function SpotDetails () {
@@ -12,24 +18,63 @@ function SpotDetails () {
     //Attention: typeof id is string!!!
     const dispatch = useDispatch();
 
-    const sessionUser = useSelector(state => state.session.user);
-
-    const spot = useSelector(state => state.spotState.singleSpot[id])
-
-    const reviews = useSelector(state => Object.values(state.reviewState))
-
     useEffect(() => {
         dispatch(getDetails(id));
         dispatch(getReviewsOfSpot(id))
-    }, [ dispatch, id]);
+        dispatch(getBookingsOfSpot(id))
+    }, [dispatch, id]);
+
+    const sessionUser = useSelector(state => state.session.user);
+
+    const spot = useSelector(state => state.spotState.singleSpot[id])
+    // console.log('-------spot-------', spot)
+    const reviews = useSelector(state => Object.values(state.reviewState))
+    // const bookings = useSelector(state => Object.values(state.bookingState))
+    // console.log('------bookings-----', bookings)
+
+
+    // if (!spot) return null;
+    // if (!spot.SpotImages) return null;
+    // if(!reviews) return null;
+
+    // date related
+    const [dates, setDates] = useState({ startDate: moment(), endDate: moment() });
+    const [dateErrors, setDateErrors] = useState({});
+    const [totalDays, setTotayDays] = useState(1);
+    const [showReviewModal, setShowReviewModal] = useState(false);
+
+
+    useEffect(() => {
+        // console.log('-------spot------', spot)
+        if (!spot) return;
+        setDates({
+            startDate: moment(spot.firstAvailableStart),
+            endDate: moment(spot.firstAvailableEnd)
+        })
+
+        return () => {
+            setDates({});
+        }
+    }, [spot])
+
+    useEffect(() => {
+        // console.log('-------dates------', dates)
+        if (dates.endDate <= dates.startDate) return;
+        setTotayDays(Math.round((dates.endDate - dates.startDate) / 86400000));
+
+        return () => {
+            setTotayDays(1);
+        }
+    }, [dates])
+
+    // date related end
 
     if (!spot) return null;
     if (!spot.SpotImages) return null;
     if(!reviews) return null;
 
-
     let imageLink
-    if (spot.SpotImages[0]) {
+    if (spot?.SpotImages[0]) {
         imageLink = (
             <div className="detail-photos">
                 <img id='img-of-spot-details' src={spot.SpotImages[0].url} alt='main image'/>
@@ -92,12 +137,42 @@ function SpotDetails () {
                 {/* <img src={spot.SpotImages[0].url} alt='main image'/> */}
                 {imageLink}
             </div>
-            <div>
-                <h3>Single house hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h3>
-                <h4>{spot.address}, {spot.city}, {spot.state}</h4>
-                <div><span id='detail-page-price'>${spot.price}</span> per night</div>
-                <p>Description: {spot.description}</p>
+
+            <div className="detail-middle-wrapper">
+                <div>
+                    <div>
+                        <h3>Single house hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h3>
+                        <h4>{spot.address}, {spot.city}, {spot.state}</h4>
+                        <div><span id='detail-page-price'>${spot.price}</span> per night</div>
+                        <p>Description: {spot.description}</p>
+                    </div>
+
+                    <div style={{borderTop: '1px solid #eeeeee'}}>
+                        <h1><span style={{color: '#ff385c'}}>air</span>cover</h1>
+                        <p>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
+                    </div>
+
+                    {/* modify start------------- */}
+                    <div className='info-detail-wrapper'>
+                        <h4>{totalDays} nights in {spot.city}</h4>
+                        <div className='date-calendar-span'>
+                            <span>{`${getMMMDDYYYStr(dates.startDate)}`} - {dates.endDate ? `${getMMMDDYYYStr(dates.endDate)}` : getMMMDDYYYStr(moment(dates.startDate, 'DD-MM-YYYY').add(1, 'day'))}</span>
+                        </div>
+                        <ShowCalendar dates={dates} setDates={setDates} setDateErrors={setDateErrors} />
+                    </div>
+                </div>
+
+
+                <div className='booking-form-wrapper'>
+                    <div className='booking-form-sub-wrapper'>
+                        <div className='booking-form'>
+                                <CreateBooking spot={spot} setShowReviewModal={setShowReviewModal} dates={dates} setDates={setDates} setDateErrors={setDateErrors} totalDays={totalDays} />
+                        </div>
+                    </div>
+                </div>
             </div>
+            {/* modify end---------------- */}
+
             <div>
                 <div className="review-title">
                     {/* <h3>★  {Number(spot.avgStarRating).toFixed(1) || 'new'} ・{reviews.length} Reviews:</h3> */}
@@ -117,6 +192,14 @@ function SpotDetails () {
                         </div>
                     </>
                 ))}
+                 <div className='spot-map-wrapper' id='spot-detail-map'>
+                    <div className='spot-map-sub-wrapper'>
+                        <h4>
+                            Where you'll be
+                        </h4>
+                    </div>
+                    <SpotMapContainer spot={spot}/>
+                </div>
                 <div className="detail-page-bottom">
                     <span>2022 Bearbnb, Inc. · Privacy · Terms · Sitemap</span>
                     <div>

@@ -3,6 +3,9 @@ const { Op } = require('sequelize');
 const { sequelize, Spot, Review ,SpotImage, User, ReviewImage, Booking} = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 
+const Moment = require('moment');
+const MomentRange = require('moment-range');
+
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -300,6 +303,30 @@ router.get('/:spotId', async(req, res) => {
         attributes: ['id', 'firstName', 'lastName']
     });
 
+    // modify----------------------------------
+    const bookings = await singleSpot.getBookings();
+    // console.log('--------- bookings of a spot in spot route --------', bookings)
+    const moment = MomentRange.extendMoment(Moment);
+
+    let startDate = moment();
+    // console.log('--------start date----', startDate)
+
+    let endDate = moment(startDate, "DD-MM-YYYY").add(2, 'days'); // adding 3 days for now
+    // console.log('--------end date----', endDate)
+
+    bookings.sort((b1, b2) => moment(b1.startDate) - moment(b2.startDate))
+    if (bookings.length) {
+        while (!isAvailableDate(endDate, bookings, true) || !isAvailableDate(startDate, bookings, false)) {
+            endDate = moment(endDate, "DD-MM-YYYY").add(1, 'days');
+            startDate = moment(endDate, "DD-MM-YYYY").subtract(2, 'days');
+        }
+    }
+
+    // console.log('firstavailable end date >>>>>>>>>>', endDate)
+    const firstAvailableStart = moment(endDate, "DD-MM-YYYY").subtract(2, 'days')
+    const firstAvailableEnd = endDate;
+    // console.log('Spot detail with first availability -----------', spotJSON)
+
     const payload = {
         id: singleSpot.id,
         ownerId: singleSpot.ownerId,
@@ -317,11 +344,32 @@ router.get('/:spotId', async(req, res) => {
         numReviews,
         avgStarRating,
         SpotImages: singleSpot.SpotImages,
-        Owner: getOwner
+        Owner: getOwner,
+        firstAvailableEnd,
+        firstAvailableStart
     };
 
     return res.json(payload);
 })
+
+const isAvailableDate = (date, bookings, isEndDate) => {
+    const moment = MomentRange.extendMoment(Moment);
+    // console.log('-------------------------------------------------')
+
+    for (let booking of bookings) {
+        const bookedRange = moment.range(booking.startDate, booking.endDate);
+        if (bookedRange.contains(moment(date))) {
+            // console.log(`Invalid ${isEndDate ? 'endDate' : 'startDate'}`)
+            // console.log(moment(date))
+            // console.log(booking.startDate, booking.endDate)
+            return false;
+        }
+    }
+
+    // console.log(`Valid ${isEndDate ? 'endDate' : 'startDate'}`)
+    // console.log(moment(date))
+    return true;
+}
 
 
 //Create a Spot
@@ -541,7 +589,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth,
         if (spot.ownerId !== req.user.id) {
             const bookings = await Booking.findAll({
                 where: {spotId},
-                attributes: ['spotId', 'startDate', 'endDate']
+                attributes: ['id', 'spotId', 'startDate', 'endDate']
             });
             return res.json({
                 Bookings: bookings

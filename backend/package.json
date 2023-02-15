@@ -23,9 +23,12 @@
     "express-validator": "^6.14.2",
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
+    "moment-range": "^4.0.2",
     "morgan": "^1.10.0",
     "per-env": "^1.0.2",
     "pg": "^8.8.0",
+    "react-geocode": "^0.2.3",
     "sequelize": "^6.23.0",
     "sequelize-cli": "^6.4.1"
   },

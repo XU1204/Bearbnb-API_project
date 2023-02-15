@@ -4,13 +4,15 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import { NavLink } from 'react-router-dom';
 import LoginFormModal from '../LoginFormModal';
+import SearchBar from './SearchBar/SearchBar';
 import './Navigation.css'
 
 
 function Navigation ({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-    const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(true);
+
+
 
     let sessionLinks;
     if (sessionUser) {
@@ -35,11 +37,13 @@ function Navigation ({ isLoaded }) {
         )
     }
 
+
     return (
         <div className='nav'>
             <NavLink exact to='/'>
                 <img id='bearbnb' src='https://pbs.twimg.com/media/BstWqTHCEAMhHBc?format=jpg&name=900x900' alt='BearBnb'/>
             </NavLink>
+            <SearchBar />
             <div className='nav-right-part'>
                 {/* <span>
                     <NavLink to='/spots'><button id='become-host-button'>Airbnb your home</button></NavLink>

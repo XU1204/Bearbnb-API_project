@@ -14,46 +14,46 @@ module.exports = {
    await queryInterface.bulkInsert('Spots', [
     {
       ownerId: 2,
-      address: '2120 Speedway',
+      address: '100 W N Loop Blvd',
       city: 'Austin',
       state: 'Texas',
-      lat: 100.1,
-      lng: 200.2,
-      name: 'Modern Farmhouse Near SOCO',
-      description: 'Come work or explore Austin. It is close to S Congress, S Lamar, and 1.5 miles to Lady Bird Lake.',
+      lat: 30.317930,
+      lng: -97.722210,
+      name: 'The Southern Studio',
+      description: 'Kick back and relax in this calm,  stylish studio fit for 1-3 people.  Kitchen is equipped with cooking tools.',
       price: 151
     },
     {
       ownerId: 3,
-      address: '2004 Clinton Pl',
+      address: '10141 Wurzbach Rd',
       city: 'San Antonio',
       state: 'Texas',
-      lat: 98.2,
-      lng: 70.3,
+      lat: 29.534370,
+      lng: -98.559820,
       name: 'NO FEE Modern Downtown Home Pearl, Alamo, River',
       description: 'My mission is to ensure that you have all the amenities.',
       price: 218
     },
     {
       ownerId: 4,
-      address: '5691 Redbug Rd',
-      city: 'Snowflake',
+      address: '650 N Clark Rd',
+      city: 'Show Low',
       state: 'Arizona',
-      lat: 80.1,
-      lng: 60.4,
+      lat: 34.254779533909,
+      lng: -110.08603804452373,
       name: 'Adorable above garage apartment at Sunrise Farm',
       description: 'Come experience our little farm that we are working on making into a permiculture oasis.',
       price: 100
     },
     {
       ownerId: 5,
-      address: '2120 Herdrick Dr',
-      city: 'Seattle',
+      address: '3418 S Star Lake Rd',
+      city: 'Auburn',
       state: 'Washington',
-      lat: 20.1,
-      lng: 210.5,
-      name: 'citizenM Seattle South Lake Union',
-      description: 'CitizenM Seattle South Lake has landed. Home of affordable luxury in the heart of South Lake Union.',
+      lat: 47.353500,
+      lng: -122.289050,
+      name: 'Raindrop Getaway',
+      description: 'We\'re proud to offer you Raindrop Getaway, a private guest suite. We offer the luxurious feel of an upscale hotel and the comfort and friendliness of a private retreat.',
       price: 189
     },
     {
@@ -61,66 +61,65 @@ module.exports = {
       address: '17921 Still Water Ln',
       city: 'Twentynine Palms',
       state: 'California',
-      lat: 66.6,
-      lng: 88.5,
-      name: 'Architect\'s Off-Grid Stargazing Cabin.',
-      description: 'Folly Joshua Tree is an off-grid outpost designed by Malek Alqadi.',
+      lat: 34.2337826465383,
+      lng: -116.06165110674766,
+      name: 'Secluded Tiny Home Near JTNP',
+      description: 'Welcome to Cactus Mountain Hideaway! Enjoy stargazing, sunsets and sunrises from our tiny home overlooking unobstructed views of the desert mountain landscape.',
       price: 1125
     },
     {
       ownerId: 2,
-      address: 'Timber Hls Ln',
+      address: '141 Wildwood Trl',
       city: 'Broken Bow',
       state: 'Oklahoma',
-      lat: 86.6,
-      lng: 58.5,
-      name: '*Brand New OCT 2022* Perfect Couples/Family Cabin',
+      lat: 34.164816220853744,
+      lng: -94.76183355479552,
+      name: 'Secluded Couples Cabin -with Hot Tub and Fire Pit!',
       description: 'Set on a spacious acre lot surrounded by towering pine trees , the cabin features a  warm and inviting living area.',
-      price: 289
+      price: 209
     },
     {
       ownerId: 3,
-      address: 'Hamden Hill Rd',
+      address: '3400 Whitney Ave',
       city: 'Hamden',
-      state: 'New York',
-      lat: 89.6,
-      lng: 50.5,
-      name: 'True log cabin with 4 bedrooms for large families',
-      description: 'Relaxation & seclusion, just 2.5 hr from NYC!  Unique cabin on 5 acres backing up to woods and fields.',
-      price: 228
+      state: 'Connecticut',
+      lat: 41.42165744228608,
+      lng: -72.90406902929882,
+      name: 'Short stay gem near Quinnipiac University',
+      description: 'Relax with the whole family at this peaceful place to stay near Quinnipiac University and Sleeping Giant State Park.'
     },
     {
       ownerId: 4,
-      address: 'BeachWood Dr',
+      address: '2521 W Fort Toulouse Rd',
       city: 'Wetumpka',
       state: 'Alabama',
-      lat: 89.6,
-      lng: 50.5,
-      name: 'Luxurious Lake Jordan Experience- Sleeps 18!',
-      description: 'Relaxation & seclusion, just 2.5 hr from NYC!  Unique cabin on 5 acres backing up to woods and fields.',
-      price: 800
+      lat: 32.50887282156723,
+      lng: -86.25090982024301,
+      name: 'The Dirt Rd River Cabin',
+      description: 'The Dirt Road River Cabin is a wonderful secluded cabin on the Coosa River,  great for couple/friends getaways. ',
+      price: 169
     },
     {
       ownerId: 5,
-      address: 'S Indian River Dr',
+      address: '91 Southpointe Dr',
       city: 'Fort Poerce',
       state: 'Florida',
-      lat: 34.6,
-      lng: 89.5,
-      name: '9000 SF Waterfront Mansion/Pool/Boat Dock/Theater',
-      description: 'The whole group will be comfortable in this spacious and unique space. 9000 SF Waterfront Mansion/Pool/Boat Dock/Theater.',
-      price: 999
+      lat: 27.443333751545143,
+      lng: -80.2837992619007,
+      name: 'The Perfect Spot, Private Beach, Beautiful Sunsets',
+      description: 'Just a 3 minute walk to our private Beach for a plunge into the surf.  Forever summer with sunset views from the balcony.',
+      price: 299
     },
     {
       ownerId: 1,
-      address: 'Webb Creek',
-      city: 'Kure Beach',
-      state: 'North Carolina',
-      lat: 34.6,
-      lng: 89.5,
-      name: 'Perma Grin- Oceanfront 8 Bedroom Home',
-      description: 'This lovely 8 Bedroom 5.5 Bathroom Oceanfront home is perfect for a vacation getaway!',
-      price: 829
+      address: '1154 Glendale Blvd, Los Angeles',
+      city: 'Los Angeles',
+      state: 'California',
+      lat: 34.077771949517334,
+      lng: -118.26051528662774,
+      name: 'Tranquil and Private Cottage in Silverlake',
+      description: 'A dreamy little guest house nestled on private street in Silverlake that feels totally unique to LA. ',
+      price: 147
     }
    ])
   },
@@ -133,13 +132,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Spots',{
-      name: [
-        'Modern Farmhouse Near SOCO',
-        'NO FEE Modern Downtown Home Pearl, Alamo, River',
-        'Adorable above garage apartment at Sunrise Farm',
-        'citizenM Seattle South Lake Union',
-        'Architect\'s Off-Grid Stargazing Cabin.'
-      ]
+      id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     })
   }
 };

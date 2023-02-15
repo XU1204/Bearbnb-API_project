@@ -1,8 +1,25 @@
 // frontend/src/store/session.js
 import { csrfFetch } from './csrf';
 
+// this needs to be refactored. Might be able to delete this part since App.js is getting geodata already.
+const getLocationPromise = new Promise((resolve, reject) => {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+          const lat = position.coords.latitude
+          const lng = position.coords.longitude
+
+          resolve({lat, lng})
+      })
+
+  } else {
+      reject('No geolocation data.')
+  }
+})
+
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const LOAD_USER_LOCATION = '/loadUserLocation';
+
 
 const setUser = (user) => {
   return {
@@ -16,6 +33,13 @@ const removeUser = () => {
     type: REMOVE_USER,
   };
 };
+
+const loadUserLocation = (location) => {
+  return {
+      type: LOAD_USER_LOCATION,
+      location
+  }
+}
 
 //thunk action creators
 export const login = (user) => async (dispatch) => {
@@ -65,8 +89,13 @@ export const signup = (user) => async (dispatch) => {
 };
 
 
+export const userLocation = () => async (dispatch) => {
+  const location = await getLocationPromise;
+  dispatch(loadUserLocation(location));
+}
 
-const initialState = { user: null };
+
+const initialState = { user: null, userLocation: {} };
 //reducer
 const sessionReducer = (state = initialState, action) => {
   let newState;
@@ -79,6 +108,11 @@ const sessionReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       newState.user = null;
       return newState;
+    case LOAD_USER_LOCATION: {
+      newState = { ...state };
+      newState.userLocation = action.location;
+      return newState;
+    };
     default:
       return state;
   }

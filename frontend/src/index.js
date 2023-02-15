@@ -11,7 +11,11 @@ import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
 
+import ReactGA from 'react-ga4';
+
 const store = configureStore();
+
+ReactGA.initialize('G-BYFPFPRZ9N');
 
 if (process.env.NODE_ENV !== 'production') {
   restoreCSRF();
