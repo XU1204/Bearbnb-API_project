@@ -112,7 +112,7 @@ module.exports = {
     },
     {
       ownerId: 1,
-      address: '1154 Glendale Blvd, Los Angeles',
+      address: '1154 Glendale Blvd',
       city: 'Los Angeles',
       state: 'California',
       lat: 34.077771949517334,

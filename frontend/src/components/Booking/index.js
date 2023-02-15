@@ -26,7 +26,7 @@ function MyBookings () {
 
     return (
         <div className="my-reviews-list">
-            <h2 id='my-review-title'>My Bookings</h2>
+            <h2 id='my-review-title'>Trips</h2>
             {allBookings && (
             <div>
                 {allBookings.map(booking => (
@@ -35,11 +35,11 @@ function MyBookings () {
                             <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${booking.Spot?.id}`}> {booking.Spot?.name}</NavLink></li>
                             <li><span className="my-reviews-bold">Location: </span> {booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</li>
                             <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt?.slice(0,10)}</li>
-                            <li><span className="my-reviews-bold">Date: </span>{booking.startDate.slice(0,10)} - {booking.endDate.slice(0,10)} </li>
+                            <li><span className="my-reviews-bold">Date: </span>from {booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
                         </ul>
                         {/* remember to change it  */}
                         <span>
-                            <button id='remove-review-button' onClick={(e) =>  dispatch(removeBooking(booking.id))}>{isPast(booking.startDate.slice(0,10))? 'Remove booking' : 'Cancel booking'} </button>
+                            <button id='remove-review-button' onClick={(e) =>  dispatch(removeBooking(booking.id))}>{isPast(booking.startDate.slice(0,10))? 'Delete' : 'Cancel'} </button>
                         </span>
                     </div>
                 ))}

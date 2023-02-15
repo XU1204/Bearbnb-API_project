@@ -45,7 +45,8 @@ function MyListings () {
                     <NavLink key={spot.id} id='link' to={`/spots/${spot.id}`}>
                     <div className="my-listings-each">
                         <div className="">
-                            <img src={spot.previewImage} alt={`preview image of ${spot.name}`}/>
+                            <img src={spot.previewImage} alt={`preview image of ${spot.name}`}
+                                onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                         </div>
                         <div className="my-listings-name-star">
                             <span className='my-listings-fold'>{spot.city}, {spot.state}</span>
@@ -66,7 +67,7 @@ function MyListings () {
                             <EditSpotFormModal spot={spot}/>
                         </span>
                         <span>
-                            <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove Listing</button>
+                            <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove</button>
                         </span>
                     </div>
 

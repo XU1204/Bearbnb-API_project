@@ -1,1 +1,19 @@
 /* TODO Add site wide styles */
+body {
+    margin: 0;
+}
+
+.page-container {
+    position: relative;
+    /* min-height: 100%; */
+    padding-bottom: 5rem;
+    min-height: 90vh;
+}
+
+.app-hp-wrapper{
+    display: flex;
+    height: calc(100vh - 81px - 65px);
+    position: relative;
+    overflow-y: auto;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}

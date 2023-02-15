@@ -20,9 +20,7 @@ const Maps = ({ apiKey, setQuery, center }) => {
         if (mapref) {
             const newBound = mapref.getBounds();
             const newCenter = mapref.getCenter();
-            // console.log('NE', newBound.getNorthEast().lat(), newBound.getNorthEast().lng());
-            // console.log('SW', newBound.getSouthWest().lat(), newBound.getSouthWest().lng());
-            // console.log('------------- newCenter', newCenter.lat(), newCenter.lng())
+        
             if (newCenter.lat() === center.lat && newCenter.lng() === center.lng) return;
 
             setQuery(query => {

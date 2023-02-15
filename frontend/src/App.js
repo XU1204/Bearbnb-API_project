@@ -13,6 +13,7 @@ import MyBookings from "./components/Booking";
 import BookingsOfSpot from "./components/Booking/BookingsOfSpot";
 import MapContainer from "./components/Maps/MapContainer";
 import { getGeoKey, getKey } from './store/maps';
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -22,8 +23,8 @@ function App() {
   // added 2/12/23
   const [query, setQuery] = useState({});
   const [center, setCenter] = useState({
-    lat: 47.6040349,
-    lng: -122.3007308,
+    lat: 30.272111846938458,
+    lng: -97.74064523000791,
   });
   const [userCenter, setUserCenter] = useState({});
   const key = useSelector((state) => state.mapState.key);
@@ -71,13 +72,15 @@ function App() {
   }
 
   return isLoaded && (
-    <>
+    <div className="page-container">
      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
-            <HomepageIndex setQuery={setQuery} query={query}/>
-            <MapContainer setQuery={setQuery} setCenter={setCenter} center={center} />
+            <div className="app-hp-wrapper">
+                <HomepageIndex setQuery={setQuery} query={query}/>
+                <MapContainer setQuery={setQuery} setCenter={setCenter} center={center} />
+            </div>
           </Route>
           <Route exact path='/spots/current'>
             <MyListings />
@@ -105,7 +108,8 @@ function App() {
           </Route>
         </Switch>
       )}
-    </>
+      <Footer />
+    </div>
   );
 }
 

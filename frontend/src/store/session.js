@@ -1,7 +1,6 @@
 // frontend/src/store/session.js
 import { csrfFetch } from './csrf';
 
-// this needs to be refactored. Might be able to delete this part since App.js is getting geodata already.
 const getLocationPromise = new Promise((resolve, reject) => {
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {

@@ -1,22 +1,20 @@
-#img-of-spot-details {
-    height: 400px;
-    width: 500px;
-}
-
 .detail-page {
     display: flex;
     flex-direction: column;
     margin-left: 10%;
     margin-right: 10%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
+.detail-review-wrapper{
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 2vh 0;
 }
 
 .review-title {
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid #dddddd;
-    margin-top: 30px;
 }
 
 .review-detail {
@@ -41,23 +39,44 @@
     color: grey;
 }
 
-.detail-photos, .two-small-photos {
+/* spot images */
+.detail-photos{
     display: flex;
+    height: 35vw;
+    gap: 1%;
+    border-radius: 10px;
+    object-fit: cover;
+    overflow: hidden;
 }
-
+.detail-big-pic{
+    width: 96%;
+}
+#img-of-spot-details{
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    object-fit: cover;
+}
 .detail-photos-right {
+    position: relative;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: hidden;
+    gap: 10px;
 }
-
-.detail-photos-right img {
-    height: 195px;
-    width: 220px;
-    margin-left: 10px;
+.detail-small-pic{
+    width: calc(50% - 5px);
+    object-fit: cover;
 }
-
-#detail-photos-right-bottom {
-    margin-top: 10px;
+#first-small,
+#second-small,
+#third-small,
+#forth-small{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0;
 }
 
 #detail-page-price {
