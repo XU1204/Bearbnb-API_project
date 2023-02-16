@@ -16,8 +16,8 @@ const SpotMap = ({ apiKey, spot }) => {
     });
 
     const center = {
-        lat: parseFloat(spot.lat),
-        lng: parseFloat(spot.lng)
+        lat: parseFloat(spot?.lat),
+        lng: parseFloat(spot?.lng)
     };
 
     // console.log('SpotMap --- center', center)
@@ -36,7 +36,7 @@ const SpotMap = ({ apiKey, spot }) => {
                 >
                 <div className='overlay-container'>
                     <OverlayView
-                        position={{ lat: spot.lat, lng: spot.lng }}
+                        position={{ lat: spot?.lat, lng: spot?.lng }}
                         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                     >
                         <div className='spot-map-house-outer'>

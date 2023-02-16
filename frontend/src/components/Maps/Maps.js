@@ -9,6 +9,8 @@ const containerStyle = {
 };
 
 const Maps = ({ apiKey, setQuery, center }) => {
+    const history = useHistory();
+
     const [libraries] = useState(['places']);
     const [mapref, setMapRef] = React.useState(null);
 
@@ -20,7 +22,7 @@ const Maps = ({ apiKey, setQuery, center }) => {
         if (mapref) {
             const newBound = mapref.getBounds();
             const newCenter = mapref.getCenter();
-        
+
             if (newCenter.lat() === center.lat && newCenter.lng() === center.lng) return;
 
             setQuery(query => {
@@ -43,13 +45,15 @@ const Maps = ({ apiKey, setQuery, center }) => {
         libraries
     });
 
-    let spotsArr = [];
+    if (!spots) return null;
+    let spotsArr;
     if (spots) spotsArr = Object.values(spots);
 
-    const history = useHistory();
     const handleClick = (spotId) => {
         history.push(`/spots/${spotId}`)
     }
+
+    // console.log('----------center---------', center)
 
     return (
         <div className='google-map'>
@@ -61,7 +65,7 @@ const Maps = ({ apiKey, setQuery, center }) => {
                     onLoad={handleOnLoad}
                     onCenterChanged={handleCenterChanged}
                 >
-                {spotsArr.map(spot => {
+                {spotsArr && spotsArr.map(spot => {
                     return (
                         <div key={spot.id} className='overlay-container'>
                             <OverlayView

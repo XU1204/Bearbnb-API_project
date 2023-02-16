@@ -8,7 +8,7 @@ function HomepageIndex ({ query, setQuery }) {
     const dispatch = useDispatch();
     const spots = useSelector(state => Object.values(state.spotState.allSpots));
 
-    const userLocation = useSelector(state => state.session.userLocation);
+    // const userLocation = useSelector(state => state.session.userLocation);
 
     useEffect(() => {
         dispatch(getSpots())

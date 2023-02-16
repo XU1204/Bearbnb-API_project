@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import moment from 'moment';
 import { getBookingsOfSpot } from "../../store/bookings";
 import { getReviewsOfSpot } from "../../store/reviews";
@@ -14,7 +14,6 @@ import './SpotDetails.css'
 
 function SpotDetails () {
     const { id } = useParams();
-    // console.log('detail id----', id)
     //Attention: typeof id is string!!!
     const dispatch = useDispatch();
 
@@ -27,25 +26,14 @@ function SpotDetails () {
     const sessionUser = useSelector(state => state.session.user);
 
     const spot = useSelector(state => state.spotState.singleSpot[id])
-    // console.log('-------spot-------', spot)
     const reviews = useSelector(state => Object.values(state.reviewState))
-    // const bookings = useSelector(state => Object.values(state.bookingState))
-    // console.log('------bookings-----', bookings)
-
-
-    // if (!spot) return null;
-    // if (!spot.SpotImages) return null;
-    // if(!reviews) return null;
 
     // date related
     const [dates, setDates] = useState({ startDate: moment(), endDate: moment() });
-    const [dateErrors, setDateErrors] = useState({});
+    // const [dateErrors, setDateErrors] = useState({});
     const [totalDays, setTotayDays] = useState(1);
-    const [showReviewModal, setShowReviewModal] = useState(false);
-
 
     useEffect(() => {
-        // console.log('-------spot------', spot)
         if (!spot) return;
         setDates({
             startDate: moment(spot.firstAvailableStart),
@@ -58,7 +46,6 @@ function SpotDetails () {
     }, [spot])
 
     useEffect(() => {
-        // console.log('-------dates------', dates)
         if (dates.endDate <= dates.startDate) return;
         setTotayDays(Math.round((dates.endDate - dates.startDate) / 86400000));
 
@@ -78,24 +65,24 @@ function SpotDetails () {
         imageLink = (
             <div className="detail-photos">
                 <div className="detail-big-pic">
-                    <img id='img-of-spot-details' src={spot.SpotImages[0].url} alt='main image'
+                    <img id='img-of-spot-details' src={spot.SpotImages[0].url} alt='spot'
                         onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                 </div>
                 <div className="detail-photos-right">
                     <div className="detail-small-pic">
-                        <img id='first-small' src='https://a0.muscache.com/im/pictures/3277347e-df0f-4d77-bb8a-9134d2534a71.jpg?im_w=720'
+                        <img id='first-small' src='https://a0.muscache.com/im/pictures/3277347e-df0f-4d77-bb8a-9134d2534a71.jpg?im_w=720' alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic">
-                        <img id='second-small' src='https://a0.muscache.com/im/pictures/2651186d-c9c5-4e93-9e6a-98ace0221e74.jpg?im_w=720'
+                        <img id='second-small' src='https://a0.muscache.com/im/pictures/2651186d-c9c5-4e93-9e6a-98ace0221e74.jpg?im_w=720' alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic" id='detail-photos-right-bottom'>
-                        <img id='third-small' src='https://a0.muscache.com/im/pictures/2394955e-8136-475b-83e5-5932915603bc.jpg?im_w=720'
+                        <img id='third-small' src='https://a0.muscache.com/im/pictures/2394955e-8136-475b-83e5-5932915603bc.jpg?im_w=720' alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic">
-                        <img id='forth-small' src='https://a0.muscache.com/im/pictures/e110f89c-22fe-43f6-9a24-1725fbf2abd8.jpg?im_w=720'
+                        <img id='forth-small' src='https://a0.muscache.com/im/pictures/e110f89c-22fe-43f6-9a24-1725fbf2abd8.jpg?im_w=720' alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                 </div>
@@ -169,14 +156,14 @@ function SpotDetails () {
                         <div className='date-calendar-span'>
                             <span>{`${getMMMDDYYYStr(dates.startDate)}`} - {dates.endDate ? `${getMMMDDYYYStr(dates.endDate)}` : getMMMDDYYYStr(moment(dates.startDate, 'DD-MM-YYYY').add(1, 'day'))}</span>
                         </div>
-                        <ShowCalendar dates={dates} setDates={setDates} setDateErrors={setDateErrors} />
+                        <ShowCalendar dates={dates} setDates={setDates} />
                     </div>
                 </div>
 
                 <div className='booking-form-wrapper'>
                     <div className='booking-form-sub-wrapper'>
                         <div className='booking-form'>
-                                <CreateBooking spot={spot} setShowReviewModal={setShowReviewModal} dates={dates} setDates={setDates} setDateErrors={setDateErrors} totalDays={totalDays} />
+                                <CreateBooking spot={spot} dates={dates} setDates={setDates} totalDays={totalDays} />
                         </div>
                     </div>
                 </div>
@@ -194,7 +181,7 @@ function SpotDetails () {
                     {reviews.map(review => (
                         <>
                             <div className="review-detail">
-                                <img id='user-review-photo'src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user-photo' />
+                                <img id='user-review-photo' src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user' />
                                 <div key={review.id}>
                                     <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
                                     <div>{review.stars} stars</div>

@@ -28,7 +28,7 @@ const SearchBar = () => {
                         <div className='search-div'>Anywhere</div>
                         <div className='search-div'>Any week</div>
                         <div>Any price</div>
-                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
                     </div>
 
                     <div >
