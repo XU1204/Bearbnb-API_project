@@ -34,19 +34,17 @@ function MyListings () {
 
 
     return (
-        <div>
+        <div className="listing-container">
             {noListing}
             <div className="my-listings-list">
             {spots.map(spot => (
-                <div key={spot.id} >
+                <div key={spot.id} className="my-listings-each">
                     <NavLink id='link' to={`/spots/${spot.id}`}>
-                    <div className="my-listings-each">
-                        <div className="">
-                            <img src={spot.previewImage} alt={`preview of ${spot.name}`}
-                                onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
-                        </div>
+                    <div className="my-listings-content">
+                        <img src={spot.previewImage} alt={`preview of ${spot.name}`}
+                            onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                         <div className="my-listings-name-star">
-                            <span className='my-listings-fold'>{spot.city}, {spot.state}</span>
+                            <span className='my-listings-bold'>{spot.city}, {spot.state}</span>
                             <span>
                                 <span>★</span>
                                 {/* <span>{Number(spot.avgRating).toFixed(1) || 'new'}</span> */}
@@ -54,7 +52,7 @@ function MyListings () {
                             </span>
                         </div>
                         <li id='my-listings-name' key={spot.name}>{spot.name}</li>
-                        <li key={spot.price}><span className='my-listings-fold'>${spot.price}</span> night</li>
+                        <li key={spot.price}><span className='my-listings-fold'><strong>${spot.price}</strong></span> night</li>
                     </div>
                     </NavLink>
                     <div className="my-listings-button">
@@ -66,14 +64,12 @@ function MyListings () {
                         <span>
                             <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove</button>
                         </span>
+                        <span>
+                            <NavLink key={spot.id} to={`/spots/${spot.id}/bookings`} style={{ color: 'black', textDecoration: 'none'}}>
+                               <button id='my-listings-bookings'>Bookings</button>
+                            </NavLink>
+                        </span>
                     </div>
-
-                    <button>
-                        <NavLink key={spot.id} to={`/spots/${spot.id}/bookings`} style={{ color: 'black', textDecoration: 'none'}}>
-                            View Bookings
-                        </NavLink>
-                    </button>
-
                 </div>
             ))}
             </div>

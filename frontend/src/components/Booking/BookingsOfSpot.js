@@ -21,11 +21,11 @@ const BookingsOfSpot = () => {
     else isExist = false
 
     return (
-        <div>
+        <div style={{marginTop: '30px'}}>
             <div className="my-reviews-list">
-            <h1>Booking Orders</h1>
                 {isExist && (
                 <div>
+                    <h2 className="my-listing-title">Booking Orders</h2>
                     {bookings.map(booking => (
                         <div className="my-reviews-each-review" key={booking.id}>
                             <ul>
