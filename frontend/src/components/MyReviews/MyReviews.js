@@ -25,7 +25,7 @@ function MyReviews () {
         )
     } else {
         noReviews = (
-            <h2 id='my-review-title'>My Reviews List</h2>
+            <h2 id='my-review-title'>My reviews</h2>
         )
     }
 

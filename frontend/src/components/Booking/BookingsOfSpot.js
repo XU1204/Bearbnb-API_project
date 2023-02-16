@@ -16,16 +16,19 @@ const BookingsOfSpot = () => {
     const bookings = useSelector(state => Object.values(state.bookingState))
     const spot = useSelector(state => state.spotState.singleSpot[id])
 
+    let isExist;
+    if (bookings.length) isExist = true
+    else isExist = false
 
     return (
         <div>
             <div className="my-reviews-list">
             <h1>Booking Orders</h1>
-                {bookings && (
+                {isExist && (
                 <div>
                     {bookings.map(booking => (
-                        <div className="my-reviews-each-review">
-                            <ul key={booking.id}>
+                        <div className="my-reviews-each-review" key={booking.id}>
+                            <ul>
                                 <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${booking?.spotId}`}> {spot?.name}</NavLink></li>
                                 <li><span className="my-reviews-bold">User: </span> {booking.User?.firstName} {booking.User?.lastName}</li>
                                 <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt.slice(0,10)}</li>
@@ -38,7 +41,7 @@ const BookingsOfSpot = () => {
                     ))}
                 </div>
                 )}
-                {!bookings && (
+                {!isExist && (
                     <h2 id='my-review-title'>This spot has no bookings yet!</h2>
                 )}
             </div>

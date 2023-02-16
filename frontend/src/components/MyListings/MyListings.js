@@ -28,7 +28,7 @@ function MyListings () {
    }
    else {
     noListing = (
-        <h2 className="my-listing-title">My Listings List</h2>
+        <h2 className="my-listing-title">My Listings</h2>
     )
    }
 
@@ -38,8 +38,8 @@ function MyListings () {
             {noListing}
             <div className="my-listings-list">
             {spots.map(spot => (
-                <div>
-                    <NavLink key={spot.id} id='link' to={`/spots/${spot.id}`}>
+                <div key={spot.id} >
+                    <NavLink id='link' to={`/spots/${spot.id}`}>
                     <div className="my-listings-each">
                         <div className="">
                             <img src={spot.previewImage} alt={`preview of ${spot.name}`}
