@@ -80,7 +80,7 @@ const mapsReducer = (state = initialState, action) => {
         case LOAD_API_KEY:
             return { ...state, key: action.payload };
         case LOAD_GEO_KEY:
-            return { ...state, geokey: action.payload };
+            return Object.assign({ ...state}, {geoKey: action.payload });
         default:
             return state;
     }

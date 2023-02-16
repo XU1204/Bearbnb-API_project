@@ -16,9 +16,8 @@ function CreateReviewFormModal ({id}) {
     const reviews = useSelector(state => state.reviewState);
 
     useEffect(() => {
-        console.log(1)
         dispatch(getDetails(id))
-    }, [reviews])
+    }, [dispatch, reviews])
 
 
     const handleSubmit = async (e) => {

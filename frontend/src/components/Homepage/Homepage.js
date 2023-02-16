@@ -11,8 +11,8 @@ function Homepage ({spots}) {
     <>
         <div className="hp-list">
             {spots.map(spot => (
-                <div className="hp-each-list">
-                    <NavLink key={spot.name} id='link' to={`/spots/${spot.id}`}>
+                <div className="hp-each-list" key={spot.name}>
+                    <NavLink id='link' to={`/spots/${spot.id}`}>
                         <div className="hp-preview-img">
                             <img src={spot.previewImage} alt={`preview image of ${spot.name}`}/>
                         </div>

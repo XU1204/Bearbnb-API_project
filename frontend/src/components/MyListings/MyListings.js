@@ -45,7 +45,7 @@ function MyListings () {
                     <NavLink key={spot.id} id='link' to={`/spots/${spot.id}`}>
                     <div className="my-listings-each">
                         <div className="">
-                            <img src={spot.previewImage} alt={`preview image of ${spot.name}`}
+                            <img src={spot.previewImage} alt={`preview of ${spot.name}`}
                                 onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                         </div>
                         <div className="my-listings-name-star">
