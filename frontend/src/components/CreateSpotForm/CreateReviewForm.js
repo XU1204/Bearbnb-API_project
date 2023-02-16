@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { createReviewOfSpot, getReviewsOfSpot } from '../../store/reviews';
 import { getDetails } from '../../store/spots';
+import MyButton from '../Booking/MyButton';
+import styles from './CreateForm.module.css'
 
 function CreateReviewFormModal ({id}) {
     const [showModal, setShowModal] = useState(false);
@@ -22,6 +24,17 @@ function CreateReviewFormModal ({id}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        //  add error handling
+        let errors = []
+        if (review.length > 254) errors.push('Review must be less than 255 characters.')
+        if (review.trim().length === 0) errors.push('Review should not contain only spaces.')
+        setErrors(errors)
+        if (errors.length) {
+            return;
+        }
+
+
         const data1 = {
             review, stars
         }
@@ -49,38 +62,40 @@ function CreateReviewFormModal ({id}) {
         )
     } else {
         content = (
-            <form onSubmit={handleSubmit}>
-                <ul>
+            <form onSubmit={handleSubmit} id={styles.writeReviewForm}>
+                <div className={styles.error}>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-            <label>
-                Review:
-                <input
-                    type='text'
-                    value={review}
-                    onChange={(e) => setReview(e.target.value)}
-                    required
-                />
-            </label>
-            <label id='create-review-star-label'>
-                Stars:
-                <input
-                    type='number'
-                    value={stars}
-                    onChange={(e) => setStars(e.target.value)}
-                    min='1'
-                    max='5'
-                    required
-                />
-            </label>
-            <button id='create-review-button' type='submit'>Submit</button>
+                </div>
+                <div className={styles.inputContainer}>
+                    <label id={styles.star}>Stars: </label>
+                    <input
+                        type='number'
+                        value={stars}
+                        onChange={(e) => setStars(e.target.value)}
+                        min='1'
+                        max='5'
+                        required
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Review:</label>
+                    <textarea
+                        id={styles.description}
+                        type='text'
+                        value={review}
+                        onChange={(e) => setReview(e.target.value)}
+                        required
+                    />
+                </div>
+                <MyButton name='Submit' disabled={false} />
+
           </form>
         )
     }
 
     return (
         <>
-          <button id='write-review-button' onClick={() => setShowModal(true)}>Write a review</button>
+          <button id={styles.writeReviewBtn} onClick={() => setShowModal(true)}>Write a review</button>
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                 {content}

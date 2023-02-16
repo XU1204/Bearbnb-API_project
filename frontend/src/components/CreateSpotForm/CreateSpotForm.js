@@ -93,10 +93,8 @@ function CreateSpotForm() {
     <div className={styles.container}>
     <form onSubmit={handleSubmit}>
         <h1>Airbnb your home</h1>
-        <div>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
+        <div className={styles.error}>
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </div>
         <div className={styles.inputWrapper}>
             <label htmlFor='address'>Address<span style={{color: 'red'}}>*</span></label>
