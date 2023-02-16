@@ -179,16 +179,14 @@ function SpotDetails () {
                         {createReviewFormLink}
                     </div>
                     {reviews.map(review => (
-                        <>
-                            <div className="review-detail">
-                                <img id='user-review-photo' src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user' />
-                                <div key={review.id}>
-                                    <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
-                                    <div>{review.stars} stars</div>
-                                    {review.review}
-                                </div>
+                        <div className="review-detail" key={review.id}>
+                            <img id='user-review-photo' src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user' />
+                            <div key={review.id}>
+                                <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
+                                <div><strong>{review.stars} stars</strong></div>
+                                {review.review}
                             </div>
-                        </>
+                        </div>
                     ))}
                 </div>
                 <div style={{margin: '4vh auto'}}>
