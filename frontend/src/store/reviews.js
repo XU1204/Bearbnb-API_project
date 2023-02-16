@@ -66,7 +66,8 @@ export const createReviewOfSpot = (id, payload) => async dispatch => {
 };
 
 export const updateReview = (id, payload) => async dispatch => {
-    const response = await (`/api/reviews/${id}`, {
+    console.log('---update review thunk working -----', response)
+    const response = await csrfFetch(`/api/reviews/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -103,8 +104,7 @@ const reviewsReducer = (state = {}, action) => {
         case CREATE:
             return Object.assign({...state}, {[action.review.id]: action.review});
         case UPDATE:
-            const updateReviewObj = Object.assign({...state}, {[action.review.id]: action.review});
-            return updateReviewObj
+            return Object.assign({...state}, {[action.review.id]: action.review});
         case REMOVE:
             let newOne = {...state}
             delete newOne[action.reviewId]

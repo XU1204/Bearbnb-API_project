@@ -51,28 +51,28 @@ function ProfileButton ({ user }) {
         </button>
         {showMenu && (
           <ul className="profile-dropdown">
-            <li><i class="fa-solid fa-user"></i>{user.username}</li>
-            <li><i class="fa-solid fa-envelope"></i>{user.email}</li>
+            <li><i className="fa-solid fa-user"></i>{user.username}</li>
+            <li><i className="fa-solid fa-envelope"></i>{user.email}</li>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                       <div style={{flex: 1, height: '1px', backgroundColor: '#dddddd'}} />
             </div>
             <li className="ul-link">
-              <i class="fa-solid fa-plane"></i>
+              <i className="fa-solid fa-plane"></i>
               <NavLink style={{ color: 'black', textDecoration:'none'}} key='review' to='/bookings/current'><strong>Trips</strong></NavLink>
             </li>
             <li className="ul-link">
-              <i class="fa-solid fa-house"></i>
+              <i className="fa-solid fa-house"></i>
               <NavLink style={{ color: 'black', textDecoration:'none'}} key='listing' to='/spots/current'><strong>Listings</strong></NavLink>
             </li>
             <li className="ul-link">
-              <i class="fa-solid fa-pen-to-square"></i>
+              <i className="fa-solid fa-pen-to-square"></i>
               <NavLink style={{ color: 'black', textDecoration:'none'}} key='review' to='/reviews/current'><strong>Reviews</strong></NavLink>
             </li>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                       <div style={{flex: 1, height: '1px', backgroundColor: '#dddddd'}} />
             </div>
             <li className="ul-link">
-              <i class="fa-solid fa-right-from-bracket"></i>
+              <i className="fa-solid fa-right-from-bracket"></i>
               <button className='logout-button' id='logout-btn' onClick={logout}>Log Out</button>
             </li>
           </ul>

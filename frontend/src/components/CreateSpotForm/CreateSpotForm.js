@@ -64,8 +64,6 @@ function CreateSpotForm() {
         }
 
 
-
-
         const  createdSpot = await dispatch(addSpot(data1))
         .catch(async (res) => {
         const data = await res.json();

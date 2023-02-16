@@ -8,9 +8,10 @@ import MyButton from '../Booking/MyButton';
 import styles from './CreateForm.module.css'
 
 function CreateReviewFormModal ({id}) {
-    const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [showModal, setShowModal] = useState(false);
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(5);
     const [errors, setErrors] = useState([]);

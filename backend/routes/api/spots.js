@@ -418,11 +418,12 @@ router.post('/:spotId/images', restoreUser, requireAuth,
             spotId, url, preview
         });
 
-        return res.json({
-            id: newSpotImage.id,
-            url: newSpotImage.url,
-            preview: newSpotImage.preview
-        })
+        // return res.json({
+        //     id: newSpotImage.id,
+        //     url: newSpotImage.url,
+        //     preview: newSpotImage.preview
+        // })
+        return res.json(newSpotImage)
     }
 )
 

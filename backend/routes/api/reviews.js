@@ -116,6 +116,7 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
     async(req, res) => {
         const reviewId = req.params.reviewId;
         const targetReview = await Review.findByPk(reviewId)
+        console.log(1111111111111, targetReview)
         if (!targetReview) {
             res.status(404);
             return res.json({
@@ -135,6 +136,7 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
 
         const { review, stars } = req.body;
         targetReview.update({ review, stars })
+        console.log('-----edit review api----', res.json(targetReview))
         return res.json(targetReview);
     }
 )

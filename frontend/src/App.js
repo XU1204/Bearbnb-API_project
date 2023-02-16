@@ -38,7 +38,7 @@ function App() {
     if (!geoKey) {
       dispatch(getGeoKey());
     }
-  }, [dispatch, key, geoKey]);
+  }, [dispatch, key]);
 
   const successGeo = (position) => {
     setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
@@ -56,7 +56,7 @@ function App() {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(successGeo, errorGeo, options);
-  }, [options]);
+  }, []);
   // added end
 
   useEffect(() => {

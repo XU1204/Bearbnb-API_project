@@ -70,19 +70,19 @@ function SpotDetails () {
                 </div>
                 <div className="detail-photos-right">
                     <div className="detail-small-pic">
-                        <img id='first-small' src='https://a0.muscache.com/im/pictures/3277347e-df0f-4d77-bb8a-9134d2534a71.jpg?im_w=720' alt='spot'
+                        <img id='first-small' src={spot.SpotImages[1]? spot.SpotImages[1].url : "https://freerentbuy.com/img/nophoto.jpg" }  alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic">
-                        <img id='second-small' src='https://a0.muscache.com/im/pictures/2651186d-c9c5-4e93-9e6a-98ace0221e74.jpg?im_w=720' alt='spot'
+                        <img id='second-small' src={spot.SpotImages[2]? spot.SpotImages[2].url : "https://freerentbuy.com/img/nophoto.jpg" } alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic" id='detail-photos-right-bottom'>
-                        <img id='third-small' src='https://a0.muscache.com/im/pictures/2394955e-8136-475b-83e5-5932915603bc.jpg?im_w=720' alt='spot'
+                        <img id='third-small' src={spot.SpotImages[3]? spot.SpotImages[3].url : "https://freerentbuy.com/img/nophoto.jpg" } alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic">
-                        <img id='forth-small' src='https://a0.muscache.com/im/pictures/e110f89c-22fe-43f6-9a24-1725fbf2abd8.jpg?im_w=720' alt='spot'
+                        <img id='forth-small' src={spot.SpotImages[4]? spot.SpotImages[4].url : "https://freerentbuy.com/img/nophoto.jpg" } alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSpot } from '../../store/spots'
+import { updateSpot, addImageToSpot } from '../../store/spots'
 import './EditForm.css'
 
 function EditSpotForm ({spot}) {
@@ -17,6 +17,7 @@ function EditSpotForm ({spot}) {
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState([]);
+    const [previewImage, setPreviewImage] = useState(spot.previewImage? spot.previewImage : 'none')
 
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -30,12 +31,36 @@ function EditSpotForm ({spot}) {
 
     const allSpots = useSelector(state => Object.values(state.spotState.allSpots));
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        let errors = []
+        if (price <= 0) errors.push('Price nust be greater than 0.');
+        if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
+        if (description.length > 254) errors.push('Description must be less than 255 characters.')
+        if (name.length > 254) errors.push('Title must be less than 255 characters.')
+        if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
+        if (name.trim().length === 0) errors.push('Title should not contain only spaces.')
+        let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', '.svg']
+        let count = 0
+        for (let i = 0; i < 6; i++) {
+            if (previewImage.includes(imgEnd[i])) count++
+        }
+        if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
+
+        setErrors(errors)
+
+        if (errors.length) return;
 
         const data = {
             id: spot.id,
             address, city, state, country, name, description, price
+        }
+
+        const data2 = {
+            url: previewImage,
+            preview: true
         }
 
         const updatedSpot = await dispatch(updateSpot(data))
@@ -47,7 +72,17 @@ function EditSpotForm ({spot}) {
         else if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
         });
 
-        if (updatedSpot) {
+        const updatedImage = await dispatch(addImageToSpot(updatedSpot.id, data2))
+        . catch (async(res) => {
+            const data = await res.json();
+        if (data && typeof data.errors === 'object') {
+            setErrors(Object.values(data.errors))
+        }
+        else if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message]);
+        });
+
+
+        if (updatedSpot || updatedImage) {
             const isExist = allSpots.find(spot => spot.address.trim() === address.trim() && spot.city.trim() === city.trim());
             if (isExist)  setErrors(['The spot with the same address and city has already exist.'])
             if (price <= 0) {
@@ -155,6 +190,17 @@ function EditSpotForm ({spot}) {
                     required
                 />
             </label>
+            <div>
+            <label>
+                Add image:</label>
+                <input
+                    type='text'
+                    placeholder={previewImage}
+                    value={previewImage}
+                    onChange={(e) => setPreviewImage(e.target.value)}
+                    required
+                />
+            </div>
             <button id='update-spot-button' type='submit'>Update Listing</button>
     </form>
     )

@@ -32,9 +32,6 @@ function MyListings () {
     )
    }
 
-   const handleView = () => {
-    dispatch()
-   }
 
     return (
         <div>
@@ -71,7 +68,7 @@ function MyListings () {
                         </span>
                     </div>
 
-                    <button onClick={handleView}>
+                    <button>
                         <NavLink key={spot.id} to={`/spots/${spot.id}/bookings`} style={{ color: 'black', textDecoration: 'none'}}>
                             View Bookings
                         </NavLink>

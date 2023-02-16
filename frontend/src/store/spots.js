@@ -144,7 +144,7 @@ export const addImageToSpot = (id, payload) => async dispatch => {
     if (response.ok) {
         const newImage = await response.json();
         dispatch(addImage(id, newImage));
-        return response;
+        return newImage;
     }
 }
 //selectors
@@ -210,7 +210,7 @@ const spotsReducer = (state = initialState, action) => {
             //     [action.spot.id]: newImage
             // }
             let newImageState = {...state};
-            newImageState.singleSpot[action.id].SpotImages.push(action.payload);
+            newImageState.singleSpot[action.id]?.SpotImages.push(action.payload);
             console.log('newImageState:', newImageState)
             return newImageState;
         default:
