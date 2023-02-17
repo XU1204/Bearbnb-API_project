@@ -15,11 +15,10 @@ const create = (wish) => ({
 });
 
 
-const remove = (wishId, userId) => {
+const remove = (wishId) => {
     return {
         type: REMOVE,
-        wishId,
-        userId
+        wishId
     }
 }
 

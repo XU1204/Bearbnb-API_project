@@ -11,6 +11,7 @@ import { getMMMDDYYYStr } from "./DateCalculate";
 import CreateBooking from "../Booking/CreateBooking";
 import SpotMapContainer from "../Maps/SpotMapContainer";
 import './SpotDetails.css'
+import CreateWish from "../Wishlist/CreateWish";
 
 function SpotDetails () {
     const { id } = useParams();
@@ -122,6 +123,7 @@ function SpotDetails () {
        <div className="detail-page">
             {/* <CreateReviewFormModal id={+id}/> */}
             <h1>{spot.name}</h1>
+            <CreateWish spot={spot} />
             <div className="detail-page-top">
                 <span>★</span>
                 {/* <span>{Number(spot.avgStarRating).toFixed(1)  || 'new'}</span> */}

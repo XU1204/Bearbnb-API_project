@@ -57,6 +57,10 @@ function ProfileButton ({ user }) {
                       <div style={{flex: 1, height: '1px', backgroundColor: '#dddddd'}} />
             </div>
             <li className="ul-link">
+              <i className="fa-solid fa-heart"></i>
+              <NavLink style={{ color: 'black', textDecoration:'none'}} key='listing' to='/wishes/current'><strong>Wishlist</strong></NavLink>
+            </li>
+            <li className="ul-link">
               <i className="fa-solid fa-plane"></i>
               <NavLink style={{ color: 'black', textDecoration:'none'}} key='review' to='/bookings/current'><strong>Trips</strong></NavLink>
             </li>
