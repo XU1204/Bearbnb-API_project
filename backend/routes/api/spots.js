@@ -1,6 +1,6 @@
 const express = require('express');
 const { Op } = require('sequelize');
-const { sequelize, Spot, Review ,SpotImage, User, ReviewImage, Booking} = require('../../db/models');
+const { sequelize, Spot, Review ,SpotImage, User, ReviewImage, Booking, Wishlist} = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 
 const Moment = require('moment');
@@ -8,6 +8,7 @@ const MomentRange = require('moment-range');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const wishlist = require('../../db/models/wishlist');
 
 const router = express.Router();
 
@@ -717,5 +718,40 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, validateBooking,
     }
 )
 
+//Create a wishlist for a Spot based on the Spot's id
+router.post('/:spotId/wishes', restoreUser, requireAuth,
+    async(req, res) => {
+        const spotId = req.params.spotId
+        const spot = await Spot.findByPk(spotId);
+        if (!spot) {
+            res.status(404);
+            return res.json(
+                {
+                    "message": "Spot couldn't be found",
+                    "statusCode": 404
+                }
+            )
+        };
+
+        const ifExist = await Wishlist.findOne({
+            where: {spotId, userId: req.user.id}
+        });
+        if (ifExist) {
+            res.status(403);
+            return res.json({
+                message: "User already added this spot to the wishlist.",
+                statusCode: 403
+            })
+        }
+
+        const newWish = await Wishlist.create({
+            spotId,
+            userId: req.user.id
+        });
+
+        res.status(201);
+        return res.json(newWish)
+    }
+)
 
 module.exports = router;
