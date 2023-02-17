@@ -5,6 +5,7 @@ import sessionReducer from './session';
 import spotsReducer from "./spots";
 import bookingsReducer from "./bookings";
 import mapsReducer from "./maps";
+import wishesReducer from "./wishes";
 
 const rootReducer = combineReducers({
   // add reducer functions here
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   spotState: spotsReducer,
   reviewState: reviewsReducer,
   bookingState: bookingsReducer,
-  mapState: mapsReducer
+  mapState: mapsReducer,
+  wishState: wishesReducer
 });
 
 let enhancer;
