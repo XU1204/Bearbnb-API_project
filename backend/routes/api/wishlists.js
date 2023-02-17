@@ -1,5 +1,5 @@
 const express = require('express');
-const { Spot, User, Wishlist } = require('../../db/models');
+const { Spot, User, Wishlist, SpotImage } = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 
 const { check } = require('express-validator');
@@ -29,6 +29,10 @@ router.get('/current', restoreUser, requireAuth,
 
         const wishArr = [];
         wishlists.forEach(wish => {
+            wishArr.push(wish.toJSON())
+        })
+
+        wishlists.forEach(wish => {
             wish.Spot.SpotImages.forEach(img => {
                 if (img.preview === true && !wish.Spot.previewImage ) {
                     wish.Spot.previewImage = img.url;
@@ -39,7 +43,7 @@ router.get('/current', restoreUser, requireAuth,
             }
             delete wish.Spot.SpotImages
         });
-
+        // console.log('---wish arr---', wishArr)
         return res.json({
             Wishes: wishArr
         })
