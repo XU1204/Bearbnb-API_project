@@ -22,10 +22,13 @@ function MyWishes () {
     return (
         <div className="my-trips-container">
             <h1>Wishlists</h1>
-            {!isExist && (
-                <h2 id='my-review-title'>No wishlist...yet!</h2>
-            )}
             <div className="all-wishes-container">
+                {!isExist && (
+                    <div>
+                        <h2>Create your first wishlist</h2>
+                        <p style={{color: 'grey'}}>As you search, tap the heart icon to save your favorite places to stay or things to do to a wishlist.</p>
+                    </div>
+                )}
                 {isExist && wishes.map(wish => (
                     <div className="each-wishlist-container" key={wish.id}>
                         <NavLink to={`/spots/${wish.Spot?.id}`} style={{color: 'black', textDecoration: 'none'}}>
