@@ -13,22 +13,26 @@ import SpotMapContainer from "../Maps/SpotMapContainer";
 import './SpotDetails.css'
 import CreateWish from "../Wishlist/CreateWish";
 import EditReviewFormModal from "../EditSpotForm/EditReviewForm";
+import { removeReview } from "../../store/reviews";
 
 function SpotDetails () {
     const { id } = useParams();
     //Attention: typeof id is string!!!
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getDetails(id));
-        dispatch(getReviewsOfSpot(id))
-        dispatch(getBookingsOfSpot(id))
-    }, [dispatch, id]);
-
     const sessionUser = useSelector(state => state.session.user);
 
     const spot = useSelector(state => state.spotState.singleSpot[id])
     const reviews = useSelector(state => Object.values(state.reviewState))
+    const hasOne = reviews.find(review => review.userId === sessionUser?.id)
+
+
+    useEffect(() => {
+        dispatch(getDetails(id));
+        dispatch(getReviewsOfSpot(id))
+        dispatch(getBookingsOfSpot(id))
+    }, [dispatch, id, reviews.length]);
+
 
     // date related
     const [dates, setDates] = useState({ startDate: moment(), endDate: moment() });
@@ -97,7 +101,7 @@ function SpotDetails () {
     };
 
     let createReviewFormLink;
-    if (sessionUser && spot.ownerId !== sessionUser.id) {
+    if (sessionUser && spot.ownerId !== sessionUser.id && !hasOne) {
         createReviewFormLink = (
             <CreateReviewFormModal id = {id} />
         )
@@ -183,15 +187,20 @@ function SpotDetails () {
                         {/* <CreateReviewFormModal id={+id}/> */}
                         {createReviewFormLink}
                     </div>
-                    {reviews.map(review => (
+                    {reviews && reviews.map(review => (
                         <div className="review-detail" key={review.id}>
                             <img id='user-review-photo' src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user' />
-                            <div key={review.id}>
-                                <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
+                            <div key={review?.id} className='detial-review-middle'>
+                                <h4>{review.User? review.User.firstName : sessionUser?.firstName} {review.User? review.User.lastName : sessionUser?.lastName}:</h4>
                                 <div><strong>{review.stars} stars</strong></div>
                                 {review.review}
-                                {review.User.id === sessionUser.id && <EditReviewFormModal eachreview={review} />}
                             </div>
+                            {review.User?.id === sessionUser?.id && (
+                                <div id='detail-change-review-container'>
+                                    <EditReviewFormModal eachreview={review} />
+                                    <button id='change-review-button' onClick={(e) =>  dispatch(removeReview(review.id))}>Delete</button>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
@@ -201,16 +210,6 @@ function SpotDetails () {
                     </h2>
                     <SpotMapContainer spot={spot}/>
                 </div>
-                {/* <div className="detail-page-bottom">
-                    <span>2022 Bearbnb, Inc. · Privacy · Terms · Sitemap</span>
-                    <div>
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span>English (US)  $ USD </span>
-                        <i class="fa-brands fa-facebook-f"></i>
-                        <i class="fa-brands fa-twitter"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                </div> */}
             </div>
 
        </div>

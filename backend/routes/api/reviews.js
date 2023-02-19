@@ -151,6 +151,16 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
             )
         }
 
+        targetReview.Spot.SpotImages.forEach(img => {
+            if (img.preview === true && !targetReview.Spot.previewImage ) {
+                targetReview.Spot.previewImage = img.url;
+            }
+            if (!targetReview.Spot.previewImage ) {
+                targetReview.Spot.previewImage = 'No available preview images.'
+            }
+            delete targetReview.Spot.SpotImages
+        });
+
         const { review, stars } = req.body;
         targetReview.update({ review, stars })
         return res.json(targetReview);

@@ -25,23 +25,31 @@ function MyReviews () {
     return (
         <div className="my-trips-container">
             <h1>Reviews</h1>
-            {!isExist && (
-                <h2>You have no reviews yet!</h2>
-            )}
-            <div>
-                {reviews?.map(eachreview => (
-                    <div className="my-reviews-each-review" key={eachreview.id}>
-                        <ul>
-                            <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${eachreview.Spot?.id}`}> {eachreview.Spot?.name}</NavLink></li>
-                            <li><span className="my-reviews-bold">Location: </span> {eachreview.Spot?.address}, {eachreview.Spot?.city}, {eachreview.Spot?.state}</li>
-                            <li><span className="my-reviews-bold">Created at: </span>{eachreview.createdAt.slice(0,10)}</li>
-                            <li><span className="my-reviews-bold">Stars: </span>{eachreview.stars} </li>
-                            <li><span className="my-reviews-bold">Review: </span>{eachreview.review}</li>
-                        </ul>
-                        <span>
-                            <EditReviewFormModal eachreview={eachreview}/>
-                            <button id='remove-review-button' onClick={(e) =>  dispatch(removeReview(eachreview.id))}>Remove Review</button>
-                        </span>
+            <div className="past-bookings">
+                {!isExist && (
+                    <h2>You have no reviews yet!</h2>
+                )}
+                {isExist && reviews.map(eachreview => (
+                    <div className="each-review-container" key={eachreview.id}>
+                        <NavLink id='link' to={`/spots/${eachreview.Spot?.id}`}>
+                            <img src={eachreview.Spot?.previewImage? eachreview.Spot?.previewImage : eachreview.Spot?.SpotImages[0]?.url} alt='' className="past-booking-img"
+                                onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}></img>
+                        </NavLink>
+                        <div className="review-info">
+                            <NavLink id='link' to={`/spots/${eachreview.Spot?.id}`}>
+                                <div className="review-li">
+                                    <li><strong>Spot:&nbsp;</strong> {eachreview.Spot?.name}</li>
+                                    <li><strong>Location:&nbsp;</strong> {eachreview.Spot?.address}, {eachreview.Spot?.city}, {eachreview.Spot?.state}</li>
+                                    <li><strong>Created at:&nbsp; </strong>{eachreview.createdAt.slice(0,10)}</li>
+                                    <li><strong>Stars:&nbsp; </strong>{eachreview.stars} </li>
+                                    <li><strong>Review:&nbsp; </strong>{eachreview.review}</li>
+                                </div>
+                            </NavLink>
+                            <div id='change-review-container'>
+                                <EditReviewFormModal eachreview={eachreview}/>
+                                <button id='change-review-button' onClick={(e) =>  dispatch(removeReview(eachreview.id))}>Delete</button>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

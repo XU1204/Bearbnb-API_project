@@ -60,7 +60,7 @@ function EditReviewFormModal ({eachreview}) {
 
     return (
         <>
-          <button onClick={() => setShowModal(true)}>Edit a review</button>
+          <button onClick={() => setShowModal(true)} id='change-review-button'>Edit</button>
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                   <form onSubmit={handleSubmit} id={styles.writeReviewForm} action="#">
