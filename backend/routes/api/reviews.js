@@ -115,8 +115,25 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
 router.put('/:reviewId', restoreUser, requireAuth, validateReview,
     async(req, res) => {
         const reviewId = req.params.reviewId;
-        const targetReview = await Review.findByPk(reviewId)
-        console.log(1111111111111, targetReview)
+        const targetReview = await Review.findByPk(reviewId, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: Spot,
+                    attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+                    include: {
+                        model: SpotImage,
+                    }
+                },
+                {
+                    model: ReviewImage,
+                    attributes: ['id', 'url']
+                }
+            ]
+        })
         if (!targetReview) {
             res.status(404);
             return res.json({
@@ -136,7 +153,6 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
 
         const { review, stars } = req.body;
         targetReview.update({ review, stars })
-        console.log('-----edit review api----', res.json(targetReview))
         return res.json(targetReview);
     }
 )

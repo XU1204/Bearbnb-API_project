@@ -14,10 +14,10 @@ const CreateWish = ({spot}) => {
     }, [dispatch, wishes.length])
 
 
-    let heart = (<i class="fa-regular fa-heart">&nbsp;<span className="save">save</span></i>)
+    let heart = (<i className="fa-regular fa-heart">&nbsp;<span className="save">save</span></i>)
     if (wish) heart = (
         <>
-            <i class="fa-solid fa-heart" style={{color: '#ff385c'}}></i>&nbsp;
+            <i className="fa-solid fa-heart" style={{color: '#ff385c'}}></i>&nbsp;
             <span className="save">saved</span>
         </>
         )

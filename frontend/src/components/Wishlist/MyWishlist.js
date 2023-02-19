@@ -15,9 +15,7 @@ function MyWishes () {
     },[dispatch]);
 
     const wishes = useSelector(state => Object.values(state.wishState))
-
-    console.log('----my wishes----', wishes)
-
+    // console.log('----my wishes----', wishes)
 
     let noWishes;
     let isExist;

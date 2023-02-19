@@ -12,6 +12,7 @@ import CreateBooking from "../Booking/CreateBooking";
 import SpotMapContainer from "../Maps/SpotMapContainer";
 import './SpotDetails.css'
 import CreateWish from "../Wishlist/CreateWish";
+import EditReviewFormModal from "../EditSpotForm/EditReviewForm";
 
 function SpotDetails () {
     const { id } = useParams();
@@ -98,7 +99,7 @@ function SpotDetails () {
     let createReviewFormLink;
     if (sessionUser && spot.ownerId !== sessionUser.id) {
         createReviewFormLink = (
-            <CreateReviewFormModal id={+id}/>
+            <CreateReviewFormModal id = {id} />
         )
     } else {
         createReviewFormLink = (
@@ -189,6 +190,7 @@ function SpotDetails () {
                                 <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
                                 <div><strong>{review.stars} stars</strong></div>
                                 {review.review}
+                                {review.User.id === sessionUser.id && <EditReviewFormModal eachreview={review} />}
                             </div>
                         </div>
                     ))}

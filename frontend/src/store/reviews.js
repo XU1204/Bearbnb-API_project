@@ -66,7 +66,6 @@ export const createReviewOfSpot = (id, payload) => async dispatch => {
 };
 
 export const updateReview = (id, payload) => async dispatch => {
-    console.log('---update review thunk working -----', response)
     const response = await csrfFetch(`/api/reviews/${id}`, {
         method: 'PUT',
         headers: {
@@ -74,6 +73,8 @@ export const updateReview = (id, payload) => async dispatch => {
             },
         body: JSON.stringify(payload)
     })
+    // console.log('---update review thunk working -----', response)
+
     if (response.ok) {
         const review = await response.json();
         dispatch(update(review));

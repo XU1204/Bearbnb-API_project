@@ -35,7 +35,6 @@ function CreateReviewFormModal ({id}) {
             return;
         }
 
-
         const data1 = {
             review, stars
         }

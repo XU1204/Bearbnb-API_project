@@ -10,11 +10,11 @@ function MyReviews () {
     const dispatch = useDispatch();
     // const sessionUser = useSelector(state => state.session.user);
 
+    const reviews = useSelector(state => Object.values(state.reviewState))
+
     useEffect(() => {
         dispatch(getReviewsOfCurrent())
     },[dispatch]);
-
-    const reviews = useSelector(state => Object.values(state.reviewState))
 
     // if (!reviews) return null;
 
