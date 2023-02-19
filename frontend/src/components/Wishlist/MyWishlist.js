@@ -21,21 +21,31 @@ function MyWishes () {
 
     return (
         <div className="my-trips-container">
-            <h2>Wishlists</h2>
+            <h1>Wishlists</h1>
             {!isExist && (
                 <h2 id='my-review-title'>No wishlist...yet!</h2>
             )}
-            <div>
+            <div className="all-wishes-container">
                 {isExist && wishes.map(wish => (
-                    <div className="my-reviews-each-review" key={wish.id}>
-                        <ul>
-                            <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${wish.Spot?.id}`}> {wish.Spot?.name}</NavLink></li>
-                            <li><span className="my-reviews-bold">Location: </span> {wish.Spot?.address}, {wish.Spot?.city}, {wish.Spot?.state}</li>
-                            <li><span className="my-reviews-bold">Created at: </span>{wish.createdAt.slice(0,10)}</li>
-                        </ul>
-                        <span>
-                            <button id='remove-wish-button' onClick={(e) =>  dispatch(removeWish(wish.id))} title='remove wishlist'> <i class="fa-solid fa-heart" style={{color: '#ff385c'}}></i>&nbsp;</button>
-                        </span>
+                    <div className="each-wishlist-container" key={wish.id}>
+                        <NavLink to={`/spots/${wish.Spot?.id}`} style={{color: 'black', textDecoration: 'none'}}>
+                        <div className="wishlist-img">
+                            <img src={wish.Spot?.SpotImages[0].url} alt=''
+                                onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}></img>
+                        </div>
+                        </NavLink>
+                        <div className="wishlist-bottom">
+                            <NavLink to={`/spots/${wish.Spot?.id}`} style={{color: 'black', textDecoration: 'none'}}>
+                                <div className="wishlist-name-loc">
+                                    <p>{wish.Spot?.name}</p>
+                                    <p>{wish.Spot?.address}, {wish.Spot?.city}, {wish.Spot?.state}</p>
+                                </div>
+                            </NavLink>
+
+                            <div>
+                                <button id='remove-wish-button' onClick={(e) =>  dispatch(removeWish(wish.id))} title='remove wishlist'> <i className="fa-solid fa-heart" style={{color: '#ff385c'}}></i>&nbsp;</button>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
