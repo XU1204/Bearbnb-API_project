@@ -2,9 +2,98 @@
     margin: auto 5vw;
 }
 
-.my-trips-list,
-.no-trips-container{
-    border-top: 1px solid #eeeeee;
-    border-bottom: 1px solid #eeeeee;
-    padding: 1vh 0;
+.future-bookings,
+.past-bookings{
+   border-top: 1px solid #eeeeee;
+   margin-top: 50px;
+}
+
+.all-future-bookings-container{
+    display: flex;
+    margin-top: 50px;
+    gap:10px
+}
+
+.each-future-booking-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    height: 390px;
+    padding: 20px 20px;
+    overflow: hidden;
+}
+
+.each-future-booking-container:hover{
+    box-shadow: 0 10px 10px #eeeeee;
+    border-radius: 10px;
+}
+
+.cancel-booking-container{
+    display: flex;
+    justify-content: center;
+}
+
+.future-booking-li>p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#start-search{
+    padding: 10px 30px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid;
+    margin-top: 10px;
+    font-size: 18px;
+}
+#start-search:hover{
+    cursor: pointer;
+    background-color: #eeeeee;
+}
+
+.past-booking-img{
+    height: 150px;
+    width: 200px;
+    object-fit: cover;
+    padding: 10px;
+}
+
+.each-past-booking-container{
+    display: flex;
+    align-items: center;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 1000px;
+    margin: 20px 0;
+}
+.each-past-booking-container:hover{
+    cursor: pointer;
+    box-shadow: 0 10px 10px #eeeeee;
+}
+
+.past-booking-info{
+    display: flex;
+    width: 75%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+.past-booking-li>li{
+    margin: 10px;
+}
+
+#remove-booking-button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+}
+#remove-booking-button:hover{
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
 }

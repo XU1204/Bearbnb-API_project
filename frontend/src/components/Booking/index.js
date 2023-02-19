@@ -23,36 +23,75 @@ function MyBookings () {
         else return false
     }
 
+    const pastBookings = allBookings.filter(booking => isPast(booking.startDate.slice(0,10)))
+    const futureBookings = allBookings.filter(booking => !isPast(booking.startDate.slice(0,10)) )
+
     return (
         <div className="my-trips-container">
             <h1 id='my-trips-title'>Trips</h1>
-            {allBookings && (
-            <div className="my-trips-list">
-                {allBookings.map(booking => (
-                    <div className="my-reviews-each-review" key={booking.id}>
-                        <ul>
-                            <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${booking.Spot?.id}`}> {booking.Spot?.name}</NavLink></li>
-                            <li><span className="my-reviews-bold">Location: </span> {booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</li>
-                            <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt?.slice(0,10)}</li>
-                            <li><span className="my-reviews-bold">Date: </span>from {booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
-                        </ul>
-                        {/* remember to change it  */}
-                        <span>
-                            <button id='remove-review-button' onClick={(e) =>  dispatch(removeBooking(booking.id))}>{isPast(booking.startDate.slice(0,10))? 'Delete' : 'Cancel'} </button>
-                        </span>
-                    </div>
-                ))}
-            </div>
-            )}
-            {!allBookings && (
-                <div className="no-trips-container">
-                    <h3 id='my-trips-title'>No trips booked...yet!</h3>
-                    <p>Time to dust off your bags and start planning your next adventure</p>
-                    <NavLink to='/'>
-                        <button>Start searching</button>
-                    </NavLink>
+            <div className="future-bookings">
+                {futureBookings && (
+                <div className="all-future-bookings-container">
+                    {futureBookings.map(booking => (
+                        <div className="each-future-booking-container" key={booking.id}>
+                            <NavLink id='link' to={`/spots/${booking.spotId}`}>
+                                <img src={booking.Spot?.previewImage} alt=''
+                                    onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}></img>
+                                <div className="future-booking-li">
+                                    <p title={booking.Spot?.name} style={{fontWeight: 'bold'}}>{booking.Spot?.name}</p>
+                                    <p>{booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</p>
+                                    <p>{booking.startDate.slice(0,10)} -- {booking.endDate.slice(0,10)} </p>
+                                </div>
+                            </NavLink>
+                            {/* remember to change it  */}
+                            <div className="cancel-booking-container">
+                                <button id='remove-booking-button' onClick={(e) =>  dispatch(removeBooking(booking.id))}>Cancel </button>
+                            </div>
+                        </div>
+                    ))}
+                    {!futureBookings.length && (
+                        <div className="no-trips-container">
+                            <h2 id='my-trips-title'>No trips booked...yet!</h2>
+                            <p>Time to dust off your bags and start planning your next adventure</p>
+                            <NavLink to='/'>
+                                <button id='start-search'>Start searching</button>
+                            </NavLink>
+                        </div>
+                    )}
                 </div>
-            )}
+                )}
+            </div>
+
+            <div className="past-bookings">
+                <h2>Past Bookings</h2>
+                {pastBookings && (
+                    <div>
+                        {pastBookings.map(booking => (
+                        <div className="each-past-booking-container" key={booking.id}>
+                            <NavLink id='link' to={`/spots/${booking.spotId}`}>
+                                <img src={booking.Spot?.previewImage} alt='' className="past-booking-img"
+                                    onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}></img>
+                            </NavLink>
+                            <div className="past-booking-info">
+                                <NavLink id='link' to={`/spots/${booking.spotId}`}>
+                                    <div className="past-booking-li">
+                                        <li><span className="my-reviews-bold">Spot: </span>{booking.Spot?.name}</li>
+                                        <li><span className="my-reviews-bold">Location: </span> {booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</li>
+                                        <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt?.slice(0,10)}</li>
+                                        <li><span className="my-reviews-bold">Date: </span>from {booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
+                                    </div>
+                                </NavLink>
+                                {/* remember to change it  */}
+                                <button id='remove-booking-button' onClick={(e) =>  dispatch(removeBooking(booking.id))} title='Delete this order'>Delete</button>
+                            </div>
+                        </div>
+                    ))}
+                    </div>
+                )}
+                {!pastBookings && (
+                    <h2 id='my-trips-title'>No past trips!</h2>
+                )}
+            </div>
         </div>
     )
 }
