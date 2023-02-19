@@ -11,22 +11,28 @@ import { getMMMDDYYYStr } from "./DateCalculate";
 import CreateBooking from "../Booking/CreateBooking";
 import SpotMapContainer from "../Maps/SpotMapContainer";
 import './SpotDetails.css'
+import CreateWish from "../Wishlist/CreateWish";
+import EditReviewFormModal from "../EditSpotForm/EditReviewForm";
+import { removeReview } from "../../store/reviews";
 
 function SpotDetails () {
     const { id } = useParams();
     //Attention: typeof id is string!!!
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getDetails(id));
-        dispatch(getReviewsOfSpot(id))
-        dispatch(getBookingsOfSpot(id))
-    }, [dispatch, id]);
-
     const sessionUser = useSelector(state => state.session.user);
 
     const spot = useSelector(state => state.spotState.singleSpot[id])
     const reviews = useSelector(state => Object.values(state.reviewState))
+    const hasOne = reviews.find(review => review.userId === sessionUser?.id)
+
+
+    useEffect(() => {
+        dispatch(getDetails(id));
+        dispatch(getReviewsOfSpot(id))
+        dispatch(getBookingsOfSpot(id))
+    }, [dispatch, id, reviews.length]);
+
 
     // date related
     const [dates, setDates] = useState({ startDate: moment(), endDate: moment() });
@@ -70,19 +76,19 @@ function SpotDetails () {
                 </div>
                 <div className="detail-photos-right">
                     <div className="detail-small-pic">
-                        <img id='first-small' src='https://a0.muscache.com/im/pictures/3277347e-df0f-4d77-bb8a-9134d2534a71.jpg?im_w=720' alt='spot'
+                        <img id='first-small' src={spot.SpotImages[1]? spot.SpotImages[1].url : "https://freerentbuy.com/img/nophoto.jpg" }  alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic">
-                        <img id='second-small' src='https://a0.muscache.com/im/pictures/2651186d-c9c5-4e93-9e6a-98ace0221e74.jpg?im_w=720' alt='spot'
+                        <img id='second-small' src={spot.SpotImages[2]? spot.SpotImages[2].url : "https://freerentbuy.com/img/nophoto.jpg" } alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic" id='detail-photos-right-bottom'>
-                        <img id='third-small' src='https://a0.muscache.com/im/pictures/2394955e-8136-475b-83e5-5932915603bc.jpg?im_w=720' alt='spot'
+                        <img id='third-small' src={spot.SpotImages[3]? spot.SpotImages[3].url : "https://freerentbuy.com/img/nophoto.jpg" } alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                     <div className="detail-small-pic">
-                        <img id='forth-small' src='https://a0.muscache.com/im/pictures/e110f89c-22fe-43f6-9a24-1725fbf2abd8.jpg?im_w=720' alt='spot'
+                        <img id='forth-small' src={spot.SpotImages[4]? spot.SpotImages[4].url : "https://freerentbuy.com/img/nophoto.jpg" } alt='spot'
                             onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
                     </div>
                 </div>
@@ -95,9 +101,9 @@ function SpotDetails () {
     };
 
     let createReviewFormLink;
-    if (sessionUser && spot.ownerId !== sessionUser.id) {
+    if (sessionUser && spot.ownerId !== sessionUser.id && !hasOne) {
         createReviewFormLink = (
-            <CreateReviewFormModal id={+id}/>
+            <CreateReviewFormModal id = {id} />
         )
     } else {
         createReviewFormLink = (
@@ -121,7 +127,10 @@ function SpotDetails () {
     return (
        <div className="detail-page">
             {/* <CreateReviewFormModal id={+id}/> */}
-            <h1>{spot.name}</h1>
+            <div className="detail-title-line">
+                <h1>{spot.name}</h1>
+                {sessionUser && <CreateWish spot={spot} />}
+            </div>
             <div className="detail-page-top">
                 <span>★</span>
                 {/* <span>{Number(spot.avgStarRating).toFixed(1)  || 'new'}</span> */}
@@ -178,17 +187,21 @@ function SpotDetails () {
                         {/* <CreateReviewFormModal id={+id}/> */}
                         {createReviewFormLink}
                     </div>
-                    {reviews.map(review => (
-                        <>
-                            <div className="review-detail">
-                                <img id='user-review-photo' src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user' />
-                                <div key={review.id}>
-                                    <h4>{review.User? review.User.firstName : sessionUser.firstName} {review.User? review.User.lastName : sessionUser.lastName}:</h4>
-                                    <div>{review.stars} stars</div>
-                                    {review.review}
-                                </div>
+                    {reviews && reviews.map(review => (
+                        <div className="review-detail" key={review.id}>
+                            <img id='user-review-photo' src='https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' alt='user' />
+                            <div key={review?.id} className='detial-review-middle'>
+                                <h4>{review.User? review.User.firstName : sessionUser?.firstName} {review.User? review.User.lastName : sessionUser?.lastName}:</h4>
+                                <div><strong>{review.stars} stars</strong></div>
+                                {review.review}
                             </div>
-                        </>
+                            {review.User?.id === sessionUser?.id && (
+                                <div id='detail-change-review-container'>
+                                    <EditReviewFormModal eachreview={review} />
+                                    <button id='change-review-button' onClick={(e) =>  dispatch(removeReview(review.id))}>Delete</button>
+                                </div>
+                            )}
+                        </div>
                     ))}
                 </div>
                 <div style={{margin: '4vh auto'}}>
@@ -197,16 +210,6 @@ function SpotDetails () {
                     </h2>
                     <SpotMapContainer spot={spot}/>
                 </div>
-                {/* <div className="detail-page-bottom">
-                    <span>2022 Bearbnb, Inc. · Privacy · Terms · Sitemap</span>
-                    <div>
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span>English (US)  $ USD </span>
-                        <i class="fa-brands fa-facebook-f"></i>
-                        <i class="fa-brands fa-twitter"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                </div> */}
             </div>
 
        </div>

@@ -20,65 +20,53 @@ function MyListings () {
 
     if (!spots) return null;
 
-   let noListing;
-   if (spots.length === 0) {
-    noListing = (
-        <h2 className="my-listing-title">You have no Listing yet!</h2>
-    )
-   }
-   else {
-    noListing = (
-        <h2 className="my-listing-title">My Listings List</h2>
-    )
-   }
+   let isExist;
+   if (spots.length === 0) isExist= false
+   else isExist=true
 
-   const handleView = () => {
-    dispatch()
-   }
 
     return (
-        <div>
-            {noListing}
+        <div className="listing-container">
+            <h1>Listings</h1>
             <div className="my-listings-list">
-            {spots.map(spot => (
-                <div>
-                    <NavLink key={spot.id} id='link' to={`/spots/${spot.id}`}>
-                    <div className="my-listings-each">
-                        <div className="">
+                {!isExist && (
+                    <h2>You have no Listings yet!</h2>
+                )}
+                {isExist && spots.map(spot => (
+                    <div key={spot.id} className="my-listings-each">
+                        <NavLink id='link' to={`/spots/${spot.id}`}>
+                        <div className="my-listings-content">
                             <img src={spot.previewImage} alt={`preview of ${spot.name}`}
                                 onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}/>
+                            <div className="my-listings-name-star">
+                                <span className='my-listings-bold'>{spot.city}, {spot.state}</span>
+                                <span>
+                                    <span>★</span>
+                                    {/* <span>{Number(spot.avgRating).toFixed(1) || 'new'}</span> */}
+                                    <StarRating spot={spot} />
+                                </span>
+                            </div>
+                            <li id='my-listings-name' key={spot.name}>{spot.name}</li>
+                            <li key={spot.price}><span className='my-listings-fold'><strong>${spot.price}</strong></span> night</li>
                         </div>
-                        <div className="my-listings-name-star">
-                            <span className='my-listings-fold'>{spot.city}, {spot.state}</span>
+                        </NavLink>
+                        <div className="my-listings-button">
+                                {/* <AddImageFormModal spot={spot}/> */}
                             <span>
-                                <span>★</span>
-                                {/* <span>{Number(spot.avgRating).toFixed(1) || 'new'}</span> */}
-                                <StarRating spot={spot} />
+                                {/* <button onClick={() => setEdit(true)}>Edit Listing</button> */}
+                                <EditSpotFormModal spot={spot}/>
+                            </span>
+                            <span>
+                                <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove</button>
+                            </span>
+                            <span>
+                                <NavLink key={spot.id} to={`/spots/${spot.id}/bookings`} style={{ color: 'black', textDecoration: 'none'}}>
+                                <button id='my-listings-bookings'>Bookings</button>
+                                </NavLink>
                             </span>
                         </div>
-                        <li id='my-listings-name' key={spot.name}>{spot.name}</li>
-                        <li key={spot.price}><span className='my-listings-fold'>${spot.price}</span> night</li>
                     </div>
-                    </NavLink>
-                    <div className="my-listings-button">
-                            {/* <AddImageFormModal spot={spot}/> */}
-                        <span>
-                            {/* <button onClick={() => setEdit(true)}>Edit Listing</button> */}
-                            <EditSpotFormModal spot={spot}/>
-                        </span>
-                        <span>
-                            <button onClick={(e) =>  dispatch(removeSpot(spot.id))}>Remove</button>
-                        </span>
-                    </div>
-
-                    <button onClick={handleView}>
-                        <NavLink key={spot.id} to={`/spots/${spot.id}/bookings`} style={{ color: 'black', textDecoration: 'none'}}>
-                            View Bookings
-                        </NavLink>
-                    </button>
-
-                </div>
-            ))}
+                ))}
             </div>
         </div>
     )

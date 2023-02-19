@@ -74,7 +74,9 @@
     justify-content: space-around;
 }
 
-#write-review-button{
+
+/* CreateReviewForm.js */
+#writeReviewBtn{
     margin-right: 20px;
     padding: 0 10px 0;
     font-size: 14px;
@@ -83,21 +85,41 @@
     border: 1px solid #dddddd;
     background-color: transparent;
 }
-#write-review-button:hover {
-    background-color: #dddddd;
+#writeReviewBtn:hover {
+    color: white;
+    background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+    cursor: pointer;
 }
 
-#create-review-button {
-    margin-top: 20px;
-    border: 1px solid #dddddd;
+#writeReviewForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20vw;
+    border: 1px solid #eeeeee;
+    border-radius: 20px;
+    padding: 2vh 3vw;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 18px;
+}
+
+.inputContainer>input {
+    font-size: 16px;
+    height: 40px;
     border-radius: 5px;
-    padding: 1px 5px 1px;
+    border: 1px solid lightgray;
+    box-shadow: 0 2px 2px #eeeeee;
+}
+.inputContainer>input:hover {
+    border: 1px solid rgba(128, 128, 128, 0.889);
 }
 
-#create-review-button:hover {
-    background-color: #ff385c;
-}
-
-#create-review-star-label>input {
-    width: 145px;
+.error{
+    margin-bottom: 10px;
+    color: red
 }

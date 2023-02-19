@@ -1,4 +1,4 @@
-.my-reviews-each-review{
+/* .my-reviews-each-review{
     display: flex;
     justify-content: space-between;
     border: 1px solid #dddddd;
@@ -6,33 +6,79 @@
     padding: 0 30px 0px;
     margin: 20px 150px 20px;
     align-items: center;
-}
+} */
 
-.my-reviews-each-review:hover{
+/* .my-reviews-each-review:hover{
     background-color: #dddddd;
 }
 
 .my-reviews-list {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-}
+} */
 
-.my-reviews-bold {
-    font-weight: bold;
-}
 
-#remove-review-button {
+/* #remove-review-button {
     border-radius: 10px;
     border: 1px solid #dddddd;
 }
 
 #remove-review-button:hover {
     background-color: #ff385c;
-}
+} */
 
-#my-review-title{
+/* #my-review-title{
     display: flex;
     justify-content: center;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+} */
+
+
+
+.each-review-container{
+    display: flex;
+    align-items: center;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 1200px;
+    margin: 20px 0;
+}
+.each-review-container:hover{
+    cursor: pointer;
+    box-shadow: 0 10px 10px #eeeeee;
+}
+
+#change-review-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 150px;
+}
+
+.review-info{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+.review-li>li{
+    margin: 10px;
+}
+
+#change-review-button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+}
+#change-review-button:hover{
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
 }

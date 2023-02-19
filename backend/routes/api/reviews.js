@@ -115,7 +115,25 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
 router.put('/:reviewId', restoreUser, requireAuth, validateReview,
     async(req, res) => {
         const reviewId = req.params.reviewId;
-        const targetReview = await Review.findByPk(reviewId)
+        const targetReview = await Review.findByPk(reviewId, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: Spot,
+                    attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+                    include: {
+                        model: SpotImage,
+                    }
+                },
+                {
+                    model: ReviewImage,
+                    attributes: ['id', 'url']
+                }
+            ]
+        })
         if (!targetReview) {
             res.status(404);
             return res.json({
@@ -132,6 +150,16 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
                 }
             )
         }
+
+        targetReview.Spot.SpotImages.forEach(img => {
+            if (img.preview === true && !targetReview.Spot.previewImage ) {
+                targetReview.Spot.previewImage = img.url;
+            }
+            if (!targetReview.Spot.previewImage ) {
+                targetReview.Spot.previewImage = 'No available preview images.'
+            }
+            delete targetReview.Spot.SpotImages
+        });
 
         const { review, stars } = req.body;
         targetReview.update({ review, stars })

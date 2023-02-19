@@ -14,6 +14,7 @@ import BookingsOfSpot from "./components/Booking/BookingsOfSpot";
 import MapContainer from "./components/Maps/MapContainer";
 import { getGeoKey, getKey } from './store/maps';
 import Footer from "./components/Footer/Footer";
+import MyWishes from "./components/Wishlist/MyWishlist";
 
 
 function App() {
@@ -99,6 +100,9 @@ function App() {
           </Route>
           <Route path='/reviews/current'>
             <MyReviews />
+          </Route>
+          <Route path='/wishes/current'>
+            <MyWishes />
           </Route>
           <Route path='/bookings/current'>
             <MyBookings />
