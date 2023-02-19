@@ -4,8 +4,6 @@ import { NavLink } from "react-router-dom";
 import { getWishesOfCurrent, removeWish } from "../../store/wishes";
 import './wish.css'
 
-
-
 function MyWishes () {
     const dispatch = useDispatch();
     // const sessionUser = useSelector(state => state.session.user);
@@ -17,23 +15,16 @@ function MyWishes () {
     const wishes = useSelector(state => Object.values(state.wishState))
     // console.log('----my wishes----', wishes)
 
-    let noWishes;
     let isExist;
-    if(wishes.length === 0) {
-        noWishes = (
-            <h2 id='my-review-title'>You have no wishlist yet!</h2>
-        );
-        isExist = false
-    } else {
-        noWishes = (
-            <h2 id='my-review-title'>Wishlists</h2>
-        )
-        isExist = true
-    }
+    if(wishes.length === 0) isExist = false
+    else isExist = true
 
     return (
-        <div className="my-reviews-list">
-            {noWishes}
+        <div className="my-trips-container">
+            <h2>Wishlists</h2>
+            {!isExist && (
+                <h2 id='my-review-title'>No wishlist...yet!</h2>
+            )}
             <div>
                 {isExist && wishes.map(wish => (
                     <div className="my-reviews-each-review" key={wish.id}>

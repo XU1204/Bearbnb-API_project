@@ -18,20 +18,16 @@ function MyReviews () {
 
     // if (!reviews) return null;
 
-    let noReviews;
-    if(reviews.length === 0) {
-        noReviews = (
-            <h2 id='my-review-title'>You have no reviews yet!</h2>
-        )
-    } else {
-        noReviews = (
-            <h2 id='my-review-title'>My reviews</h2>
-        )
-    }
+    let isExist
+    if(reviews.length === 0) isExist = false
+    else isExist = true
 
     return (
-        <div className="my-reviews-list">
-            {noReviews}
+        <div className="my-trips-container">
+            <h1>Reviews</h1>
+            {!isExist && (
+                <h2>You have no reviews yet!</h2>
+            )}
             <div>
                 {reviews?.map(eachreview => (
                     <div className="my-reviews-each-review" key={eachreview.id}>

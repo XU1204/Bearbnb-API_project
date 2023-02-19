@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getBookingsOfCurrent, removeBooking } from "../../store/bookings";
-// import EditReviewFormModal from "../EditSpotForm/EditReviewForm";
-
+import './bookings.css'
 
 function MyBookings () {
     const dispatch = useDispatch()
@@ -25,13 +24,13 @@ function MyBookings () {
     }
 
     return (
-        <div className="my-reviews-list">
-            <h2 id='my-review-title'>Trips</h2>
+        <div className="my-trips-container">
+            <h1 id='my-trips-title'>Trips</h1>
             {allBookings && (
-            <div>
+            <div className="my-trips-list">
                 {allBookings.map(booking => (
-                    <div className="my-reviews-each-review">
-                        <ul key={booking.id}>
+                    <div className="my-reviews-each-review" key={booking.id}>
+                        <ul>
                             <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${booking.Spot?.id}`}> {booking.Spot?.name}</NavLink></li>
                             <li><span className="my-reviews-bold">Location: </span> {booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</li>
                             <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt?.slice(0,10)}</li>
@@ -46,8 +45,13 @@ function MyBookings () {
             </div>
             )}
             {!allBookings && (
-                <h2 id='my-review-title'>You have no bookings yet!</h2>
-
+                <div className="no-trips-container">
+                    <h3 id='my-trips-title'>No trips booked...yet!</h3>
+                    <p>Time to dust off your bags and start planning your next adventure</p>
+                    <NavLink to='/'>
+                        <button>Start searching</button>
+                    </NavLink>
+                </div>
             )}
         </div>
     )

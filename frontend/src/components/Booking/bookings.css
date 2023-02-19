@@ -1,0 +1,10 @@
+.my-trips-container{
+    margin: auto 5vw;
+}
+
+.my-trips-list,
+.no-trips-container{
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+    padding: 1vh 0;
+}
