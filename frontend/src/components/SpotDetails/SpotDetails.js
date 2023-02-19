@@ -122,8 +122,10 @@ function SpotDetails () {
     return (
        <div className="detail-page">
             {/* <CreateReviewFormModal id={+id}/> */}
-            <h1>{spot.name}</h1>
-            <CreateWish spot={spot} />
+            <div className="detail-title-line">
+                <h1>{spot.name}</h1>
+                {sessionUser && <CreateWish spot={spot} />}
+            </div>
             <div className="detail-page-top">
                 <span>★</span>
                 {/* <span>{Number(spot.avgStarRating).toFixed(1)  || 'new'}</span> */}

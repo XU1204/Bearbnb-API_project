@@ -6,15 +6,21 @@ import './wish.css'
 const CreateWish = ({spot}) => {
     const dispatch  = useDispatch();
 
-    useEffect(() => {
-        dispatch(getWishesOfCurrent())
-    }, [dispatch])
-
     const wishes = useSelector(state => Object.values(state.wishState))
     const wish= wishes.find(wish => wish.spotId === +spot.id);
 
-    let heart = (<i class="fa-regular fa-heart"></i>)
-    if (wish) heart = (<i class="fa-solid fa-heart" style={{color: '#a5192e'}}></i>)
+    useEffect(() => {
+        dispatch(getWishesOfCurrent())
+    }, [dispatch, wishes.length])
+
+
+    let heart = (<i class="fa-regular fa-heart">&nbsp;<span className="save">save</span></i>)
+    if (wish) heart = (
+        <>
+            <i class="fa-solid fa-heart" style={{color: '#ff385c'}}></i>&nbsp;
+            <span className="save">saved</span>
+        </>
+        )
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -23,6 +29,7 @@ const CreateWish = ({spot}) => {
         } else {
             const payload = {spotId: spot.id}
             await dispatch(createWishOfSpot(spot.id, payload))
+
         }
     }
 

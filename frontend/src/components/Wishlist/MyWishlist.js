@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getWishesOfCurrent, removeWish } from "../../store/wishes";
+import './wish.css'
 
 
 
@@ -27,7 +28,7 @@ function MyWishes () {
         isExist = false
     } else {
         noWishes = (
-            <h2 id='my-review-title'>My Wishlist</h2>
+            <h2 id='my-review-title'>Wishlists</h2>
         )
         isExist = true
     }
@@ -44,7 +45,7 @@ function MyWishes () {
                             <li><span className="my-reviews-bold">Created at: </span>{wish.createdAt.slice(0,10)}</li>
                         </ul>
                         <span>
-                            <button id='remove-review-button' onClick={(e) =>  dispatch(removeWish(wish.id))}>Remove wish</button>
+                            <button id='remove-wish-button' onClick={(e) =>  dispatch(removeWish(wish.id))} title='remove wishlist'> <i class="fa-solid fa-heart" style={{color: '#ff385c'}}></i>&nbsp;</button>
                         </span>
                     </div>
                 ))}
