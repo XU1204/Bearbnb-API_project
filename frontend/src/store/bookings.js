@@ -105,7 +105,7 @@ const bookingsReducer = (state = {}, action) => {
     switch(action.type) {
         case LOAD:
             let newState = {};
-            console.log('store get bookings--------', action.booking)
+            // console.log('store get bookings--------', action.booking)
             action.bookings.forEach(booking => newState[booking.id] = booking);
             return newState;
         case CREATE:

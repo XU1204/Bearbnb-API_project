@@ -21,28 +21,32 @@ const BookingsOfSpot = () => {
     else isExist = false
 
     return (
-        <div style={{marginTop: '30px'}}>
-            <div className="my-reviews-list">
+        <div className="my-trips-container">
+            <h1 id='bookingsOfSpot-title'>Bookings</h1>
+            <div className="past-bookings">
                 {isExist && (
                 <div>
-                    <h2 className="my-listing-title">Booking Orders</h2>
                     {bookings.map(booking => (
-                        <div className="my-reviews-each-review" key={booking.id}>
-                            <ul>
-                                <li><span className="my-reviews-bold">Spot: </span><NavLink style={{color: 'black'}} to={`/spots/${booking?.spotId}`}> {spot?.name}</NavLink></li>
-                                <li><span className="my-reviews-bold">User: </span> {booking.User?.firstName} {booking.User?.lastName}</li>
-                                <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt.slice(0,10)}</li>
-                                <li><span className="my-reviews-bold">Stay: </span>{booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
-                            </ul>
-                            {/* <span>
-                                <button id='remove-review-button' onClick={(e) =>  dispatch(removeBooking(booking.id))}>Remove booking </button>
-                            </span> */}
-                        </div>
+                        <NavLink id='link' to={`/spots/${booking.spotId}`}>
+                            <div className="each-past-booking-container" key={booking.id}>
+                                <img src={booking.Spot?.SpotImages[0].url} alt='' className="past-booking-img"
+                                    onError={e => { e.currentTarget.src = "https://freerentbuy.com/img/nophoto.jpg" }}></img>
+                                <div className="past-booking-info">
+                                    <div className="past-booking-li">
+                                        <li><strong>Spot: </strong>{booking.Spot?.name}</li>
+                                        <li><strong>Location: </strong> {booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</li>
+                                        <li><strong>Created at: </strong>{booking.createdAt?.slice(0,10)}</li>
+                                        <li><strong>Guest: </strong> {booking.User?.firstName} {booking.User?.lastName}</li>
+                                        <li><strong>Stay: </strong> {booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </NavLink>
                     ))}
                 </div>
                 )}
                 {!isExist && (
-                    <h2 id='my-review-title'>This spot has no bookings yet!</h2>
+                    <h2 id='my-review-title'>This listing has no bookings yet!</h2>
                 )}
             </div>
         </div>

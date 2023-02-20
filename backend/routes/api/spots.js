@@ -600,10 +600,19 @@ router.get('/:spotId/bookings', restoreUser, requireAuth,
         if (spot.ownerId === req.user.id) {
             const bookings = await Booking.findAll({
                 where: {spotId},
-                include: {
+                include: [{
                     model: User,
                     attributes: ['id', 'firstName', 'lastName']
-                }
+                },
+                {
+                    model: Spot,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    },
+                    include: {
+                        model: SpotImage,
+                    }
+                }]
             });
             return res.json({
                 Bookings: bookings
