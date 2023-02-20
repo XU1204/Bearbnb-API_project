@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateSpot, addImageToSpot } from '../../store/spots'
-import './EditForm.css'
+import styles from './EditForm.module.css'
+import MyButton from '../Booking/MyButton';
 
-function EditSpotForm ({spot}) {
+function EditSpotForm ({spot, showModal, setShowModal}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const [address, setAddress] = useState(spot.address);
@@ -95,23 +96,39 @@ function EditSpotForm ({spot}) {
         }
     };
 
+    const handleCancel = (e) => {
+        setAddress(spot.address)
+        setCity(spot.city)
+        setState(spot.state)
+        setCountry(spot.country)
+        setName(spot.name)
+        setDescription(spot.description)
+        setPrice(spot.price)
+        setPreviewImage(spot.previewImage? spot.previewImage : 'none')
+        setShowModal(false)
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
-        <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <label>
-            Address:
-            <input
-                type='text'
-                value={address}
-                placeholder={address}
-                onChange={updateAddress}
-                required
-            />
-        </label>
-            <label>
-                City:
+        <form onSubmit={handleSubmit} id={styles.editSpot}>
+            <div id={styles.title}>
+                <h1>Edit listing</h1>
+                <button onClick={handleCancel} id={styles.cancel}><i className="fa-solid fa-xmark"></i></button>
+            </div>
+            <div className={styles.error}>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </div>
+            <div className={styles.inputWrapper}>
+                <label>Address:<span style={{color: 'red'}}>*</span></label>
+                <input
+                    type='text'
+                    value={address}
+                    placeholder={address}
+                    onChange={updateAddress}
+                    required
+                />
+            </div>
+            <div className={styles.inputWrapper}>
+                <label>City:<span style={{color: 'red'}}>*</span></label>
                 <input
                 type="text"
                 placeholder={city}
@@ -119,9 +136,9 @@ function EditSpotForm ({spot}) {
                 onChange={updateCity}
                 required
                 />
-            </label>
-            <label>
-                State:
+            </div>
+            <div className={styles.inputWrapper}>
+                <label>State:<span style={{color: 'red'}}>*</span></label>
                 <input
                     type='text'
                     placeholder={state}
@@ -129,9 +146,9 @@ function EditSpotForm ({spot}) {
                     onChange={updateState}
                     required
                 />
-            </label>
-            <label>
-                Country:
+            </div>
+            <div className={styles.inputWrapper}>
+                <label>Country:<span style={{color: 'red'}}>*</span></label>
                 <input
                     type='text'
                     placeholder={country}
@@ -139,7 +156,7 @@ function EditSpotForm ({spot}) {
                     onChange={updateCountry}
                     required
                 />
-            </label>
+            </div>
             {/* <label>
                 Latitude:
                 <input
@@ -160,8 +177,8 @@ function EditSpotForm ({spot}) {
                     required
                 />
             </label> */}
-            <label>
-                Name:
+            <div className={styles.inputWrapper}>
+                <label>Name:<span style={{color: 'red'}}>*</span></label>
                 <input
                     type='text'
                     placeholder={name}
@@ -169,19 +186,20 @@ function EditSpotForm ({spot}) {
                     onChange={updateName}
                     required
                 />
-            </label>
-            <label>
-                Description:
-                <input
+            </div>
+            <div className={styles.inputWrapper}>
+                <label>Description:<span style={{color: 'red'}}>*</span></label>
+                <textarea
                     type='text'
+                    id={styles.description}
                     placeholder={description}
                     value={description}
                     onChange={updateDescription}
                     required
                 />
-            </label>
-            <label>
-                Price:
+            </div>
+            <div className={styles.inputWrapper}>
+                <label>Price:<span style={{color: 'red'}}>*</span></label>
                 <input
                     type='number'
                     placeholder={price}
@@ -189,10 +207,9 @@ function EditSpotForm ({spot}) {
                     onChange={updatePrice}
                     required
                 />
-            </label>
-            <div>
-            <label>
-                Add image:</label>
+            </div>
+            <div className={styles.inputWrapper}>
+                <label>Add image:<span style={{color: 'red'}}>*</span></label>
                 <input
                     type='text'
                     placeholder={previewImage}
@@ -201,8 +218,8 @@ function EditSpotForm ({spot}) {
                     required
                 />
             </div>
-            <button id='update-spot-button' type='submit'>Update Listing</button>
-    </form>
+            <MyButton name='Update' />
+        </form>
     )
 
 

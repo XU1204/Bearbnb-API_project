@@ -1,9 +1,0 @@
-#update-spot-button {
-    margin-top: 20px;
-    border-radius: 10px;
-    border: 1px solid #dddddd;
-}
-
-#update-spot-button:hover {
-    background-color: #ff385c;
-}
