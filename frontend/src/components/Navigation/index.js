@@ -43,7 +43,7 @@ function Navigation ({ isLoaded }) {
             <NavLink exact to='/'>
                 <img id='bearbnb' src='https://pbs.twimg.com/media/BstWqTHCEAMhHBc?format=jpg&name=900x900' alt='BearBnb'/>
             </NavLink>
-            <SearchBar />
+            {/* <SearchBar /> */}
             <div className='nav-right-part'>
                 {/* <span>
                     <NavLink to='/spots'><button id='become-host-button'>Airbnb your home</button></NavLink>
