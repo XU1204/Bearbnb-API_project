@@ -75,10 +75,10 @@ function MyBookings () {
                             <div className="past-booking-info">
                                 <NavLink id='link' to={`/spots/${booking.spotId}`}>
                                     <div className="past-booking-li">
-                                        <li><span className="my-reviews-bold">Spot: </span>{booking.Spot?.name}</li>
-                                        <li><span className="my-reviews-bold">Location: </span> {booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</li>
-                                        <li><span className="my-reviews-bold">Created at: </span>{booking.createdAt?.slice(0,10)}</li>
-                                        <li><span className="my-reviews-bold">Date: </span>from {booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
+                                        <li><strong>Spot: </strong>{booking.Spot?.name}</li>
+                                        <li><strong>Location: </strong> {booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</li>
+                                        <li><strong>Created at: </strong>{booking.createdAt?.slice(0,10)}</li>
+                                        <li><strong>Date: </strong> {booking.startDate.slice(0,10)} to {booking.endDate.slice(0,10)} </li>
                                     </div>
                                 </NavLink>
                                 {/* remember to change it  */}

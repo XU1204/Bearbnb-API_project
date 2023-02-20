@@ -1,0 +1,57 @@
+#editSpot{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 0 30px;
+}
+
+#title{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeeee;
+    align-items: center;
+}
+
+#cancel{
+    border: none;
+    background-color: white;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+#cancel:hover{
+    cursor: pointer;
+    background-color: #eeeeee;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 18px;
+}
+.inputWrapper>input {
+    font-size: 16px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    box-shadow: 0 2px 2px #eeeeee;
+}
+.inputWrapper>input:hover,
+#description:hover {
+    border: 1px solid rgba(128, 128, 128, 0.889);
+}
+
+#description {
+    font-size: 16px;
+    resize: none;
+    height: 80px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    box-shadow: 0 2px 2px #eeeeee;
+}
+
+.error{
+    margin-bottom: 10px;
+    color: red
+}

@@ -75,7 +75,6 @@ function CreateSpotForm() {
 
         if (createdSpot) {
             const isExist = allSpots.find(spot => spot.address.trim() === address.trim() && spot.city.trim() === city.trim());
-            console.log('isExist:', isExist)
             if (isExist)  setErrors(['The spot with the same address and city has already exist.'])
             if (price <= 0) setErrors(['Price must be greater than 0.'])
             else {
