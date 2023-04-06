@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import { NavLink } from 'react-router-dom';
 import LoginFormModal from '../LoginFormModal';
-import SearchBar from './SearchBar/SearchBar';
+// import SearchBar from './SearchBar/SearchBar';
 import './Navigation.css'
 
 
